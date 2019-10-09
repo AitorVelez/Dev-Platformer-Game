@@ -30,7 +30,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("Map1.tmx");
+	App->map->Load("map1.tmx");
 	
 	return true;
 }
@@ -61,28 +61,6 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
-
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-		App->map->ResetPath();
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		App->map->PropagateBFS();
-
-	if (App->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
-		App->map->PropagateBFS();
-
-	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
-		App->map->PropagateDijkstra();
-
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
-		App->map->PropagateDijkstra();
-
-	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
-	{
-		iPoint p;
-		App->input->GetMousePosition(p.x, p.y);
-		App->map->Path(p.x - App->render->camera.x, p.y - App->render->camera.y);
-	}
 
 	App->map->Draw();
 

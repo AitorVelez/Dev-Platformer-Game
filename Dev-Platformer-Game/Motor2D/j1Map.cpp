@@ -22,126 +22,8 @@ bool j1Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
-	ResetPath();
 
 	return ret;
-}
-
-bool j1Map::Start()
-{
-	tile_x = App->tex->Load("maps/x.png");
-	return true;
-}
-
-void j1Map::ResetPath()
-{
-	frontier.Clear();
-	visited.clear();
-	breadcrumbs.clear();
-	frontier.Push(iPoint(19, 4), 0);
-	visited.add(iPoint(19, 4));
-	breadcrumbs.add(iPoint(19, 4));
-	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
-}
-
-void j1Map::Path(int x, int y)
-{
-	path.Clear();
-	iPoint goal = WorldToMap(x, y);
-
-	// TODO 2: Follow the breadcrumps to goal back to the origin
-	// add each step into "path" dyn array (it will then draw automatically)
-}
-
-void j1Map::PropagateDijkstra()
-{
-	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
-	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
-	// on each cell (is already reset to 0 automatically)
-}
-
-int j1Map::MovementCost(int x, int y) const
-{
-	int ret = -1;
-
-	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
-	{
-		int id = data.layers.start->next->data->Get(x, y);
-
-		if (id == 0)
-			ret = 3;
-		else
-			ret = 0;
-	}
-
-	return ret;
-}
-
-void j1Map::PropagateBFS()
-{
-	// TODO 1: Record the direction to the previous node 
-	// with the new list "breadcrumps"
-	iPoint curr;
-	if (frontier.Pop(curr))
-	{
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
-		{
-			if (MovementCost(neighbors[i].x, neighbors[i].y) > 0)
-			{
-				if (visited.find(neighbors[i]) == -1)
-				{
-					frontier.Push(neighbors[i], 0);
-					visited.add(neighbors[i]);
-				}
-			}
-		}
-	}
-}
-
-void j1Map::DrawPath()
-{
-	iPoint point;
-
-	// Draw visited
-	p2List_item<iPoint>* item = visited.start;
-
-	while(item)
-	{
-		point = item->data;
-		TileSet* tileset = GetTilesetFromTileId(26);
-
-		SDL_Rect r = tileset->GetTileRect(26);
-		iPoint pos = MapToWorld(point.x, point.y);
-
-		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-
-		item = item->next;
-	}
-
-	// Draw frontier
-	for (uint i = 0; i < frontier.Count(); ++i)
-	{
-		point = *(frontier.Peek(i));
-		TileSet* tileset = GetTilesetFromTileId(25);
-
-		SDL_Rect r = tileset->GetTileRect(25);
-		iPoint pos = MapToWorld(point.x, point.y);
-
-		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-	}
-
-	// Draw path
-	for (uint i = 0; i < path.Count(); ++i)
-	{
-		iPoint pos = MapToWorld(path[i].x, path[i].y);
-		App->render->Blit(tile_x, pos.x, pos.y);
-	}
 }
 
 void j1Map::Draw()
@@ -149,24 +31,19 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	p2List_item<MapLayer*>* item = data.layers.start;
+	// TODO 4: Make sure we draw all the layers and not just the first one
+	MapLayer* layer = this->data.layers.start->data;
 
-	for(; item != NULL; item = item->next)
+	for(int y = 0; y < data.height; ++y)
 	{
-		MapLayer* layer = item->data;
-
-		if(layer->properties.Get("Nodraw") != 0)
-			continue;
-
-		for(int y = 0; y < data.height; ++y)
+		for(int x = 0; x < data.width; ++x)
 		{
-			for(int x = 0; x < data.width; ++x)
+			int tile_id = layer->Get(x, y);
+			if(tile_id > 0)
 			{
-				int tile_id = layer->Get(x, y);
-				if(tile_id > 0)
+				TileSet* tileset = GetTilesetFromTileId(tile_id);
+				if (tileset != nullptr)
 				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
-
 					SDL_Rect r = tileset->GetTileRect(tile_id);
 					iPoint pos = MapToWorld(x, y);
 
@@ -175,41 +52,14 @@ void j1Map::Draw()
 			}
 		}
 	}
-
-	DrawPath();
-}
-
-int Properties::Get(const char* value, int default_value) const
-{
-	p2List_item<Property*>* item = list.start;
-
-	while(item)
-	{
-		if(item->data->name == value)
-			return item->data->value;
-		item = item->next;
-	}
-
-	return default_value;
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
 {
-	p2List_item<TileSet*>* item = data.tilesets.start;
-	TileSet* set = item->data;
+	// TODO 3: Complete this method so we pick the right
+	// Tileset based on a tile id
 
-	while(item)
-	{
-		if(id < item->data->firstgid)
-		{
-			set = item->prev->data;
-			break;
-		}
-		set = item->data;
-		item = item->next;
-	}
-
-	return set;
+	return data.tilesets.start->data;
 }
 
 iPoint j1Map::MapToWorld(int x, int y) const
@@ -241,7 +91,7 @@ iPoint j1Map::WorldToMap(int x, int y) const
 
 	if(data.type == MAPTYPE_ORTHOGONAL)
 	{
-		ret.x = (x / data.tile_width);
+		ret.x = x / data.tile_width;
 		ret.y = y / data.tile_height;
 	}
 	else if(data.type == MAPTYPE_ISOMETRIC)
@@ -249,7 +99,7 @@ iPoint j1Map::WorldToMap(int x, int y) const
 		
 		float half_width = data.tile_width * 0.5f;
 		float half_height = data.tile_height * 0.5f;
-		ret.x = int( (x / half_width + y / half_height) / 2) - 1;
+		ret.x = int( (x / half_width + y / half_height) / 2);
 		ret.y = int( (y / half_height - (x / half_width)) / 2);
 	}
 	else
@@ -309,9 +159,9 @@ bool j1Map::CleanUp()
 bool j1Map::Load(const char* file_name)
 {
 	bool ret = true;
-	p2SString tmp("%s%s", folder.GetString(), file_name);
+	p2SString tmp("maps\\%s", folder.GetString(), file_name);
 
-	pugi::xml_parse_result result = map_file.load_file(tmp.GetString());
+	pugi::xml_parse_result result = map_file.load_file("maps/map1.tmx");
 
 	if(result == NULL)
 	{
@@ -552,22 +402,8 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
 	bool ret = false;
 
-	pugi::xml_node data = node.child("properties");
-
-	if(data != NULL)
-	{
-		pugi::xml_node prop;
-
-		for(prop = data.child("property"); prop; prop = prop.next_sibling("property"))
-		{
-			Properties::Property* p = new Properties::Property();
-
-			p->name = prop.attribute("name").as_string();
-			p->value = prop.attribute("value").as_int();
-
-			properties.list.add(p);
-		}
-	}
+	// TODO 6: Fill in the method to fill the custom properties from 
+	// an xml_node
 
 	return ret;
 }
