@@ -31,10 +31,40 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	// TODO 4: Make sure we draw all the layers and not just the first one
-	MapLayer* layer = this->data.layers.start->data;
+	p2List_item<MapLayer*>* layer_pointer = data.layers.start;
+	p2List_item<TileSet*>* tileset_pointer = data.tilesets.start;
 
-	for(int y = 0; y < data.height; ++y)
+	for (tileset_pointer; tileset_pointer != nullptr; tileset_pointer = tileset_pointer->next) 
+	{
+		for (layer_pointer; layer_pointer != nullptr; layer_pointer = layer_pointer->next) 
+		{
+			for (uint x = 0; x < data.width; x++)
+			{
+				for (uint y = 0; y < data.height; y++) 
+				{
+					SDL_Rect rect = tileset_pointer->data->GetTileRect(layer_pointer->data->Get(x, y));
+					iPoint coordinate = MapToWorld(x, y);
+					if (layer_pointer->data->name == "Sky") 
+					{
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed);
+						//LOG("SKY SPEED: %f", layer_pointer->data->speed);
+					}
+					else if (layer_pointer->data->name == "Crane") 
+					{
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed);
+						//LOG("CRANE SPEED: %f", layer_pointer->data->speed);
+					}
+					else if (layer_pointer->data->name == "Buildings")
+					{
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed);
+						//LOG("BUILDINGS SPEED: %f", layer_pointer->data->speed);
+					}
+				}
+			}
+		}
+	}
+
+	/*for(int y = 0; y < data.height; ++y)
 	{
 		for(int x = 0; x < data.width; ++x)
 		{
@@ -51,7 +81,7 @@ void j1Map::Draw()
 				}
 			}
 		}
-	}
+	}*/
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
@@ -375,6 +405,13 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->height = node.attribute("height").as_int();
 	LoadProperties(node, layer->properties);
 	pugi::xml_node layer_data = node.child("data");
+
+	const char* aux = node.child("properties").child("property").attribute("name").as_string();
+
+	if (strcmp(aux, "Speed") == 0) 
+	{
+		layer->speed = node.child("properties").child("property").attribute("value").as_float();
+	}
 
 	if(layer_data == NULL)
 	{

@@ -21,6 +21,7 @@ struct MapLayer
 	int			width;
 	int			height;
 	uint*		data;
+	float		speed;
 	Properties	properties;
 
 	MapLayer() : data(NULL)

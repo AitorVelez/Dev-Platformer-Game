@@ -4,6 +4,9 @@
   <image source="patron6.png" width="2156" height="1472"/>
  </tileset>
  <layer name="Sky" width="150" height="20">
+  <properties>
+   <property name="Speed" type="float" value="0.6"/>
+  </properties>
   <data>
    <tile gid="403"/>
    <tile gid="404"/>
@@ -3008,6 +3011,9 @@
   </data>
  </layer>
  <layer name="Crane" width="150" height="20">
+  <properties>
+   <property name="Speed" type="float" value="0.3"/>
+  </properties>
   <data>
    <tile gid="1775"/>
    <tile gid="1776"/>
@@ -6012,6 +6018,9 @@
   </data>
  </layer>
  <layer name="Buildings" width="150" height="20">
+  <properties>
+   <property name="Speed" type="float" value="0.2"/>
+  </properties>
   <data>
    <tile gid="1743"/>
    <tile gid="1744"/>
