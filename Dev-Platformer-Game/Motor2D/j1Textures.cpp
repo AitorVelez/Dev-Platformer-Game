@@ -117,3 +117,11 @@ void j1Textures::GetSize(const SDL_Texture* texture, uint& width, uint& height) 
 {
 	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*) &width, (int*) &height);
 }
+
+void j1Textures::FreeTextures() {
+	p2List_item<SDL_Texture*>* item;
+	for (item = textures.start; item != NULL; item = item->next)
+	{
+		SDL_DestroyTexture(item->data);
+	}
+}
