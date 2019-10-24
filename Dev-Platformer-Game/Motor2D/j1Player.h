@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "Animation.h"
 
+struct SDL_Texture;
+
 class j1Player :
 	public j1Module
 {
@@ -21,6 +23,18 @@ public:
 public:
 
 	SDL_Texture* texture = nullptr;
+
+	Animation* animation = nullptr;
+
+	Animation idle = Animation();
+	Animation running = Animation();
+	Animation jumping = Animation();
+	Animation death = Animation();
+	Animation slide = Animation();
+	Animation fall = Animation();
+	Animation wall_slide = Animation();
+	Animation punch1 = Animation();
+	Animation punch_barrage = Animation();
 };
 
 #endif

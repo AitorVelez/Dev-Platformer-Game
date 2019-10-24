@@ -12,6 +12,35 @@
 
 j1Player::j1Player()
 {
+	name.create("player");
+
+	pugi::xml_document	config_file;
+	pugi::xml_node* node = &App->LoadEntities(config_file);
+	node = &node->child("player");
+
+	for (pugi::xml_node animations = node->child("animations").child("animation"); animations; animations = animations.next_sibling("animation"))
+	{
+		std::string tmp(animations.attribute("name").as_string());
+
+		if (tmp == "idle")
+			LoadAnimation(animations, &idle);
+		else if (tmp == "running")
+			LoadAnimation(animations, &running);
+		else if (tmp == "death")
+			LoadAnimation(animations, &death);
+		else if (tmp == "slide")
+			LoadAnimation(animations, &slide);
+		else if (tmp == "fall")
+			LoadAnimation(animations, &fall);
+		else if (tmp == "jumping")
+			LoadAnimation(animations, &jumping);
+		else if (tmp == "wall_slide")
+			LoadAnimation(animations, &wall_slide);
+		else if (tmp == "punch1")
+			LoadAnimation(animations, &punch1);
+		else if (tmp == "punch_barrage")
+			LoadAnimation(animations, &punch_barrage);
+	}
 }
 
 
