@@ -10,8 +10,17 @@ class j1Player :
 	public j1Module
 {
 public:
+
 	j1Player();
 	~j1Player();
+
+	void LoadTexture();
+
+	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
+
+public:
+
+	SDL_Texture* texture = nullptr;
 };
 
 #endif
