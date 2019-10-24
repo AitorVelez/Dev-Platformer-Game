@@ -62,7 +62,12 @@ void j1Map::Draw()
 					else if (layer_pointer->data->name == "Platforms")
 					{
 						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed);
-						//LOG("BUILDINGS SPEED: %f", layer_pointer->data->speed);
+						
+					}
+					else if (layer_pointer->data->name == "Colliders")
+					{
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed, 50.0f);
+					
 					}
 				}
 			}
