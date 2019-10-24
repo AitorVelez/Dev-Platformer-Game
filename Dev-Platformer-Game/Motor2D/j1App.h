@@ -13,6 +13,7 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 class j1Map;
+class j1FadeToBlack;
 
 class j1App
 {
@@ -76,29 +77,30 @@ private:
 public:
 
 	// Modules
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
-	j1Textures*			tex;
-	j1Audio*			audio;
-	j1Scene*			scene;
-	j1Map*				map;
+	j1Window*			win = nullptr;
+	j1Input*			input = nullptr;
+	j1Render*			render = nullptr;
+	j1Textures*			tex = nullptr;
+	j1Audio*			audio = nullptr;
+	j1Scene*			scene = nullptr;
+	j1Map*				map = nullptr;
+	j1FadeToBlack*		fade_to_black = nullptr;
 
 private:
 
 	p2List<j1Module*>	modules;
-	uint				frames;
-	float				dt;
-	int					argc;
-	char**				args;
+	uint				frames = 0;
+	float				dt = 0.0f;
+	int					argc = 0;
+	char**				args = nullptr;
 
-	p2SString			title;
-	p2SString			organization;
+	p2SString			title = nullptr;
+	p2SString			organization = nullptr;
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
-	p2SString			load_game;
-	mutable p2SString	save_game;
+	p2SString			load_game = nullptr;
+	mutable p2SString	save_game = nullptr;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S
