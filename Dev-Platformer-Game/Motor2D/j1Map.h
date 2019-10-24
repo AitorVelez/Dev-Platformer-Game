@@ -18,10 +18,12 @@ struct Properties
 struct MapLayer
 {
 	p2SString	name;
-	int			width;
-	int			height;
+	int			width = 0;
+	int			height = 0;
 	uint*		data;
-	float		speed;
+	float		speed = 0;
+	float		alpha = 0;
+
 	Properties	properties;
 
 	MapLayer() : data(NULL)

@@ -66,7 +66,7 @@ void j1Map::Draw()
 					}
 					else if (layer_pointer->data->name == "Colliders")
 					{
-						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed, 50.0f);
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed, layer_pointer->data->alpha);
 					
 					}
 				}
@@ -421,6 +421,11 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	if (strcmp(aux, "Speed") == 0) 
 	{
 		layer->speed = node.child("properties").child("property").attribute("value").as_float();
+	}
+
+	if (strcmp(aux, "Alpha") == 0)
+	{
+		layer->alpha = node.child("properties").child("property").attribute("value").as_float();
 	}
 
 	if(layer_data == NULL)
