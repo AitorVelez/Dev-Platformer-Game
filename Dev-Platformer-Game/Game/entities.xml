@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<entities>
+
+  <enemies>
+  </enemies>
+
+  <player>
+    <animations>
+      <animation name="idle" speed="0.1" loop="true" offset_x ="0" offset_y ="0">
+        <frame x="29" y="6" w="21" h="30"/>
+        <frame x="79" y="6" w="21" h="30"/>
+        <frame x="129" y="6" w="21" h="30"/>
+        <frame x="179" y="6" w="21" h="30"/>
+      </animation>
+
+      <animation name="running" speed="0.3" loop="true" offset_x ="0" offset_y ="2">
+        <frame x="82" y="45" w="25" h="28"/>
+        <frame x="132" y="45" w="25" h="28"/>
+        <frame x="182" y="45" w="25" h="28"/>
+        <frame x="231" y="45" w="25" h="28"/>
+        <frame x="281" y="45" w="25" h="28"/>
+        <frame x="332" y="45" w="25" h="28"/>
+      </animation>
+
+      <animation name="death" speed="0.1" loop="false" offset_x ="0" offset_y ="6">
+        <frame x="33" y="334" w="25" h="24"/>
+        <frame x="81" y="335" w="25" h="24"/>
+        <frame x="132" y="335" w="25" h="24"/>
+        <frame x="184" y="335" w="25" h="24"/>
+        <frame x="237" y="335" w="25" h="24"/>
+        <frame x="284" y="335" w="25" h="24"/>
+      </animation>
+
+      <animation name="slide" speed="0.1" loop="true" offset_x ="0" offset_y ="13">
+        <frame x="171" y="130" w="34" h="17"/>
+        <frame x="221" y="130" w="34" h="17"/>
+        <frame x="271" y="130" w="34" h="17"/>
+        <frame x="325" y="130" w="30" h="17"/>
+      </animation>
+
+      <animation name="fall" speed="0.2" loop="true" offset_x ="0" offset_y ="0">
+        <frame x="84" y="112" w="17" h="31"/>
+        <frame x="134" y="112" w="17" h="31"/>
+      </animation>
+
+      <animation name="jumping" speed="0.2" loop="false" offset_x ="0" offset_y ="0">
+        <frame x="31" y="79" w="20" h="27"/>
+        <frame x="81" y="79" w="20" h="27"/>
+        <frame x="133" y="79" w="19" h="27"/>
+        <frame x="180" y="79" w="21" h="27"/>
+        <frame x="234" y="79" w="15" h="27"/>
+        <frame x="280" y="79" w="24" h="27"/>
+        <frame x="336" y="79" w="15" h="27"/>
+        <frame x="27" y="79" w="24" h="27"/>
+      </animation>
+
+      <animation name="wall_slide" speed="0.2" loop="true" offset_x ="0" offset_y ="0">
+        <frame x="182" y="409" w="17" h="32"/>
+        <frame x="132" y="409" w="17" h="32"/>
+      </animation>
+
+      <animation name="punch1" speed="0.25" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="25" y="613" w="34" h="25"/>
+        <frame x="75" y="613" w="34" h="25"/>
+        <frame x="127" y="613" w="34" h="25"/>
+        <frame x="177" y="613" w="34" h="25"/>
+      </animation>
+
+      <animation name="punch2" speed="0.25" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="225" y="613" w="34" h="25"/>
+        <frame x="275" y="613" w="34" h="25"/>
+        <frame x="326" y="613" w="34" h="25"/>
+      </animation>
+
+      <animation name="punch3" speed="0.25" loop="false" offset_x ="13" offset_y ="6">
+        <frame x="26" y="650" w="34" h="25"/>
+        <frame x="75" y="650" w="34" h="25"/>
+        <frame x="125" y="650" w="34" h="25"/>
+        <frame x="177" y="650" w="34" h="25"/>
+      </animation>
+
+      <animation name="punch_barrage" speed="0.25" loop="false" offset_x ="13" offset_y ="5">
+        <frame x="25" y="613" w="34" h="25"/>
+        <frame x="75" y="613" w="34" h="25"/>
+        <frame x="127" y="613" w="34" h="25"/>
+        <frame x="177" y="613" w="34" h="25"/>
+        <frame x="225" y="613" w="34" h="25"/>
+        <frame x="275" y="613" w="34" h="25"/>
+        <frame x="326" y="613" w="34" h="25"/>
+        <frame x="26" y="650" w="34" h="25"/>
+        <frame x="75" y="650" w="34" h="25"/>
+        <frame x="125" y="650" w="34" h="25"/>
+        <frame x="177" y="650" w="34" h="25"/>
+      </animation>
+
+    </animations>
+
+  </player>
+
+</entities>
