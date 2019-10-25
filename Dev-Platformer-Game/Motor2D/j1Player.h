@@ -62,6 +62,10 @@ public:
 
 	int GetPlayerTile(fPoint pos) const;
 
+	bool Load(pugi::xml_node& data);
+
+	bool Save(pugi::xml_node& data) const;
+
 public:
 
 	SDL_Texture* texture = nullptr;

@@ -270,3 +270,11 @@ int j1Player::GetPlayerTile(fPoint pos) const
 
 	return tile_number;
 }
+
+
+
+bool j1Player::CleanUp()
+{
+	App->tex->UnLoad(texture);
+	return true;
+}
