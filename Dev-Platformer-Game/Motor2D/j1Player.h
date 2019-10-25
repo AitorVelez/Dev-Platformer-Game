@@ -20,6 +20,8 @@ public:
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
+	void FindPlayerSpawn();
+
 public:
 
 	SDL_Texture* texture = nullptr;
@@ -35,6 +37,8 @@ public:
 	Animation wall_slide = Animation();
 	Animation punch1 = Animation();
 	Animation punch_barrage = Animation();
+
+	iPoint spawn_pos;
 };
 
 #endif

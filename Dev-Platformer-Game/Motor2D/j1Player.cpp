@@ -65,3 +65,15 @@ void j1Player::LoadAnimation(pugi::xml_node animation_node, Animation* animation
 	animation->loop = animation_node.attribute("loop").as_bool();
 	animation->offset = animation_node.attribute("offset").as_int();
 }
+
+void j1Player::FindPlayerSpawn()
+{
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 27)
+		{
+			spawn_pos = App->map->TileToWorld(i);
+		}
+	}
+}
