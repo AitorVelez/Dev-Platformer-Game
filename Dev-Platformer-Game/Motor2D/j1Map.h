@@ -104,6 +104,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
+	iPoint TileToWorld(int gid) const
 
 private:
 
