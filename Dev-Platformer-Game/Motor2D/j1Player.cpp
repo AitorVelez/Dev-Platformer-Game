@@ -156,38 +156,39 @@ bool j1Player::Update(float dt)
 				can_jump = true;
 			}
 		}
-		else
+	}
+
+	else
+	{
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			looking_right = true;
+			looking_left = false;
+			player.position.x += 4;
+			animation = &running;
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 			{
-				looking_right = true;
-				looking_left = false;
-				player.position.x += 4;
-				animation = &running;
-				if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
-					&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
+				if (App->scene->current_map == 1)
 				{
-					if (App->scene->current_map == 1)
-					{
-						App->scene->LoadScene(2);
-						App->scene->current_map = 2;
-					}
-					else
-					{
-						App->scene->LoadScene(1);
-						App->scene->current_map = 1;
-					}
-					
+					App->scene->LoadScene(2);
+					App->scene->current_map = 2;
 				}
+				else
+				{
+					App->scene->LoadScene(1);
+					App->scene->current_map = 1;
+				}
+
 			}
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-			{
-				looking_right = false;
-				looking_left = true;
-				if (tempPos.x >= App->render->camera.x)
-					player.position.x -= 4;
-				animation = &running;
-			}
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			looking_right = false;
+			looking_left = true;
+			if (tempPos.x >= App->render->camera.x)
+				player.position.x -= 4;
+			animation = &running;
 		}
 	}
 

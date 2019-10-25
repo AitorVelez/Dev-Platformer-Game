@@ -102,6 +102,20 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
+	int camera_speed = 2;
+
+	if (App->player->player.position.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) >= 0)
+	{
+		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
+			App->render->camera.x -= camera_speed;
+	}
+
+	if (App->player->player.position.x - (-App->render->camera.x + (1 * App->render->camera.w / 2)) <= 0)
+	{
+		if (App->render->camera.x < 0)
+			App->render->camera.x += camera_speed;
+	}
+
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
