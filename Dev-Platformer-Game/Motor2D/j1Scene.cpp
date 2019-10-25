@@ -54,6 +54,12 @@ bool j1Scene::Update(float dt)
 		
 	}
 
+	//draw logic
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 
+	{
+		App->map->draw_logic = !App->map->draw_logic;
+	}
+
 
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");

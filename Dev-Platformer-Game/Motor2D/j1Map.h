@@ -119,6 +119,8 @@ public:
 
 	MapData data;
 
+	bool draw_logic = false;
+
 private:
 
 	pugi::xml_document	map_file;
