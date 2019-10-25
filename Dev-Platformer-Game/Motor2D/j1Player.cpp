@@ -273,6 +273,16 @@ int j1Player::GetPlayerTile(fPoint pos) const
 
 
 
+bool j1Player::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node position = data.append_child("position");
+
+	position.append_attribute("x") = (float)player.position.x;
+	position.append_attribute("y") = (float)player.position.y;
+
+	return true;
+}
+
 bool j1Player::CleanUp()
 {
 	App->tex->UnLoad(texture);
