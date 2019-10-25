@@ -162,15 +162,15 @@ COLLISION_TYPE j1Player::CheckCollision(int x) const
 	default:
 		break;
 
-	case 201:
+	case 202:
 		return COLLISION_TYPE::GROUND;
 		break;
 
-	case 202:
+	case 203:
 		return COLLISION_TYPE::DEATH;
 		break;
 
-	case 269:
+	case 270:
 		return COLLISION_TYPE::WIN;
 		break;
 	}
