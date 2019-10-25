@@ -58,6 +58,9 @@ bool j1Player::Start()
 	FindPlayerSpawn();
 	SpawnPlayer();
 
+	is_jumping = false;
+	looking_right = true;
+
 	LOG("PLAYER SPAWN: %u %u", player.position.x, player.position.y);
 
 	return true;
@@ -82,7 +85,6 @@ bool j1Player::Update(float dt)
 
 	if (god_mode == false)
 	{
-		//GRAVITY
 		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
@@ -106,9 +108,57 @@ bool j1Player::Update(float dt)
 			App->audio->PlayFx(2);
 			SpawnPlayer();
 		}
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			looking_left = false;
+			looking_right = true;
+			tempPos = player.position;
+
+			tempPos.x += player.speed;
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+			{
+				player.position.x = tempPos.x;
+				if (is_falling == false)
+					animation = &running;
+			}
+			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::GROUND
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::GROUND
+				&& is_falling)
+			{
+				animation = &wall_slide;
+				can_jump = true;
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			looking_left = true;
+			looking_right = false;
+			tempPos = player.position;
+
+			tempPos.x -= player.speed;
+			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
+			{
+				if (tempPos.x >= App->render->camera.x)
+					player.position.x = tempPos.x;
+				if (is_falling == false)
+					animation = &running;
+			}
+			else if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::GROUND
+				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::GROUND
+				&& is_falling)
+			{
+				animation = &wall_slide;
+				can_jump = true;
+			}
+		}
 	}
 
-	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1, flip);
+	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1.0f, flip);
 	return true;
 }
 
