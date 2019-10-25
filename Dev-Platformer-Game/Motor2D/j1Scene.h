@@ -32,10 +32,11 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-private:
+	void LoadScene(int map);
 
-	p2List<const char*>  MapsList_String;
-	p2List_item<const char*>* CurrentMap = nullptr;
+	int current_map = 1;
+
+private:
 };
 
 #endif // __j1SCENE_H__

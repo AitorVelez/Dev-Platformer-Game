@@ -25,24 +25,13 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	for (pugi::xml_node map_node = config.child("maps"); map_node != nullptr; map_node = map_node.next_sibling("maps"))
-	{
-
-		const char* name = map_node.attribute("map").as_string();
-
-		MapsList_String.add(name);
-	}
-
-	CurrentMap = MapsList_String.start;
-
-
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load(CurrentMap->data);
+	App->map->Load("Map1.tmx");
 	
 	return true;
 }
@@ -60,18 +49,20 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		App->map->CleanUp();
+		/*App->map->CleanUp();
 		App->tex->FreeTextures();
-		App->map->Load("Map1.tmx");
+		App->map->Load("Map1.tmx");*/
+		LoadScene(1);
 		
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
 	{
 		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		App->map->CleanUp();
+		/*App->map->CleanUp();
 		App->tex->FreeTextures();
-		App->map->Load("Map2.tmx");
+		App->map->Load("Map2.tmx");*/
+		LoadScene(2);
 	}
 
 
@@ -132,4 +123,22 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+void j1Scene::LoadScene(int map) 
+{
+	if (map == 1) 
+	{
+		App->map->CleanUp();
+		App->tex->FreeTextures();
+		App->map->Load("Map1.tmx");
+		current_map = 1;
+	}
+	else if (map == 2)
+	{
+		App->map->CleanUp();
+		App->tex->FreeTextures();
+		App->map->Load("Map2.tmx");
+		current_map = 2;
+	}
 }
