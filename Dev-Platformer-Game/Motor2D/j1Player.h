@@ -85,6 +85,13 @@ public:
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 	bool god_mode = false;
+
+	bool is_jumping;
+	bool is_falling;
+	bool can_jump;
+
+	bool looking_right = false;
+	bool looking_left = false;
 };
 
 #endif

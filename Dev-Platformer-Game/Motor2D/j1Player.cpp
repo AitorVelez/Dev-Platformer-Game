@@ -65,7 +65,48 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	
+	animation = &idle;
+
+	float falling_speed = player.gravity;
+	if (can_jump)
+		falling_speed -= 1.5;
+
+	if (looking_right)
+		flip = SDL_FLIP_NONE;
+	else if (looking_left)
+		flip = SDL_FLIP_HORIZONTAL;
+
+	animation = &idle;
+
+	fPoint tempPos = player.position;
+
+	if (god_mode == false)
+	{
+		//GRAVITY
+		tempPos.y += falling_speed;
+		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
+			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
+			&& !is_jumping)
+		{
+			can_jump = false;
+			is_falling = true;
+			player.position = tempPos;
+			if (!can_jump)
+				animation = &fall;
+		}
+		else
+		{
+			is_falling = false;
+			can_jump = true;
+		}
+
+		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH
+			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
+		{
+			App->audio->PlayFx(2);
+			SpawnPlayer();
+		}
+	}
 
 	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1, flip);
 	return true;
