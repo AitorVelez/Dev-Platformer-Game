@@ -57,6 +57,7 @@ bool j1Scene::Update(float dt)
 		
 	}
 
+	//start from second level
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
 	{
 		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
@@ -65,6 +66,13 @@ bool j1Scene::Update(float dt)
 		App->map->Load("Map2.tmx");*/
 		LoadScene(2);
 	}
+
+	//start from current level
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		LoadScene(current_map);
+	}
+
 
 
 	//draw logic
