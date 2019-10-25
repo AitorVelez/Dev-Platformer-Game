@@ -42,6 +42,8 @@ public:
 
 	void SpawnPlayer();
 
+	COLLISION_TYPE CheckCollision(int x) const;
+
 public:
 
 	SDL_Texture* texture = nullptr;

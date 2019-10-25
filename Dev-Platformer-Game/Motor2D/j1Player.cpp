@@ -114,7 +114,7 @@ void j1Player::SpawnPlayer()
 	App->render->camera.x = 0;
 }
 
-COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
+COLLISION_TYPE j1Player::CheckCollision(int x) const
 {
 	p2List_item<MapLayer*>* layer_colliders = App->map->data.layers.end;
 
@@ -123,15 +123,15 @@ COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
 	default:
 		break;
 
-	case 25:
+	case 201:
 		return COLLISION_TYPE::GROUND;
 		break;
 
-	case 26:
+	case 202:
 		return COLLISION_TYPE::DEATH;
 		break;
 
-	case 34:
+	case 269:
 		return COLLISION_TYPE::WIN;
 		break;
 	}
