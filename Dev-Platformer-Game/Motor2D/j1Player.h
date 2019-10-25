@@ -8,19 +8,31 @@
 
 struct SDL_Texture;
 
+struct PlayerInfo 
+{
+	iPoint position;
+
+};
+
 class j1Player :
 	public j1Module
 {
 public:
 
 	j1Player();
-	~j1Player();
+	virtual	~j1Player();
+
+	bool Start();
+	bool Update(float dt);
+	bool CleanUp();
 
 	void LoadTexture();
 
 	void LoadAnimation(pugi::xml_node animation_node, Animation* animation);
 
 	void FindPlayerSpawn();
+
+	void SpawnPlayer();
 
 public:
 
@@ -38,7 +50,11 @@ public:
 	Animation punch1 = Animation();
 	Animation punch_barrage = Animation();
 
+	PlayerInfo player;
+
 	iPoint spawn_pos;
+
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 };
 
 #endif

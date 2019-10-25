@@ -7,6 +7,7 @@
 #include "j1Scene.h"
 #include "j1Audio.h"
 #include "j1Window.h"
+#include "p2Log.h"
 
 
 
@@ -49,6 +50,32 @@ j1Player::~j1Player()
 }
 
 
+bool j1Player::Start()
+{
+	LoadTexture();
+
+	animation = &idle;
+	FindPlayerSpawn();
+	SpawnPlayer();
+
+	LOG("PLAYER SPAWN: %u %u", player.position.x, player.position.y);
+
+	return true;
+}
+
+bool j1Player::Update(float dt)
+{
+	animation = &idle;
+
+	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1, flip);
+	return true;
+}
+
+bool j1Player::CleanUp()
+{
+	return true;
+}
+
 void j1Player::LoadTexture()
 {
 	texture = App->tex->Load("textures/Player/player_spritesheet.png");
@@ -71,9 +98,16 @@ void j1Player::FindPlayerSpawn()
 	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
 	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
 	{
-		if (layer->data->data[i] == 27)
+		if (layer->data->data[i] == 204)
 		{
 			spawn_pos = App->map->TileToWorld(i);
 		}
 	}
+}
+
+void j1Player::SpawnPlayer() 
+{
+	player.position.x = spawn_pos.x;
+	player.position.y = spawn_pos.y;
+	App->render->camera.x = 0;
 }
