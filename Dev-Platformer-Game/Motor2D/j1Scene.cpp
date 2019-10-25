@@ -20,10 +20,21 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+
+	for (pugi::xml_node map_node = config.child("maps"); map_node != nullptr; map_node = map_node.next_sibling("maps"))
+	{
+
+		const char* name = map_node.attribute("map").as_string();
+
+		MapsList_String.add(name);
+	}
+
+	CurrentMap = MapsList_String.start;
+
 
 	return ret;
 }
@@ -31,7 +42,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("map1.tmx");
+	App->map->Load(CurrentMap->data);
 	
 	return true;
 }
@@ -45,14 +56,24 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	//fadetoblack test
+	//start from first level
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
+		App->tex->FreeTextures();
 		App->map->Load("Map1.tmx");
 		
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
+	{
+		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->map->CleanUp();
+		App->tex->FreeTextures();
+		App->map->Load("Map2.tmx");
+	}
+
 
 	//draw logic
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 

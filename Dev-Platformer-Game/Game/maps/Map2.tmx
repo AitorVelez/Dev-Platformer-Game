@@ -12029,6 +12029,9 @@
   </data>
  </layer>
  <layer id="5" name="Colliders" width="150" height="20" opacity="0.29">
+  <properties>
+   <property name="Alpha" type="float" value="50"/>
+  </properties>
   <data>
    <tile gid="202"/>
    <tile gid="202"/>
