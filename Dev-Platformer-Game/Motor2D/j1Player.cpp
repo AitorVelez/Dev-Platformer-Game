@@ -67,6 +67,8 @@ bool j1Player::Update(float dt)
 {
 	animation = &idle;
 
+
+
 	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1, flip);
 	return true;
 }
@@ -110,4 +112,29 @@ void j1Player::SpawnPlayer()
 	player.position.x = spawn_pos.x;
 	player.position.y = spawn_pos.y;
 	App->render->camera.x = 0;
+}
+
+COLLISION_TYPE ModulePlayer::CheckCollision(int x) const
+{
+	p2List_item<MapLayer*>* layer_colliders = App->map->data.layers.end;
+
+	switch (layer_colliders->data->data[x])
+	{
+	default:
+		break;
+
+	case 25:
+		return COLLISION_TYPE::GROUND;
+		break;
+
+	case 26:
+		return COLLISION_TYPE::DEATH;
+		break;
+
+	case 34:
+		return COLLISION_TYPE::WIN;
+		break;
+	}
+
+	return COLLISION_TYPE::AIR;
 }

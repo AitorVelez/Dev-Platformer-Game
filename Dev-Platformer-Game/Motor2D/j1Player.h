@@ -8,6 +8,14 @@
 
 struct SDL_Texture;
 
+enum COLLISION_TYPE
+{
+	GROUND,
+	AIR,
+	DEATH,
+	WIN
+};
+
 struct PlayerInfo 
 {
 	iPoint position;
@@ -55,6 +63,8 @@ public:
 	iPoint spawn_pos;
 
 	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	bool god_mode = false;
 };
 
 #endif
