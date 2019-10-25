@@ -271,7 +271,13 @@ int j1Player::GetPlayerTile(fPoint pos) const
 	return tile_number;
 }
 
+bool j1Player::Load(pugi::xml_node& data)
+{
+	player.position.x = data.child("position").attribute("x").as_float();
+	player.position.y = data.child("position").attribute("y").as_float();
 
+	return true;
+}
 
 bool j1Player::Save(pugi::xml_node& data) const
 {
