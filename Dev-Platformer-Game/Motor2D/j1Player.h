@@ -60,6 +60,8 @@ public:
 
 	COLLISION_TYPE CheckCollision(int x) const;
 
+	int GetPlayerTile(fPoint pos) const;
+
 public:
 
 	SDL_Texture* texture = nullptr;

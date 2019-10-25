@@ -136,3 +136,12 @@ COLLISION_TYPE j1Player::CheckCollision(int x) const
 
 	return COLLISION_TYPE::AIR;
 }
+
+int j1Player::GetPlayerTile(fPoint pos) const
+{
+	iPoint position = App->map->WorldToMap(pos.x, pos.y);
+
+	int tile_number = position.y * App->map->data.width + position.x;
+
+	return tile_number;
+}
