@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1FadeToBlack.h"
+#include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -127,18 +128,23 @@ bool j1Scene::CleanUp()
 
 void j1Scene::LoadScene(int map) 
 {
+	App->map->CleanUp();
+	App->tex->FreeTextures();
+	App->player->LoadTexture();
+
 	if (map == 1) 
 	{
-		App->map->CleanUp();
-		App->tex->FreeTextures();
+		
 		App->map->Load("Map1.tmx");
 		current_map = 1;
 	}
 	else if (map == 2)
 	{
-		App->map->CleanUp();
-		App->tex->FreeTextures();
+		
 		App->map->Load("Map2.tmx");
 		current_map = 2;
 	}
+
+	App->player->FindPlayerSpawn();
+	App->player->SpawnPlayer();
 }
