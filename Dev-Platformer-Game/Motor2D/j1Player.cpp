@@ -65,9 +65,7 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	animation = &idle;
-
-
+	
 
 	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1, flip);
 	return true;

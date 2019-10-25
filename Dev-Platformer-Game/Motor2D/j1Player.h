@@ -16,10 +16,26 @@ enum COLLISION_TYPE
 	WIN
 };
 
-struct PlayerInfo 
+enum ANIMATION_STATE
 {
-	iPoint position;
+	IDLE_LEFT,
+	IDLE_RIGHT,
+	RUNNING_LEFT,
+	RUNNING_RIGHT,
+	JUMPING_LEFT,
+	JUMPING_RIGHT
+};
 
+struct PlayerInfo
+{
+
+	fPoint position;
+
+	float speed = 2.0f;
+	float jumpSpeed = 2.0f;
+	float gravity = 3.0f;
+
+	ANIMATION_STATE anim_state;
 };
 
 class j1Player :
