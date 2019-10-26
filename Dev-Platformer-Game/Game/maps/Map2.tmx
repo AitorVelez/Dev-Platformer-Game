@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Sky" width="150" height="20">
   <properties>
-   <property name="Speed" type="float" value="0.6"/>
+   <property name="Speed" type="float" value="0.2"/>
   </properties>
   <data>
    <tile gid="403"/>
@@ -3012,7 +3012,7 @@
  </layer>
  <layer name="Crane" width="150" height="20">
   <properties>
-   <property name="Speed" type="float" value="0.3"/>
+   <property name="Speed" type="float" value="0.5"/>
   </properties>
   <data>
    <tile gid="1775"/>
@@ -6019,7 +6019,7 @@
  </layer>
  <layer name="Buildings" width="150" height="20">
   <properties>
-   <property name="Speed" type="float" value="0.2"/>
+   <property name="Speed" type="float" value="0.6"/>
   </properties>
   <data>
    <tile gid="1743"/>
@@ -9025,6 +9025,9 @@
   </data>
  </layer>
  <layer name="Platforms" width="150" height="20">
+  <properties>
+   <property name="Speed" type="float" value="1"/>
+  </properties>
   <data>
    <tile gid="69"/>
    <tile gid="70"/>
@@ -12031,6 +12034,7 @@
  <layer name="Colliders" width="150" height="20" opacity="0.29">
   <properties>
    <property name="Alpha" type="float" value="50"/>
+   <property name="Speed" type="float" value="1"/>
   </properties>
   <data>
    <tile gid="202"/>

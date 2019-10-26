@@ -66,7 +66,8 @@ void j1Map::Draw()
 					}
 					else if (layer_pointer->data->name == "Colliders" && draw_logic)
 					{
-						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, layer_pointer->data->speed, SDL_FLIP_NONE, layer_pointer->data->alpha);
+						App->render->Blit(tileset_pointer->data->texture, coordinate.x, coordinate.y, &rect, 1.0f, SDL_FLIP_NONE, layer_pointer->data->alpha);
+						//LOG("COLLIDERS SPEED: %f", layer_pointer->data->speed);
 					
 					}
 				}
@@ -422,7 +423,6 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	{
 		layer->speed = node.child("properties").child("property").attribute("value").as_float();
 	}
-
 	if (strcmp(aux, "Alpha") == 0)
 	{
 		layer->alpha = node.child("properties").child("property").attribute("value").as_float();
@@ -454,8 +454,7 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
 	bool ret = false;
 
-	// TODO 6: Fill in the method to fill the custom properties from 
-	// an xml_node
+	
 
 	return ret;
 }
