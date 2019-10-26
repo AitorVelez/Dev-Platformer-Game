@@ -131,6 +131,21 @@ bool j1Player::Update(float dt)
 				animation = &wall_slide;
 				can_jump = true;
 			}
+
+			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
+				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
+			{
+				if (App->scene->current_map == 1)
+				{
+					App->scene->LoadScene(2);
+					App->scene->current_map = 2;
+				}
+				else
+				{
+					App->scene->LoadScene(1);
+					App->scene->current_map = 1;
+				}
+			}
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
