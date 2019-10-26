@@ -77,17 +77,17 @@ bool j1Scene::Update(float dt)
 		App->LoadGame("save_game.xml");
 	}
 
-	//volume up
-	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) 
+	//volume down
+	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 	{
-		change_volume = true;
+		change_volume = false;
 		App->audio->ChangeVolume(change_volume);
 	}
 
-	//volume down
+	//volume up
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) 
 	{
-		change_volume = false;
+		change_volume = true;
 		App->audio->ChangeVolume(change_volume);
 	}
 
@@ -146,7 +146,7 @@ bool j1Scene::Update(float dt)
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(),
 					map_coordinates.x, map_coordinates.y);*/
-	p2SString title("City Hero   Level: %i", App->scene->current_map);
+	p2SString title("City Hero   Level: %i      Music volume: %i / 130", App->scene->current_map, App->audio->music_volume);
 
 	App->win->SetTitle(title.GetString());
 	return true;
