@@ -53,6 +53,8 @@ j1Player::~j1Player()
 bool j1Player::Start()
 {
 	LoadTexture();
+	App->audio->LoadFx("audio/fx/Jump.wav");
+	App->audio->LoadFx("audio/fx/Die.wav");
 
 	animation = &idle;
 	FindPlayerSpawn();
@@ -158,7 +160,7 @@ bool j1Player::Update(float dt)
 		}
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_jumping == false && can_jump)
 		{
-			//App->audio->PlayFx(1);
+			App->audio->PlayFx(1);
 			can_jump = false;
 			jumping.Reset();
 			is_jumping = true;
