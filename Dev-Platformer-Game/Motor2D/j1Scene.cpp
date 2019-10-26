@@ -82,6 +82,12 @@ bool j1Scene::Update(float dt)
 		App->map->draw_logic = !App->map->draw_logic;
 	}
 
+	//activate/disactivate godmode
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) 
+	{
+		App->player->god_mode = !App->player->god_mode;
+	}
+
 
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
