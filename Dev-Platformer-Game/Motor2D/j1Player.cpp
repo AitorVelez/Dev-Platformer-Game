@@ -243,6 +243,24 @@ bool j1Player::Update(float dt)
 
 			animation = &running;
 		}
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			tempPos = player.position;
+
+			tempPos.y -= player.speed;
+
+			if (tempPos.y >= App->render->camera.y)
+				player.position.y = tempPos.y;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			tempPos = player.position;
+
+			tempPos.y += player.speed;
+
+			if (tempPos.y + animation->GetCurrentFrame().h <= (App->render->camera.y + App->win->height))
+				player.position.y = tempPos.y;
+		}
 	}
 
 	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1.0f, flip);
