@@ -33,6 +33,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load("Map1.tmx");
+	App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
 	
 	return true;
 }
