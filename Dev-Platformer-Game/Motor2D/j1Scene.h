@@ -35,6 +35,9 @@ public:
 	//Save
 	bool Save(pugi::xml_node& data)const;
 
+	//Load
+	bool Load(pugi::xml_node& savegame);
+
 	void LoadScene(int map);
 
 	int current_map = 1;

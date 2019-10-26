@@ -80,6 +80,12 @@ bool j1Scene::Update(float dt)
 		App->SaveGame("save_game.xml");
 	}
 
+	//load game
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		App->LoadGame("save_game.xml");
+	}
+
 	//draw logic
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 
 	{
@@ -183,4 +189,26 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	map.append_attribute("CurrentMap") = current_map;
 
 	return true;
+}
+
+bool j1Scene::Load(pugi::xml_node& savegame)
+{
+	current_map = savegame.child("Map").attribute("CurrentMap").as_int();
+
+	App->map->CleanUp();
+
+	switch (current_map)
+	{
+	case 1:
+		App->map->Load("Map1.tmx");
+		break;
+	case 2:
+		App->map->Load("Map2.tmx");
+		break;
+	default:
+		break;
+	}
+
+	return true;
+
 }
