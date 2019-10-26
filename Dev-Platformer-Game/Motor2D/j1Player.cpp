@@ -156,6 +156,31 @@ bool j1Player::Update(float dt)
 				can_jump = true;
 			}
 		}
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_jumping == false && can_jump)
+		{
+			//App->audio->PlayFx(1);
+			can_jump = false;
+			jumping.Reset();
+			is_jumping = true;
+			cont = 0;
+		}
+		if (is_jumping)
+		{
+			tempPos = player.position;
+
+			tempPos.y -= player.jumpSpeed;
+			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
+				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
+			{
+				if (tempPos.y >= App->render->camera.y)
+					player.position.y = tempPos.y;
+				animation = &jumping;
+			}
+			if (cont == 35)
+			{
+				is_jumping = false;
+			}
+		}
 	}
 
 	else
