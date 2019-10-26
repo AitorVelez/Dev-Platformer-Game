@@ -43,6 +43,8 @@ public:
 	int current_map = 1;
 
 private:
+
+	bool change_volume = false;
 };
 
 #endif // __j1SCENE_H__

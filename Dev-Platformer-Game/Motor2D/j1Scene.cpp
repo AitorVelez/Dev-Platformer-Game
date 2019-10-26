@@ -33,6 +33,7 @@ bool j1Scene::Start()
 {
 	App->map->Load("Map1.tmx");
 	App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
+	App->audio->MusicVolume(App->audio->music_volume);
 	
 	return true;
 }
@@ -74,6 +75,20 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		App->LoadGame("save_game.xml");
+	}
+
+	//volume up
+	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) 
+	{
+		change_volume = true;
+		App->audio->ChangeVolume(change_volume);
+	}
+
+	//volume down
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) 
+	{
+		change_volume = false;
+		App->audio->ChangeVolume(change_volume);
 	}
 
 	//draw logic
@@ -161,6 +176,7 @@ void j1Scene::LoadScene(int map)
 	App->map->CleanUp();
 	App->tex->FreeTextures();
 	App->player->LoadTexture();
+	
 
 	if (map == 1) 
 	{
