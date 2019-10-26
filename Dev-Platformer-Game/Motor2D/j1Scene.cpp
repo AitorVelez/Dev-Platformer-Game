@@ -197,10 +197,10 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 	switch (current_map)
 	{
 	case 1:
-		App->map->Load("Map1.tmx");
+		LoadScene(1);
 		break;
 	case 2:
-		App->map->Load("Map2.tmx");
+		LoadScene(2);
 		break;
 	default:
 		break;
