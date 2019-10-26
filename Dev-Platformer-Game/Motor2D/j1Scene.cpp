@@ -8,7 +8,6 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
-#include "j1FadeToBlack.h"
 #include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -50,21 +49,12 @@ bool j1Scene::Update(float dt)
 	//start from first level
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		/*App->map->CleanUp();
-		App->tex->FreeTextures();
-		App->map->Load("Map1.tmx");*/
 		LoadScene(1);
-		
 	}
 
 	//start from second level
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
 	{
-		//App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		/*App->map->CleanUp();
-		App->tex->FreeTextures();
-		App->map->Load("Map2.tmx");*/
 		LoadScene(2);
 	}
 
