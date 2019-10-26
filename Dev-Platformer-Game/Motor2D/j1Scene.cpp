@@ -74,7 +74,11 @@ bool j1Scene::Update(float dt)
 		LoadScene(current_map);
 	}
 
-
+	//save game
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		App->SaveGame("save_game.xml");
+	}
 
 	//draw logic
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) 
@@ -170,4 +174,13 @@ void j1Scene::LoadScene(int map)
 
 	App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();
+}
+
+bool j1Scene::Save(pugi::xml_node& data) const 
+{
+	pugi::xml_node map = data.append_child("Map");
+
+	map.append_attribute("CurrentMap") = current_map;
+
+	return true;
 }

@@ -32,6 +32,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//Save
+	bool Save(pugi::xml_node& data)const;
+
 	void LoadScene(int map);
 
 	int current_map = 1;
