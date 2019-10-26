@@ -9,9 +9,9 @@
 		<Map CurrentMap="2" />
 	</scene>
 	<player>
-		<position x="1500" y="234" />
+		<position x="2928" y="241" />
 	</player>
 	<renderer>
-		<camera x="-988" y="0" />
+		<camera x="-2450" y="0" />
 	</renderer>
 </game_state>
