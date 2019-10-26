@@ -70,7 +70,7 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	
+	animation = &idle;
 
 	float falling_speed = player.gravity;
 	if (can_jump)
@@ -85,8 +85,6 @@ bool j1Player::Update(float dt)
 
 	if (!god_mode)
 	{
-		animation = &idle;
-
 		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR

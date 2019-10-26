@@ -6,12 +6,12 @@
 	<audio />
 	<map />
 	<scene>
-		<Map CurrentMap="1" />
+		<Map CurrentMap="2" />
 	</scene>
 	<player>
-		<position x="648" y="120.5" />
+		<position x="1500" y="234" />
 	</player>
 	<renderer>
-		<camera x="-136" y="0" />
+		<camera x="-988" y="0" />
 	</renderer>
 </game_state>
