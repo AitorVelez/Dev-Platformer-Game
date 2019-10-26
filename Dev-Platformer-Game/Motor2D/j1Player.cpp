@@ -70,7 +70,7 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	animation = &idle;
+	
 
 	float falling_speed = player.gravity;
 	if (can_jump)
@@ -81,12 +81,12 @@ bool j1Player::Update(float dt)
 	else if (looking_left)
 		flip = SDL_FLIP_HORIZONTAL;
 
-	animation = &idle;
-
 	fPoint tempPos = player.position;
 
-	if (god_mode == false)
+	if (!god_mode)
 	{
+		animation = &idle;
+
 		tempPos.y += falling_speed;
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR
@@ -115,6 +115,7 @@ bool j1Player::Update(float dt)
 		{
 			looking_left = false;
 			looking_right = true;
+
 			tempPos = player.position;
 
 			tempPos.x += player.speed;
@@ -134,7 +135,7 @@ bool j1Player::Update(float dt)
 				can_jump = true;
 			}
 
-			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
+			else if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
 			{
 				if (App->scene->current_map == 1)
@@ -200,7 +201,7 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	else
+	else if (god_mode)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{

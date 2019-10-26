@@ -7,14 +7,14 @@
 
   <player>
     <animations>
-      <animation name="idle" speed="0.1" loop="true" offset_x ="0" offset_y ="0">
+      <animation name="idle" speed="0.05" loop="true" offset_x ="0" offset_y ="0">
         <frame x="29" y="6" w="21" h="30"/>
         <frame x="79" y="6" w="21" h="30"/>
         <frame x="129" y="6" w="21" h="30"/>
         <frame x="179" y="6" w="21" h="30"/>
       </animation>
 
-      <animation name="running" speed="0.3" loop="true" offset_x ="0" offset_y ="2">
+      <animation name="running" speed="0.15" loop="true" offset_x ="0" offset_y ="2">
         <frame x="82" y="45" w="25" h="28"/>
         <frame x="132" y="45" w="25" h="28"/>
         <frame x="182" y="45" w="25" h="28"/>
