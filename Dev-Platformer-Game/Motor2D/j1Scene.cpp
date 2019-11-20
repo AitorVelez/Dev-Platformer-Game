@@ -8,7 +8,8 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
-#include "j1Player.h"
+#include "ModuleEntities.h"
+#include "Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -34,6 +35,17 @@ bool j1Scene::Start()
 	App->map->Load("Map1.tmx");
 	App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
 	App->audio->MusicVolume(App->audio->music_volume);
+
+	iPoint spawnEntity;
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 204)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		}
+	}
 	
 	return true;
 }
@@ -100,7 +112,7 @@ bool j1Scene::Update(float dt)
 	//activate/disactivate godmode
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) 
 	{
-		App->player->god_mode = !App->player->god_mode;
+		App->entities->player->god_mode = !App->entities->player->god_mode;
 	}
 
 
@@ -124,15 +136,15 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	int camera_speed = App->player->player.speed;
+	int camera_speed = App->entities->player->playerData.speed;
 
-	if (App->player->player.position.x - (-App->render->camera.x + (App->render->camera.w / 2)) >= 0)
+	if (App->entities->player->pos.x - (-App->render->camera.x + (App->render->camera.w / 2)) >= 0)
 	{
 		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
 			App->render->camera.x -= camera_speed;
 	}
 
-	if (App->player->player.position.x - (-App->render->camera.x + (App->render->camera.w / 3)) <= 0)
+	if (App->entities->player->pos.x - (-App->render->camera.x + (App->render->camera.w / 3)) <= 0)
 	{
 		if (App->render->camera.x < 0)
 			App->render->camera.x += camera_speed;
@@ -175,7 +187,7 @@ void j1Scene::LoadScene(int map)
 {
 	App->map->CleanUp();
 	App->tex->FreeTextures();
-	App->player->LoadTexture();
+	//App->player->LoadTexture();
 	
 
 	if (map == 1) 
@@ -191,8 +203,18 @@ void j1Scene::LoadScene(int map)
 		current_map = 2;
 	}
 
-	App->player->FindPlayerSpawn();
-	App->player->SpawnPlayer();
+	iPoint spawnEntity;
+	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	{
+		if (layer->data->data[i] == 204)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		}
+	}
+	/*App->player->FindPlayerSpawn();
+	App->player->SpawnPlayer();*/
 }
 
 bool j1Scene::Save(pugi::xml_node& data) const 
