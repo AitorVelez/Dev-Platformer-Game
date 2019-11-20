@@ -1,20 +1,14 @@
+#include "Player.h"
 #include "j1App.h"
-#include "j1Player.h"
-#include "j1Render.h"
-#include "j1Textures.h"
 #include "j1Input.h"
-#include "j1Map.h"
+#include "j1Textures.h"
 #include "j1Scene.h"
+#include "j1Map.h"
 #include "j1Audio.h"
 #include "j1Window.h"
-#include "p2Log.h"
 
-
-
-j1Player::j1Player()
+Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 {
-	name.create("player");
-
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
 	node = &node->child("player");
@@ -42,15 +36,12 @@ j1Player::j1Player()
 		else if (tmp == "punch_barrage")
 			LoadAnimation(animations, &punch_barrage);
 	}
+	Start();
 }
 
+Player::~Player() { CleanUp(); }
 
-j1Player::~j1Player()
-{
-}
-
-
-bool j1Player::Start()
+bool Player::Start()
 {
 	LoadTexture();
 	App->audio->LoadFx("audio/fx/Jump.wav");
@@ -63,16 +54,14 @@ bool j1Player::Start()
 	is_jumping = false;
 	looking_right = true;
 
-	LOG("PLAYER SPAWN: %u %u", player.position.x, player.position.y);
-
 	return true;
 }
 
-bool j1Player::Update(float dt)
+bool Player::Update(float dt)
 {
 	animation = &idle;
 
-	float falling_speed = player.gravity;
+	float falling_speed = playerData.gravity;
 	if (can_jump)
 		falling_speed -= 1.5;
 
@@ -81,7 +70,7 @@ bool j1Player::Update(float dt)
 	else if (looking_left)
 		flip = SDL_FLIP_HORIZONTAL;
 
-	fPoint tempPos = player.position;
+	fPoint tempPos = pos;
 
 	if (!god_mode)
 	{
@@ -92,7 +81,7 @@ bool j1Player::Update(float dt)
 		{
 			can_jump = false;
 			is_falling = true;
-			player.position = tempPos;
+			pos = tempPos;
 			if (!can_jump)
 				animation = &fall;
 		}
@@ -114,14 +103,14 @@ bool j1Player::Update(float dt)
 			looking_left = false;
 			looking_right = true;
 
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.x += player.speed;
+			tempPos.x += playerData.speed;
 
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 			{
-				player.position.x = tempPos.x;
+				pos.x = tempPos.x;
 				if (is_falling == false)
 					animation = &running;
 			}
@@ -153,14 +142,14 @@ bool j1Player::Update(float dt)
 		{
 			looking_left = true;
 			looking_right = false;
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.x -= player.speed;
+			tempPos.x -= playerData.speed;
 			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 			{
 				if (tempPos.x >= App->render->camera.x)
-					player.position.x = tempPos.x;
+					pos.x = tempPos.x;
 				if (is_falling == false)
 					animation = &running;
 			}
@@ -182,14 +171,14 @@ bool j1Player::Update(float dt)
 		}
 		if (is_jumping)
 		{
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.y -= player.jumpSpeed;
+			tempPos.y -= playerData.jumpSpeed;
 			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
 			{
 				if (tempPos.y >= App->render->camera.y)
-					player.position.y = tempPos.y;
+					pos.y = tempPos.y;
 				animation = &jumping;
 			}
 			if (cont == 35)
@@ -206,10 +195,10 @@ bool j1Player::Update(float dt)
 			looking_left = false;
 			looking_right = true;
 
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.x += player.speed;
-			player.position.x = tempPos.x;
+			tempPos.x += playerData.speed;
+			pos.x = tempPos.x;
 
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::WIN)
@@ -233,46 +222,46 @@ bool j1Player::Update(float dt)
 			looking_left = true;
 			looking_right = false;
 
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.x -= player.speed;
+			tempPos.x -= playerData.speed;
 
 			if (tempPos.x >= App->render->camera.x)
-				player.position.x = tempPos.x;
+				pos.x = tempPos.x;
 
 			animation = &running;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.y -= player.speed;
+			tempPos.y -= playerData.speed;
 
 			if (tempPos.y >= App->render->camera.y)
-				player.position.y = tempPos.y;
+				pos.y = tempPos.y;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			tempPos = player.position;
+			tempPos = pos;
 
-			tempPos.y += player.speed;
+			tempPos.y += playerData.speed;
 
 			if (tempPos.y + animation->GetCurrentFrame().h <= (App->render->camera.y + App->win->height))
-				player.position.y = tempPos.y;
+				pos.y = tempPos.y;
 		}
 	}
 
-	App->render->Blit(texture, player.position.x, player.position.y, &animation->GetCurrentFrame(), 1.0f, flip);
+	App->render->Blit(texture, pos.x, pos.y, &animation->GetCurrentFrame(), 1.0f, flip);
 	cont++;
 	return true;
 }
 
-void j1Player::LoadTexture()
+void Player::LoadTexture()
 {
 	texture = App->tex->Load("textures/Player/player_spritesheet.png");
 }
 
-void j1Player::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
+void Player::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
 {
 	bool ret = true;
 
@@ -284,7 +273,7 @@ void j1Player::LoadAnimation(pugi::xml_node animation_node, Animation* animation
 	animation->offset = animation_node.attribute("offset").as_int();
 }
 
-void j1Player::FindPlayerSpawn()
+void Player::FindPlayerSpawn()
 {
 	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
 	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
@@ -296,39 +285,14 @@ void j1Player::FindPlayerSpawn()
 	}
 }
 
-void j1Player::SpawnPlayer() 
+void Player::SpawnPlayer()
 {
-	player.position.x = spawn_pos.x;
-	player.position.y = spawn_pos.y;
+	pos.x = spawn_pos.x;
+	pos.y = spawn_pos.y;
 	App->render->camera.x = 0;
 }
 
-COLLISION_TYPE j1Player::CheckCollision(int x) const
-{
-	p2List_item<MapLayer*>* layer_colliders = App->map->data.layers.end;
-
-	switch (layer_colliders->data->data[x])
-	{
-	default:
-		break;
-
-	case 202:
-		return COLLISION_TYPE::GROUND;
-		break;
-
-	case 203:
-		return COLLISION_TYPE::DEATH;
-		break;
-
-	case 270:
-		return COLLISION_TYPE::WIN;
-		break;
-	}
-
-	return COLLISION_TYPE::AIR;
-}
-
-int j1Player::GetPlayerTile(fPoint pos) const
+int Player::GetPlayerTile(fPoint pos) const
 {
 	iPoint position = App->map->WorldToMap(pos.x, pos.y);
 
@@ -337,26 +301,28 @@ int j1Player::GetPlayerTile(fPoint pos) const
 	return tile_number;
 }
 
-bool j1Player::Load(pugi::xml_node& data)
+bool Player::Load(pugi::xml_node& data)
 {
-	player.position.x = data.child("position").attribute("x").as_float();
-	player.position.y = data.child("position").attribute("y").as_float();
+	pos.x = data.child("position").attribute("x").as_float();
+	pos.y = data.child("position").attribute("y").as_float();
 
 	return true;
 }
 
-bool j1Player::Save(pugi::xml_node& data) const
+bool Player::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node position = data.append_child("position");
 
-	position.append_attribute("x") = (float)player.position.x;
-	position.append_attribute("y") = (float)player.position.y;
+	position.append_attribute("x") = (float)pos.x;
+	position.append_attribute("y") = (float)pos.y;
 
 	return true;
 }
 
-bool j1Player::CleanUp()
+bool Player::CleanUp()
 {
 	App->tex->UnLoad(texture);
+	animation = nullptr;
+	texture = nullptr;
 	return true;
 }
