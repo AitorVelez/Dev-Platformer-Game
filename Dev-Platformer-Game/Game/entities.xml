@@ -3,6 +3,20 @@
 <entities>
 
   <enemies>
+    <bigBat>
+      <animations>
+        <animation name="fly" speed="0.3" loop="true" offset_x ="0" offset_y ="0">
+          <frame x="0" y="0" w="26" h="30"/>
+          <frame x="32" y="0" w="26" h="30"/>
+          <frame x="64" y="0" w="26" h="30"/>
+          <frame x="96" y="0" w="26" h="30"/>
+          <frame x="128" y="0" w="26" h="30"/>
+          <frame x="96" y="0" w="26" h="30"/>
+          <frame x="64" y="0" w="26" h="30"/>
+          <frame x="32" y="0" w="26" h="30"/>
+        </animation>
+      </animations>
+    </bigBat>
   </enemies>
 
   <player>
