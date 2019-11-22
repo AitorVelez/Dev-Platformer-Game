@@ -158,9 +158,9 @@ bool j1Scene::Update(float dt)
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(),
 					map_coordinates.x, map_coordinates.y);*/
-	p2SString title("City Hero   Level: %i      Music volume: %i / 130", App->scene->current_map, App->audio->music_volume);
+	//p2SString title("City Hero   Level: %i      Music volume: %i / 130", App->scene->current_map, App->audio->music_volume);
 
-	App->win->SetTitle(title.GetString());
+	//App->win->SetTitle(title.GetString());
 	return true;
 }
 

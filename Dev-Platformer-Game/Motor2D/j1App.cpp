@@ -202,6 +202,13 @@ void j1App::FinishUpdate()
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
+	//Window Title
+	static char title[300];
+	sprintf_s(title, 300, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Cap: %luFPS  VSYNC:  ",
+		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count, frame_limit);
+	App->win->SetTitle(title);
+
+
 	//Fps 
 	float ms_frame = 1 / (float)frame_limit * 1000;
 	if (last_frame_ms <= ms_frame) {
