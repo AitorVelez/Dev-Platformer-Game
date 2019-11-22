@@ -97,7 +97,7 @@ public:
 	j1Map*				map = nullptr;
 	ModuleEntities*		entities = nullptr;
 
-	uint32				frame_limit;
+	uint32				frame_limit = 30;
 
 	float				dt = 0.0f;
 
@@ -118,7 +118,7 @@ private:
 	p2SString			load_game = nullptr;
 	mutable p2SString	save_game = nullptr;
 
-	bool				fpshigh = true;
+	bool				fpshigh = false;
 	j1PerfTimer			ptimer;
 	j1PerfTimer			dttimer;
 	uint64				frame_count = 0;
