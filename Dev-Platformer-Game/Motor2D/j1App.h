@@ -118,7 +118,7 @@ private:
 	p2SString			load_game = nullptr;
 	mutable p2SString	save_game = nullptr;
 
-	bool				fpshigh = false;
+	bool				fpshigh = true;
 	j1PerfTimer			ptimer;
 	j1PerfTimer			dttimer;
 	uint64				frame_count = 0;

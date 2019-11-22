@@ -6,10 +6,10 @@
 	<audio />
 	<map />
 	<scene>
-		<Map CurrentMap="2" />
+		<Map CurrentMap="1" />
 	</scene>
 	<entities />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-380" y="0" />
 	</renderer>
 </game_state>
