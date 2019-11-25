@@ -17,6 +17,53 @@
         </animation>
       </animations>
     </bigBat>
+
+
+    <walkingEnemy>
+      <animations>
+        <animation name ="idle" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="16" y="8" w="26" h="38"/>
+          <frame x="64" y="8" w="26" h="38"/>
+          <frame x="112" y="8" w="26" h="38"/>
+          <frame x="160" y="8" w="26" h="38"/>
+        </animation>
+        
+        <animation name ="idleSwordUp" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="154" y="10" w="33" h="37"/>
+          <frame x="106" y="10" w="33" h="37"/>
+          <frame x="58" y="10" w="33" h="37"/>
+          <frame x="10" y="10" w="33" h="37"/>
+        </animation>
+
+        <animation name ="running" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="12" y="58" w="31" h="37"/>
+          <frame x="59" y="58" w="31" h="37"/>
+          <frame x="107" y="58" w="31" h="37"/>
+          <frame x="155" y="58" w="31" h="37"/>
+          <frame x="203" y="58" w="31" h="37"/>
+        </animation>
+
+        <animation name ="attack" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="155" y="98" w="38" h="44"/>
+          <frame x="107" y="98" w="38" h="44"/>
+          <frame x="59" y="98" w="38" h="44"/>
+          <frame x="11" y="98" w="38" h="44"/>
+        </animation>
+
+        <animation name ="death" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="12" y="156" w="27" h="34"/>
+          <frame x="59" y="156" w="27" h="34"/>
+          <frame x="107" y="156" w="27" h="34"/>
+          <frame x="203" y="156" w="27" h="34"/>
+          <frame x="251" y="156" w="27" h="34"/>
+        </animation>
+
+        <animation name ="falling" speed ="0.05" loop ="true" offset_x ="0" offset_y="0">
+          <frame x="67" y="201" w="20" h="37"/>
+        </animation>
+      </animations>
+    </walkingEnemy>
+
   </enemies>
 
   <player>
