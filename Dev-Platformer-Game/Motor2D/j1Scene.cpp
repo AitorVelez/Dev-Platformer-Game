@@ -192,6 +192,7 @@ void j1Scene::LoadScene(int map)
 {
 	App->map->CleanUp();
 	App->tex->FreeTextures();
+	App->entities->CleanUp();
 	//App->player->LoadTexture();
 	
 

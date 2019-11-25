@@ -81,24 +81,24 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 
 	switch (type)
 	{
-	case PLAYER:
-	{
+		case PLAYER:
+		{
 		player = new Player(x, y, PLAYER);
 		entities.add(player);
 		ret = true;
 		break;
-	}
-	case BIGBAT:
-	{
+		}
+		case BIGBAT:
+		{
 		BigBat* bat = new BigBat(x, y, BIGBAT);
 		entities.add(bat);
 		ret = true;
 		break;
-	}
-	default:
-	{ 
+		}
+		default:
+		{ 
 		break;
-	}
+		}
 		
 	}
 
