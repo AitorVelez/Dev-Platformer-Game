@@ -7,7 +7,6 @@
 #include "ModuleEntities.h"
 #include "j1Scene.h"
 #include "Player.h"
-#include "ModulePathfinding.h"
 #include "j1Audio.h"
 
 BigBat::BigBat(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
@@ -51,9 +50,7 @@ bool BigBat::Update(float dt)
 	batData.jumpSpeed = 0.0f;
 	batData.speed = 0.0f;
 	animation = &fly;
- 
-
-
+	App->render->Blit(texture, pos.x, pos.y, &animation->GetCurrentFrame(), 1.0f, flip);
 
 	return true;
 }
@@ -96,6 +93,6 @@ void BigBat::LoadAnimation(pugi::xml_node animation_node, Animation* animation)
 
 	animation->speed = animation_node.attribute("speed").as_float();
 	animation->loop = animation_node.attribute("loop").as_bool();
-	animation->offset_x = animation_node.attribute("offset_x").as_int();
-	animation->offset_y = animation_node.attribute("offset_y").as_int();
+	animation->offset = animation_node.attribute("offset").as_int();
+	
 }

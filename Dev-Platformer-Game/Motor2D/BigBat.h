@@ -31,11 +31,7 @@ public:
 
 public:
 	Animation fly = Animation();
-	//Animation idleSwordUp = Animation();
-	//Animation running = Animation();
-	//Animation attack = Animation();
 	Animation death = Animation();
-	//Animation falling = Animation();
 
 	EntityData batData;
 

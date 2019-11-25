@@ -45,6 +45,11 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
 		}
+		else if (layer->data->data[i] == 269)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
+		}
 	}
 	
 	return true;
@@ -211,6 +216,11 @@ void j1Scene::LoadScene(int map)
 		{
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		}
+		else if (layer->data->data[i] == 269)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
 	}
 	/*App->player->FindPlayerSpawn();
