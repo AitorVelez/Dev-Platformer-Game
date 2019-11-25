@@ -13,6 +13,8 @@ public:
 	float current_frame;
 	int last_frame = 0;
 	int offset = 0;
+	int offset_x = 0;
+	int offset_y = 0;
 
 private:
 
