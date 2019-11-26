@@ -9,6 +9,7 @@
 #include "j1Window.h"
 #include "j1Audio.h"
 #include "j1App.h"
+#include "ModuleCollision.h"
 
 ModuleEntities::ModuleEntities() 
 {
@@ -118,4 +119,21 @@ Player* ModuleEntities::GetPlayer() const
 		}
 	}
 	return nullptr;
+}
+
+void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
+	{
+		if (player->is_attacking)
+		{
+			c2->owner->to_destroy = true;
+			c2->to_delete = true;
+		}
+		else
+		{
+			c1->owner->to_destroy = true;
+			c1->to_delete = true;
+		}
+	}
 }

@@ -8,6 +8,8 @@ class Entity;
 
 class Player;
 
+struct Collider;
+
 enum ENTITY_TYPE
 {
 	NONE,
@@ -33,6 +35,8 @@ public:
 	bool SpawnEntity(int x, int y, ENTITY_TYPE type);
 
 	Player* GetPlayer() const;
+
+	void OnCollision(Collider* c1, Collider* c2);
 
 public:
 	p2List<Entity*> entities;
