@@ -33,6 +33,9 @@ BigBat::BigBat(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 	}
 	batData.jumpSpeed = 0.0f;
 	batData.speed = 0.0f;
+
+	collider = App->collision->AddCollider({ x, y, 26, 30 }, COLLIDER_ENEMY, this, App->entities);
+
 	Start();
 }
 
@@ -51,6 +54,8 @@ bool BigBat::Update(float dt)
 	batData.speed = 0.0f;
 	animation = &fly;
 	App->render->Blit(texture, pos.x, pos.y, &animation->GetCurrentFrame(), 1.0f, flip);
+
+	collider->SetPos(pos.x, pos.y);
 
 	return true;
 }

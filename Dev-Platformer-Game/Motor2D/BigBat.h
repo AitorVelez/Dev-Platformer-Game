@@ -35,9 +35,6 @@ public:
 
 	EntityData batData;
 
-	iPoint batPos;
-	iPoint playerPos;
-	fPoint playerPosition;
 	iPoint nextPoint;
 	iPoint spawnPos;
 
