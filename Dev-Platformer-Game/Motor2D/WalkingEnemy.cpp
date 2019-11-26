@@ -43,6 +43,9 @@ WalkingEnemy::WalkingEnemy(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 	banditData.jumpSpeed = 0.0f;
 	banditData.speed = 0.0f;
 	banditData.gravity = 50.0f;
+
+	collider = App->collision->AddCollider({ x, y, 26, 38 }, COLLIDER_ENEMY, this, App->entities);
+
 	Start();
 }
 
@@ -71,19 +74,10 @@ bool WalkingEnemy::Update(float dt)
 		animation = &falling;
 	}
 
-	playerPosition = App->entities->player->pos;
-	banditPos = App->map->WorldToMap(pos.x, pos.y);
-	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
-
 	pos.x += banditData.speed;
 	pos.y += banditData.jumpSpeed;
 
-	if (banditPos.y == playerPos.y && (banditPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || banditPos.x == playerPos.x) && !App->entities->player->god_mode)
-	{
-		App->audio->PlayFx(2);
-		App->entities->player->SpawnPlayer();
-		pos = spawn;
-	}
+	collider->SetPos(pos.x, pos.y);
 
 	return true;
 }
