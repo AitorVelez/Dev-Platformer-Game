@@ -18,6 +18,7 @@ class j1Audio;
 class j1Scene;
 class j1Map;
 class ModuleEntities;
+class ModuleCollision;
 
 class j1App
 {
@@ -96,6 +97,7 @@ public:
 	j1Scene*			scene = nullptr;
 	j1Map*				map = nullptr;
 	ModuleEntities*		entities = nullptr;
+	ModuleCollision*	collision = nullptr;
 
 	uint32				frame_limit = 30;
 

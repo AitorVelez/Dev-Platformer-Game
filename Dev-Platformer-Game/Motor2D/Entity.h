@@ -4,6 +4,7 @@
 #include "SDL/include/SDL.h"
 #include "p2Point.h"
 #include "ModuleEntities.h"
+#include "ModuleCollision.h"
 
 class Animation;
 
@@ -65,6 +66,8 @@ public:
 	fPoint previousPos = { 0.0f, 0.0f };
 
 	bool to_destroy = false;
+
+	Collider* collider = nullptr;
 };
 
 #endif // !_ENTITY_H_
