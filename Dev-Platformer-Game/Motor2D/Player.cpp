@@ -36,6 +36,9 @@ Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 		else if (tmp == "punch_barrage")
 			LoadAnimation(animations, &punch_barrage);
 	}
+
+	collider = App->collision->AddCollider({ x, y, 21, 30 }, COLLIDER_PLAYER, this, App->entities);
+
 	Start();
 }
 
@@ -253,6 +256,9 @@ bool Player::Update(float dt)
 
 	App->render->Blit(texture, pos.x, pos.y, &animation->GetCurrentFrame(), 1.0f, flip);
 	cont++;
+
+	collider->SetPos(pos.x, pos.y);
+
 	return true;
 }
 

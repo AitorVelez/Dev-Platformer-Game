@@ -52,6 +52,8 @@ public:
 	bool is_falling;
 	bool can_jump;
 
+	bool is_attacking = false;
+
 	bool looking_right = false;
 	bool looking_left = false;
 
