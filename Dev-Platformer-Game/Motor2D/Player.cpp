@@ -220,6 +220,22 @@ bool Player::Update(float dt)
 				pos.y += animation->offset_y;
 				offset_y_added = true;
 			}
+			if (animation->Finished())
+			{
+				if (offset_x_added)
+				{
+					pos.x += animation->offset_x;
+					offset_x_added = false;
+				}
+				if (offset_y_added)
+				{
+					pos.y -= animation->offset_y;
+					offset_y_added = false;
+				}
+				is_punching = false;
+				ability_boost = false;
+				animation = &idle;
+			}
 		}
 	}
 
