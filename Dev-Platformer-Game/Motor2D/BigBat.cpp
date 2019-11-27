@@ -65,6 +65,7 @@ bool BigBat::CleanUp()
 	App->tex->UnLoad(texture);
 	animation = nullptr;
 	texture = nullptr;
+	collider->to_delete = true;
 	return true;
 }
 
