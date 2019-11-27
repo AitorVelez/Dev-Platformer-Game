@@ -67,6 +67,8 @@ public:
 
 	bool to_destroy = false;
 
+	int offset = 0;
+
 	Collider* collider = nullptr;
 };
 
