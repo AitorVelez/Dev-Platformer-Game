@@ -128,33 +128,6 @@
         <frame x="177" y="613" w="34" h="25"/>
       </animation>
 
-      <animation name="punch2" speed="0.25" loop="false" offset_x ="13" offset_y ="6">
-        <frame x="225" y="613" w="34" h="25"/>
-        <frame x="275" y="613" w="34" h="25"/>
-        <frame x="326" y="613" w="34" h="25"/>
-      </animation>
-
-      <animation name="punch3" speed="0.25" loop="false" offset_x ="13" offset_y ="6">
-        <frame x="26" y="650" w="34" h="25"/>
-        <frame x="75" y="650" w="34" h="25"/>
-        <frame x="125" y="650" w="34" h="25"/>
-        <frame x="177" y="650" w="34" h="25"/>
-      </animation>
-
-      <animation name="punch_barrage" speed="0.25" loop="false" offset_x ="13" offset_y ="5">
-        <frame x="25" y="613" w="34" h="25"/>
-        <frame x="75" y="613" w="34" h="25"/>
-        <frame x="127" y="613" w="34" h="25"/>
-        <frame x="177" y="613" w="34" h="25"/>
-        <frame x="225" y="613" w="34" h="25"/>
-        <frame x="275" y="613" w="34" h="25"/>
-        <frame x="326" y="613" w="34" h="25"/>
-        <frame x="26" y="650" w="34" h="25"/>
-        <frame x="75" y="650" w="34" h="25"/>
-        <frame x="125" y="650" w="34" h="25"/>
-        <frame x="177" y="650" w="34" h="25"/>
-      </animation>
-
     </animations>
 
   </player>
