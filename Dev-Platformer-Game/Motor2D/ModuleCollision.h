@@ -25,6 +25,8 @@ struct Collider
 	j1Module* callback = nullptr;
 	int life_units;
 
+	int offset = 0;
+
 	Entity* owner = nullptr;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* owner, j1Module* callback = nullptr) :

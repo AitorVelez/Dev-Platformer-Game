@@ -103,7 +103,7 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
 		case COLLIDER_PLAYER:
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+			App->render->DrawQuad({ colliders[i]->rect.x + colliders[i]->offset, colliders[i]->rect.y, colliders[i]->rect.w, colliders[i]->rect.h }, 0, 255, 0, alpha);
 			break;
 		case COLLIDER_ENEMY:
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
@@ -166,14 +166,12 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 {
 	bool collision = false;
 
-
 	if (rect.x + rect.w >= r.x && rect.x <= r.x + r.w) {
 		if (rect.y + rect.h >= r.y && rect.y <= r.y + r.h) {
 
 			collision = true;
 		}
 	}
-
 
 	return  collision;
 }
