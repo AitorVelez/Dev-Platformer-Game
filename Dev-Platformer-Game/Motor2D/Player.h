@@ -44,7 +44,6 @@ public:
 	Animation fall = Animation();
 	Animation wall_slide = Animation();
 	Animation punch1 = Animation();
-	Animation punch_barrage = Animation();
 
 	bool god_mode = false;
 
@@ -53,15 +52,8 @@ public:
 	bool is_punching=false;
 	bool can_jump;
 
-	bool is_attacking = false;
-
 	bool looking_right = false;
 	bool looking_left = false;
-
-
-	bool offset_x_added = false;
-	bool offset_y_added = false;
-
 
 	bool ability_boost = false;
 

@@ -33,8 +33,6 @@ Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 			LoadAnimation(animations, &wall_slide);
 		else if (tmp == "punch1")
 			LoadAnimation(animations, &punch1);
-		else if (tmp == "punch_barrage")
-			LoadAnimation(animations, &punch_barrage);
 	}
 
 	collider = App->collision->AddCollider({ x, y, 21, 30 }, COLLIDER_PLAYER, this, App->entities);
@@ -201,46 +199,31 @@ bool Player::Update(float dt)
 			
 			is_punching = true;
 			punch1.Reset();
-			punch1.ResetLoops();
-			punch_barrage.Reset();
-			punch_barrage.ResetLoops();
-			
+			punch1.ResetLoops();			
 		}
 		if (is_punching)
 		{
-			if (ability_boost)
+			if (flip == SDL_FLIP_HORIZONTAL)
 			{
-				animation = &punch_barrage;
+				offset = -13;
+				collider->rect.w = -34;
+				collider->offset = 21;
 			}
 			else
 			{
-				animation = &punch1;
+				collider->rect.w = 34;
+				collider->offset = 0;
 			}
-			if (!offset_x_added && looking_left)
-			{
-				pos.x -= animation->offset_x;
-				offset_x_added = true;
-			}
-			if (!offset_y_added)
-			{
-				pos.y += animation->offset_y;
-				offset_y_added = true;
-			}
+
+			animation = &punch1;
 			if (animation->Finished())
 			{
-				if (offset_x_added)
-				{
-					pos.x += animation->offset_x;
-					offset_x_added = false;
-				}
-				if (offset_y_added)
-				{
-					pos.y -= animation->offset_y;
-					offset_y_added = false;
-				}
 				is_punching = false;
 				ability_boost = false;
 				animation = &idle;
+				collider->rect.w = 21;
+				collider->offset = 0;
+				offset = 0;
 			}
 		}
 	}
@@ -307,8 +290,6 @@ bool Player::Update(float dt)
 				pos.y = tempPos.y;
 		}
 	}
-
-	App->render->Blit(texture, pos.x, pos.y, &animation->GetCurrentFrame(), 1.0f, flip);
 	cont++;
 
 	collider->SetPos(pos.x, pos.y);
@@ -385,5 +366,6 @@ bool Player::CleanUp()
 	App->tex->UnLoad(texture);
 	animation = nullptr;
 	texture = nullptr;
-	return true;
+	collider->to_delete = true;
+	return true;	
 }
