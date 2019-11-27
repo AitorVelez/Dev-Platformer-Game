@@ -50,12 +50,20 @@ public:
 
 	bool is_jumping;
 	bool is_falling;
+	bool is_punching=false;
 	bool can_jump;
 
 	bool is_attacking = false;
 
 	bool looking_right = false;
 	bool looking_left = false;
+
+
+	bool offset_x_added = false;
+	bool offset_y_added = false;
+
+
+	bool ability_boost = false;
 
 	int cont = 0;
 

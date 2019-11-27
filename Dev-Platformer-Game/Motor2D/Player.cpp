@@ -189,6 +189,38 @@ bool Player::Update(float dt)
 				is_jumping = false;
 			}
 		}
+		// PUNCHES AND SLASHES
+		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
+		{
+			
+			is_punching = true;
+			punch1.Reset();
+			punch1.ResetLoops();
+			punch_barrage.Reset();
+			punch_barrage.ResetLoops();
+			
+		}
+		if (is_punching)
+		{
+			if (ability_boost)
+			{
+				animation = &punch_barrage;
+			}
+			else
+			{
+				animation = &punch1;
+			}
+			if (!offset_x_added && looking_left)
+			{
+				pos.x -= animation->offset_x;
+				offset_x_added = true;
+			}
+			if (!offset_y_added)
+			{
+				pos.y += animation->offset_y;
+				offset_y_added = true;
+			}
+		}
 	}
 
 	else if (god_mode)
