@@ -206,8 +206,8 @@ bool Player::Update(float dt)
 			if (flip == SDL_FLIP_HORIZONTAL)
 			{
 				offset = -13;
-				collider->rect.w = -34;
-				collider->offset = 21;
+				collider->rect.w = 34;
+				collider->offset = -13;
 			}
 			else
 			{

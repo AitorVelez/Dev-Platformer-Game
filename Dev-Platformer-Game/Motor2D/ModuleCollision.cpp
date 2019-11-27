@@ -67,7 +67,7 @@ bool ModuleCollision::Update(float dt)
 
 			c2 = colliders[k];
 
-			if (c1->CheckCollision(c2->rect) == true)
+			if (c1->CheckCollision(*c2) == true)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback) {}
 				c1->callback->OnCollision(c1, c2);
@@ -162,12 +162,12 @@ bool ModuleCollision::EraseCollider(Collider* collider)
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r) const
+bool Collider::CheckCollision(const Collider& r) const
 {
 	bool collision = false;
 
-	if (rect.x + rect.w >= r.x && rect.x <= r.x + r.w) {
-		if (rect.y + rect.h >= r.y && rect.y <= r.y + r.h) {
+	if (rect.x + rect.w + offset >= r.rect.x + r.offset && rect.x + offset <= r.rect.x + r.rect.w + r.offset) {
+		if (rect.y + rect.h >= r.rect.y && rect.y <= r.rect.y + r.rect.h) {
 
 			collision = true;
 		}
