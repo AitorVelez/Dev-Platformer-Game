@@ -98,7 +98,13 @@ bool Player::Update(float dt)
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{
 			App->audio->PlayFx(2);
-			SpawnPlayer();
+			--lives;
+			if (lives > 0)
+				SpawnPlayer();
+			else
+			{
+				App->scene->LoadScene(1);
+			}
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -344,6 +350,7 @@ void Player::SpawnPlayer()
 	pos.x = spawn_pos.x;
 	pos.y = spawn_pos.y;
 	App->render->camera.x = 0;
+	collider->SetPos(pos.x, pos.y);
 }
 
 int Player::GetPlayerTile(fPoint pos) const

@@ -67,6 +67,8 @@ public:
 
 	int cont = 0;
 
+	int lives = 3;
+
 	iPoint spawn_pos;
 
 	EntityData playerData;
