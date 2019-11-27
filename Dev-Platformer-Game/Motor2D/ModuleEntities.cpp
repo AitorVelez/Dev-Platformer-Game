@@ -126,7 +126,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if (player->is_attacking)
+		if (player->is_punching)
 		{
 			c2->owner->to_destroy = true;
 			c2->to_delete = true;
