@@ -44,11 +44,13 @@ public:
 	Animation fall = Animation();
 	Animation wall_slide = Animation();
 	Animation punch1 = Animation();
+	Animation kick1 = Animation();
 
 	bool god_mode = false;
 
 	bool is_jumping;
 	bool is_falling;
+	bool is_kicking;
 	bool is_punching=false;
 	bool can_jump;
 

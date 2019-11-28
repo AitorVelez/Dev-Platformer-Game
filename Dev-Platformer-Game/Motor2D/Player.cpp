@@ -33,8 +33,8 @@ Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 			LoadAnimation(animations, &wall_slide);
 		else if (tmp == "punch1")
 			LoadAnimation(animations, &punch1);
-		else if (tmp == "kick")
-			LoadAnimation(animations, &punch1);
+		else if (tmp == "kick1")
+			LoadAnimation(animations, &kick1);
 	}
 
 	collider = App->collision->AddCollider({ x, y, 21, 30 }, COLLIDER_PLAYER, this, App->entities);
@@ -195,7 +195,7 @@ bool Player::Update(float dt)
 				is_jumping = false;
 			}
 		}
-		// PUNCHES AND SLASHES
+		// PUNCHES AND KICKS
 		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
 		{
 			
@@ -226,6 +226,24 @@ bool Player::Update(float dt)
 				collider->rect.w = 21;
 				collider->offset = 0;
 				offset = 0;
+			}
+		}
+
+
+		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && is_falling)   //multiple kicks while falling, need to think about attack design
+		{
+			is_kicking = true;
+			kick1.Reset();
+			kick1.ResetLoops();
+		}
+		if (is_kicking)
+		{
+			animation = &kick1;
+
+			if (animation->Finished())
+			{
+				is_kicking = false;
+				animation = &idle;
 			}
 		}
 	}
