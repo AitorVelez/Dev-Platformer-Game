@@ -33,6 +33,8 @@ Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 			LoadAnimation(animations, &wall_slide);
 		else if (tmp == "punch1")
 			LoadAnimation(animations, &punch1);
+		else if (tmp == "kick")
+			LoadAnimation(animations, &punch1);
 	}
 
 	collider = App->collision->AddCollider({ x, y, 21, 30 }, COLLIDER_PLAYER, this, App->entities);

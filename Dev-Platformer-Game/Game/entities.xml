@@ -128,6 +128,12 @@
         <frame x="177" y="613" w="34" h="25"/>
       </animation>
 
+      <animation name="kick1" speed="0.25" loop="false" offset_x ="9" offset_y ="6">
+        <frame x="29" y="725" w="30" h="26"/>
+        <frame x="79" y="725" w="30" h="26"/>
+        <frame x="129" y="723" w="35" h="26"/>
+      </animation>
+
     </animations>
 
   </player>
