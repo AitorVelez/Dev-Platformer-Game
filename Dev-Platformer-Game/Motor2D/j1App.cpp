@@ -14,6 +14,7 @@
 #include "j1App.h"
 #include "ModuleEntities.h"
 #include "ModuleCollision.h"
+#include "ModulePathfinding.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -33,6 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new j1Map();
 	entities = new ModuleEntities();
 	collision = new ModuleCollision();
+	pathfinding = new ModulePathfinding();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -44,6 +46,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(entities);
 	AddModule(collision);
+	AddModule(pathfinding);
 
 	// render last to swap buffer
 	AddModule(render);

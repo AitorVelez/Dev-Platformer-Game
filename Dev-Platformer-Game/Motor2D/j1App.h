@@ -19,6 +19,7 @@ class j1Scene;
 class j1Map;
 class ModuleEntities;
 class ModuleCollision;
+class ModulePathfinding;
 
 class j1App
 {
@@ -98,6 +99,7 @@ public:
 	j1Map*				map = nullptr;
 	ModuleEntities*		entities = nullptr;
 	ModuleCollision*	collision = nullptr;
+	ModulePathfinding*	pathfinding = nullptr;
 
 	uint32				frame_limit = 30;
 
