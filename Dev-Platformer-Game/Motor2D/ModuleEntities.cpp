@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "BigBat.h"
+#include "WalkingEnemy.h"
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Map.h"

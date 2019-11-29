@@ -50,6 +50,12 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
+		else if (layer->data->data[i] == 336)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+		}
+
 	}
 	
 	return true;
