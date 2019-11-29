@@ -17,9 +17,10 @@ WalkingEnemy::WalkingEnemy(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
 	pos.y = y;
 	spawn.x = x;
 	spawn.y = y;
+	spawnPos = App->map->WorldToMap(x, y);
 	pugi::xml_document	config_file;
 	pugi::xml_node* node = &App->LoadEntities(config_file);
-	node = &node->child("enemies").child("blackBandit");
+	node = &node->child("enemies").child("walkingEnemy");
 
 	for (pugi::xml_node animations = node->child("animations").child("animation"); animations; animations = animations.next_sibling("animation"))
 	{

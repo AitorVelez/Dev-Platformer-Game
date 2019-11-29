@@ -98,6 +98,13 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 		ret = true;
 		break;
 		}
+		case WALKING_ENEMY:
+		{
+			WalkingEnemy* bandit = new WalkingEnemy(x, y, WALKING_ENEMY);
+			entities.add(bandit);
+			ret = true;
+			break;
+		}
 		default:
 		{ 
 		break;
