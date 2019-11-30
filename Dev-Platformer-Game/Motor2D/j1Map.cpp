@@ -70,35 +70,30 @@ void j1Map::Draw()
 						//LOG("COLLIDERS SPEED: %f", layer_pointer->data->speed);
 					
 					}
+
 				}
 			}
 		}
 	}
-
-	/*for(int y = 0; y < data.height; ++y)
-	{
-		for(int x = 0; x < data.width; ++x)
-		{
-			int tile_id = layer->Get(x, y);
-			if(tile_id > 0)
-			{
-				TileSet* tileset = GetTilesetFromTileId(tile_id);
-				if (tileset != nullptr)
-				{
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld(x, y);
-
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-				}
-			}
-		}
-	}*/
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
 {
-	// TODO 3: Complete this method so we pick the right
-	// Tileset based on a tile id
+	p2List_item<TileSet*>* item = data.tilesets.start;
+	TileSet* set = item->data;
+
+	while (item)
+	{
+		if (id < item->data->firstgid)
+		{
+			set = item->prev->data;
+			break;
+		}
+		set = item->data;
+		item = item->next;
+	}
+
+	return set;
 
 	return data.tilesets.start->data;
 }
@@ -472,4 +467,69 @@ iPoint j1Map::TileToWorld(int gid) const
 	pos.y *= data.tilesets.start->data->tile_height;
 
 	return pos;
+}
+
+bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer, bool can_fly) const
+{
+	bool ret = false;
+	p2List_item<MapLayer*>* item;
+	item = data.layers.start;
+
+	for (item = data.layers.start; item != NULL; item = item->next)
+	{
+		MapLayer* layer = item->data;
+
+		if (layer->properties.Get("Navigation", 0) == 0)
+			continue;
+		if (can_fly && layer->name != "Navigation" || !can_fly && layer->name != "Navigation_Walker")
+			continue;
+
+		uchar* map = new uchar[layer->width*layer->height];
+		memset(map, 1, layer->width*layer->height);
+
+		for (int y = 0; y < data.height; ++y)
+		{
+			for (int x = 0; x < data.width; ++x)
+			{
+				int i = (y*layer->width) + x;
+
+				int tile_id = layer->Get(x, y);
+				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+
+				if (tileset != NULL)
+				{
+					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
+					/*TileType* ts = tileset->GetTileType(tile_id);
+					if(ts != NULL)
+					{
+						map[i] = ts->properties.Get("walkable", 1);
+					}*/
+
+				}
+			}
+		}
+
+		*buffer = map;
+		width = data.width;
+		height = data.height;
+		ret = true;
+
+		break;
+	}
+
+	return ret;
+}
+
+int Properties::Get(const char* value, int default_value) const
+{
+	p2List_item<Property*>* item = list.start;
+
+	while (item)
+	{
+		if (item->data->name == value)
+			return item->data->value;
+		item = item->next;
+	}
+
+	return default_value;
 }

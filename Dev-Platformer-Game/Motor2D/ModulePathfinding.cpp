@@ -190,7 +190,7 @@ int ModulePathfinding::CreatePath(const iPoint& origin, const iPoint& destinatio
 {
 	BROFILER_CATEGORY("PathfindingCreatePath", Profiler::Color::Violet)
 	last_path.Clear();
-	// TODO 1: if origin or destination are not walkable, return -1
+	
 
 	if (!IsWalkable(origin) || !IsWalkable(destination))
 		return -1;
