@@ -15035,7 +15035,11 @@
    <tile gid="337"/>
   </data>
  </layer>
- <layer name="Navigation" width="150" height="20" opacity="0.27">
+ <layer name="Navigation" width="150" height="20" visible="0" opacity="0.27">
+  <properties>
+   <property name="Navigation" type="int" value="1"/>
+   <property name="canFly" type="int" value="1"/>
+  </properties>
   <data>
    <tile gid="337"/>
    <tile gid="337"/>
