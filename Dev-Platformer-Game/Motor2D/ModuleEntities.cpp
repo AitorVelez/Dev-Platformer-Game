@@ -141,16 +141,19 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 		}
 		else
 		{
-			--App->entities->player->lives;
-			if (App->entities->player->lives > 0)
+			if (!App->entities->player->god_mode)
 			{
-				c1->to_delete = true;
-				App->entities->player->SpawnPlayer();
-				App->entities->player->collider = App->collision->AddCollider({ (int)App->entities->player->pos.x, (int)App->entities->player->pos.y, 21, 30 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities->player, App->entities);
-			}				
-			else
-			{
-				App->scene->LoadScene(1);
+				--App->entities->player->lives;
+				if (App->entities->player->lives > 0)
+				{
+					c1->to_delete = true;
+					App->entities->player->SpawnPlayer();
+					App->entities->player->collider = App->collision->AddCollider({ (int)App->entities->player->pos.x, (int)App->entities->player->pos.y, 21, 30 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities->player, App->entities);
+				}				
+				else
+				{
+					App->scene->LoadScene(1);
+				}
 			}
 		}
 	}
