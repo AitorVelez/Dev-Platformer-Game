@@ -238,6 +238,11 @@ void j1Scene::LoadScene(int map)
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
 		}
+		else if (layer->data->data[i] == 336)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+		}
 	}
 	/*App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();*/
