@@ -38,6 +38,10 @@ public:
 	iPoint nextPoint;
 	iPoint spawnPos;
 
+	iPoint batPos;
+	iPoint playerPos;
+	fPoint playerPosition;
+
 	fPoint spawn;
 };
 

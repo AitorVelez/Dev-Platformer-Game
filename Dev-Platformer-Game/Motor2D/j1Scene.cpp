@@ -10,6 +10,7 @@
 #include "j1Scene.h"
 #include "ModuleEntities.h"
 #include "Player.h"
+#include "ModulePathfinding.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -33,6 +34,14 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	App->map->Load("Map1.tmx");
+
+	int w, h;
+	uchar* data = NULL;
+	if (App->map->CreateWalkabilityMap(w, h, &data, true))
+		App->pathfinding->SetMap(w, h, data);
+
+	RELEASE_ARRAY(data);
+
 	App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
 	App->audio->MusicVolume(App->audio->music_volume);
 
