@@ -97,13 +97,16 @@ bool Player::Update(float dt)
 		if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH
 			&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::DEATH)
 		{
-			App->audio->PlayFx(2);
-			--lives;
-			if (lives > 0)
-				SpawnPlayer();
-			else
+			if (!god_mode)
 			{
-				App->scene->LoadScene(1);
+				App->audio->PlayFx(2);
+				--lives;
+				if (lives > 0)
+					SpawnPlayer();
+				else
+				{
+					App->scene->LoadScene(1);
+				}
 			}
 		}
 
