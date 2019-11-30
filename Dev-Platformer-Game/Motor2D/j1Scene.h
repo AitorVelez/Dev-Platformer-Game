@@ -42,6 +42,8 @@ public:
 
 	int current_map = 1;
 
+	float camPos;
+
 private:
 
 	bool change_volume = false;

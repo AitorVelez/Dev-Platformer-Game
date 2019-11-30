@@ -67,6 +67,8 @@ bool j1Scene::Start()
 
 	}
 	
+	camPos = App->render->camera.x;
+
 	return true;
 }
 
@@ -156,31 +158,26 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	int camera_speed = App->entities->player->playerData.speed;
+	float camera_speed = App->entities->player->playerData.speed * dt;
 
 	if (App->entities->player->pos.x - (-App->render->camera.x + (App->render->camera.w / 2)) >= 0)
 	{
-		if (App->render->camera.x - App->render->camera.w > -(App->map->data.width*App->map->data.tile_width))
-			App->render->camera.x -= camera_speed;
+		if (camPos - App->render->camera.w > -(App->map->data.width * App->map->data.tile_width))
+			camPos -= camera_speed;
 	}
 
 	if (App->entities->player->pos.x - (-App->render->camera.x + (App->render->camera.w / 3)) <= 0)
 	{
-		if (App->render->camera.x < 0)
-			App->render->camera.x += camera_speed;
+		if (camPos < 0)
+			camPos += camera_speed;
 	}
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	/*p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count(),
-					map_coordinates.x, map_coordinates.y);*/
-	//p2SString title("City Hero   Level: %i      Music volume: %i / 130", App->scene->current_map, App->audio->music_volume);
 
-	//App->win->SetTitle(title.GetString());
+	App->render->camera.x = camPos;
+
 	return true;
 }
 
@@ -208,8 +205,7 @@ void j1Scene::LoadScene(int map)
 	App->map->CleanUp();
 	App->tex->FreeTextures();
 	App->entities->CleanUp();
-	//App->player->LoadTexture();
-	
+	//App->player->LoadTexture();	
 
 	if (map == 1) 
 	{
