@@ -54,6 +54,10 @@ bool Player::Start()
 	FindPlayerSpawn();
 	SpawnPlayer();
 
+	playerData.speed = 100;
+	playerData.jumpSpeed = 100;
+	playerData.gravity = 150;
+
 	is_jumping = false;
 	looking_right = true;
 
@@ -64,7 +68,7 @@ bool Player::Update(float dt)
 {
 	animation = &idle;
 
-	float falling_speed = playerData.gravity;
+	float falling_speed = playerData.gravity * dt;
 	if (can_jump)
 		falling_speed -= 1.5;
 
@@ -117,7 +121,7 @@ bool Player::Update(float dt)
 
 			tempPos = pos;
 
-			tempPos.x += playerData.speed;
+			tempPos.x += playerData.speed * dt;
 
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
@@ -156,7 +160,7 @@ bool Player::Update(float dt)
 			looking_right = false;
 			tempPos = pos;
 
-			tempPos.x -= playerData.speed;
+			tempPos.x -= playerData.speed * dt;
 			if (CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x, tempPos.y + animation->GetCurrentFrame().h })) == COLLISION_TYPE::AIR)
 			{
@@ -179,13 +183,13 @@ bool Player::Update(float dt)
 			can_jump = false;
 			jumping.Reset();
 			is_jumping = true;
-			cont = 0;
+			jumpingCount = 0;
 		}
 		if (is_jumping)
 		{
 			tempPos = pos;
 
-			tempPos.y -= playerData.jumpSpeed;
+			tempPos.y -= playerData.jumpSpeed * dt;
 			if (CheckCollision(GetPlayerTile({ tempPos.x + 5, tempPos.y })) == COLLISION_TYPE::AIR
 				&& CheckCollision(GetPlayerTile({ tempPos.x + 10, tempPos.y })) == COLLISION_TYPE::AIR)
 			{
@@ -193,7 +197,7 @@ bool Player::Update(float dt)
 					pos.y = tempPos.y;
 				animation = &jumping;
 			}
-			if (cont == 35)
+			if (jumpingCount >= 0.65)
 			{
 				is_jumping = false;
 			}
@@ -313,7 +317,7 @@ bool Player::Update(float dt)
 				pos.y = tempPos.y;
 		}
 	}
-	cont++;
+	jumpingCount += dt;
 
 	collider->SetPos(pos.x, pos.y);
 
@@ -354,6 +358,7 @@ void Player::SpawnPlayer()
 	pos.x = spawn_pos.x;
 	pos.y = spawn_pos.y;
 	App->render->camera.x = 0;
+	App->scene->camPos = 0.0f;
 	collider->SetPos(pos.x, pos.y);
 }
 

@@ -59,7 +59,7 @@ public:
 
 	bool ability_boost = false;
 
-	int cont = 0;
+	float jumpingCount = 0;
 
 	int lives = 3;
 
