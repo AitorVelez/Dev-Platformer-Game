@@ -11,6 +11,7 @@
 #include "ModuleEntities.h"
 #include "Player.h"
 #include "ModulePathfinding.h"
+#include "ModulePathfindingWalker.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -39,6 +40,11 @@ bool j1Scene::Start()
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data, true))
 		App->pathfinding->SetMap(w, h, data);
+
+	int w2, h2;
+	uchar* data2 = NULL;
+	if (App->map->CreateWalkabilityMap(w2, h2, &data2, false))
+		App->pathfindingWalker->SetMap(w2, h2, data2);
 
 	RELEASE_ARRAY(data);
 

@@ -147,7 +147,7 @@ int PathNodeWalker::CalculateF(const iPoint& destination)
 int ModulePathfindingWalker::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	BROFILER_CATEGORY("PathfindingWalkerCreatePath", Profiler::Color::Violet)
-		last_path.Clear();
+	last_path.Clear();
 	
 	if (!IsWalkable(origin) || !IsWalkable(destination))
 		return -1;
@@ -180,7 +180,7 @@ int ModulePathfindingWalker::CreatePath(const iPoint& origin, const iPoint& dest
 		}
 		else
 		{
-				PathListWalker neighbours;
+			PathListWalker neighbours;
 		
 			close.list.end->data.FindWalkableAdjacents(neighbours);
 			p2List_item<PathNodeWalker>* iterator = neighbours.list.start;

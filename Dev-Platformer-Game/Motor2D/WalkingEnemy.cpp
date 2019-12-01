@@ -80,7 +80,7 @@ bool WalkingEnemy::Update(float dt)
 	banditPos = App->map->WorldToMap(pos.x, pos.y);
 	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
 
-	if (banditPos.x < playerPos.x + 8 && banditPos.x > playerPos.x - 8 && banditPos.y < playerPos.y + 8 && banditPos.y > playerPos.y - 8)
+	if (banditPos.x < playerPos.x + 8 && banditPos.x > playerPos.x - 8)
 	{
 		if (App->pathfindingWalker->CreatePath(banditPos, playerPos) != -1)
 		{

@@ -137,31 +137,6 @@ bool BigBat::Update(float dt)
 	pos.x += batData.speed;
 	pos.y += batData.jumpSpeed;
 
-
-	/*if ((animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && App->entities->player->animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && App->entities->player->animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().y + animation->GetCurrentFrame().h <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& (animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().x && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().x + App->entities->player->animation->GetCurrentFrame().w && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w >= App->entities->player->animation->GetCurrentFrame().y && animation->GetCurrentFrame().x + animation->GetCurrentFrame().w <= App->entities->player->animation->GetCurrentFrame().y + App->entities->player->animation->GetCurrentFrame().h)
-		&& !App->entities->player->playerAttacking && !App->entities->player->god_mode)
-	{
-		App->audio->PlayFx(2);
-		App->entities->player->SpawnPLayer();
-	}*/
-
-	/*iPoint contactPointRight = { animation->GetCurrentFrame().x + animation->GetCurrentFrame().w, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };
-	iPoint contactPointLeft = { animation->GetCurrentFrame().x, animation->GetCurrentFrame().y + (animation->GetCurrentFrame().h / 2) };*/
-
-	//if (batPos.y == playerPos.y && (batPos.x == playerPos.x + App->entities->player->animation->GetCurrentFrame().w || batPos.x == playerPos.x) && !App->entities->player->god_mode)
-	//{
-	//	if (!App->entities->player->playerAttacking)
-	//	{
-	//		App->audio->PlayFx(2);
-	//		App->entities->player->SpawnPLayer();
-	//		pos = spawn;
-	//	}
-	//	else to_destroy = true;
-	//}
-
 	collider->SetPos(pos.x, pos.y);
 
 	return true;
