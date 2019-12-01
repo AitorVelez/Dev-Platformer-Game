@@ -203,7 +203,7 @@ bool Player::Update(float dt)
 			}
 		}
 		// PUNCHES AND KICKS
-		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
+		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
 		{
 			
 			is_punching = true;
@@ -237,7 +237,7 @@ bool Player::Update(float dt)
 		}
 
 
-		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !is_punching && is_falling)   //multiple kicks while falling, need to think about attack design
+		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_punching && is_falling)   //multiple kicks while falling, need to think about attack design
 		{
 			is_kicking = true;
 			kick1.Reset();
@@ -264,7 +264,7 @@ bool Player::Update(float dt)
 
 			tempPos = pos;
 
-			tempPos.x += playerData.speed;
+			tempPos.x += playerData.speed * dt;
 			pos.x = tempPos.x;
 
 			if (CheckCollision(GetPlayerTile({ tempPos.x + animation->GetCurrentFrame().w, tempPos.y })) == COLLISION_TYPE::WIN
@@ -291,7 +291,7 @@ bool Player::Update(float dt)
 
 			tempPos = pos;
 
-			tempPos.x -= playerData.speed;
+			tempPos.x -= playerData.speed*dt;
 
 			if (tempPos.x >= App->render->camera.x)
 				pos.x = tempPos.x;
@@ -302,7 +302,7 @@ bool Player::Update(float dt)
 		{
 			tempPos = pos;
 
-			tempPos.y -= playerData.speed;
+			tempPos.y -= playerData.speed * dt;
 
 			if (tempPos.y >= App->render->camera.y)
 				pos.y = tempPos.y;
@@ -311,7 +311,7 @@ bool Player::Update(float dt)
 		{
 			tempPos = pos;
 
-			tempPos.y += playerData.speed;
+			tempPos.y += playerData.speed * dt;
 
 			if (tempPos.y + animation->GetCurrentFrame().h <= (App->render->camera.y + App->win->height))
 				pos.y = tempPos.y;
