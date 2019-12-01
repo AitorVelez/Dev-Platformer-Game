@@ -71,4 +71,4 @@ SOFTWARE.
 
 ## Github repository link
 
-https://github.com/MAtaur00/Development-Game
+https://github.com/AitorVelez/Dev-Platformer-Game
