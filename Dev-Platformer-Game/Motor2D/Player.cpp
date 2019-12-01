@@ -383,8 +383,8 @@ bool Player::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node position = data.append_child("position");
 
-	position.append_attribute("x") = (float)pos.x;
-	position.append_attribute("y") = (float)pos.y;
+	position.append_attribute("x") = pos.x;
+	position.append_attribute("y") = pos.y;
 
 	return true;
 }
