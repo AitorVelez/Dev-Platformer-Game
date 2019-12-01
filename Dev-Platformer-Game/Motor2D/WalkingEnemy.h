@@ -41,6 +41,9 @@ public:
 
 	iPoint nextPoint;
 	iPoint spawnPos;
+	iPoint banditPos;
+	iPoint playerPos;
+	fPoint playerPosition;
 
 	fPoint spawn;
 };

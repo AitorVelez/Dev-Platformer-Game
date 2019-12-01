@@ -20,6 +20,7 @@ class j1Map;
 class ModuleEntities;
 class ModuleCollision;
 class ModulePathfinding;
+class ModulePathfindingWalker;
 
 class j1App
 {
@@ -100,7 +101,7 @@ public:
 	ModuleEntities*		entities = nullptr;
 	ModuleCollision*	collision = nullptr;
 	ModulePathfinding*	pathfinding = nullptr;
-
+	ModulePathfindingWalker* pathfindingWalker= nullptr;
 	uint32				frame_limit = 30;
 
 	float				dt = 0.0f;

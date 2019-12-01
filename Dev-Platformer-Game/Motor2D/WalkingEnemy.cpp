@@ -7,6 +7,7 @@
 #include "WalkingEnemy.h"
 #include "j1Window.h"
 #include "ModuleEntities.h"
+#include "ModulePathfindingWalker.h"
 #include "j1Scene.h"
 #include "Player.h"
 #include "j1Audio.h"
@@ -73,6 +74,48 @@ bool WalkingEnemy::Update(float dt)
 	{
 		pos = tempPos;
 		animation = &falling;
+	}
+
+	playerPosition = App->entities->player->pos;
+	banditPos = App->map->WorldToMap(pos.x, pos.y);
+	playerPos = App->map->WorldToMap(playerPosition.x, playerPosition.y);
+
+	if (banditPos.x < playerPos.x + 8 && banditPos.x > playerPos.x - 8 && banditPos.y < playerPos.y + 8 && banditPos.y > playerPos.y - 8)
+	{
+		if (App->pathfindingWalker->CreatePath(banditPos, playerPos) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfindingWalker->GetLastPath();
+
+			if (App->map->draw_logic)
+			{
+				for (uint i = 0; i < path->Count(); ++i)
+				{
+					iPoint nextPoint = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(path_texture, nextPoint.x, nextPoint.y);
+				}
+			}
+			if (path->Count() > 0)
+			{
+				iPoint pathPoint = iPoint(path->At(0)->x, path->At(0)->y);
+				if (pathPoint.x < banditPos.x)
+				{
+					animation = &running;
+					flip = SDL_RendererFlip::SDL_FLIP_NONE;
+					banditData.speed = -70 * dt;
+				}
+				else if (pathPoint.x > banditPos.x)
+				{
+					animation = &running;
+					flip = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+					banditData.speed = 70 * dt;
+				}
+				if (pathPoint.y > banditPos.y)
+				{
+					animation = &falling;
+					banditData.jumpSpeed = 70 * dt;
+				}
+			}
+		}
 	}
 
 	pos.x += banditData.speed;
