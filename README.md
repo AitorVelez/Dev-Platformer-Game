@@ -30,6 +30,7 @@ This game is a platformer game where you will have to reach the end of the two l
 * A or D while falling if you have a wall in your left or right to slide down.
 * W key to jump while sliding walls.
 * W/A/S/D to move Up/Left/Down/Right with god mode.
+* P to hit enemies. P while falling makes a flying kick.
 
 ## Innovation
 
