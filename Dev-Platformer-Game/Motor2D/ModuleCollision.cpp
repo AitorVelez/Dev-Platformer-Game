@@ -2,6 +2,7 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "ModuleCollision.h"
+#include "Brofiler/Brofiler.h"
 #include "Player.h"
 #include "p2Log.h"
 
