@@ -16,6 +16,7 @@
 #include "ModuleCollision.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
+#include "Brofiler/Brofiler.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -143,6 +144,7 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
+	BROFILER_CATEGORY("Update", Profiler::Color::Red);
 	bool ret = true;
 	PrepareUpdate();
 
@@ -180,6 +182,8 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 void j1App::PrepareUpdate()
 {
 
+	BROFILER_CATEGORY("PrepareUpdate", Profiler::Color::Red);
+
 	dt = dttimer.ReadMs() / 1000;
 
 	dttimer.Start();
@@ -192,6 +196,9 @@ void j1App::PrepareUpdate()
 // ---------------------------------------------
 void j1App::FinishUpdate()
 {
+
+	BROFILER_CATEGORY("FinishUpdate", Profiler::Color::Red);
+
 	if(want_to_save == true)
 		SavegameNow();
 

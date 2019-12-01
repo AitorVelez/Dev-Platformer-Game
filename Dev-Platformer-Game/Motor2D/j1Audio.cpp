@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Audio.h"
+#include "Brofiler/Brofiler.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -82,6 +83,9 @@ bool j1Audio::CleanUp()
 // Play a music file
 bool j1Audio::PlayMusic(const char* path, float fade_time)
 {
+
+	BROFILER_CATEGORY("j1AudioPlayMusic", Profiler::Color::Gray);
+
 	bool ret = true;
 
 	if(!active)
