@@ -149,6 +149,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 		{
 			c2->owner->to_destroy = true;
 			c2->to_delete = true;
+			App->entities->player->score += 50;
 		}
 		else
 		{
@@ -173,6 +174,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 		c2->owner->to_destroy = true;
 		c2->to_delete = true;
 
+		App->entities->player->score += 100;
 		App->entities->player->coinsCount++;
 	}
 }
