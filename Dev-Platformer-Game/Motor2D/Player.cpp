@@ -54,9 +54,6 @@ bool Player::Start()
 	FindPlayerSpawn();
 	SpawnPlayer();
 
-	lives = 3;
-	coinsCount = 0;
-
 	playerData.speed = 100;
 	playerData.jumpSpeed = 100;
 	playerData.gravity = 150;
@@ -379,6 +376,9 @@ bool Player::Load(pugi::xml_node& data)
 	pos.x = data.child("position").attribute("x").as_float();
 	pos.y = data.child("position").attribute("y").as_float();
 
+	score = data.child("gameData").attribute("score").as_int();
+	lives = data.child("gameData").attribute("lives").as_int();
+
 	return true;
 }
 
@@ -388,6 +388,11 @@ bool Player::Save(pugi::xml_node& data) const
 
 	position.append_attribute("x") = pos.x;
 	position.append_attribute("y") = pos.y;
+
+	pugi::xml_node gameData = data.append_child("gameData");
+
+	gameData.append_attribute("score") = score;
+	gameData.append_attribute("lives") = lives;
 
 	return true;
 }
