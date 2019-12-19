@@ -63,6 +63,8 @@ public:
 
 	int lives = 3;
 
+	int coinsCount = 0;
+
 	iPoint spawn_pos;
 
 	EntityData playerData;

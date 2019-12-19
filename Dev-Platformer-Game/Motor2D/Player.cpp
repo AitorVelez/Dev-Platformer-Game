@@ -54,6 +54,9 @@ bool Player::Start()
 	FindPlayerSpawn();
 	SpawnPlayer();
 
+	lives = 3;
+	coinsCount = 0;
+
 	playerData.speed = 100;
 	playerData.jumpSpeed = 100;
 	playerData.gravity = 150;
