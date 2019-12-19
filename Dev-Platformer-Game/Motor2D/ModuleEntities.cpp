@@ -13,6 +13,7 @@
 #include "ModuleCollision.h"
 #include "Brofiler/Brofiler.h"
 #include "j1Scene.h"
+#include "Coin.h"
 
 ModuleEntities::ModuleEntities() 
 {
@@ -108,6 +109,13 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 			ret = true;
 			break;
 		}
+		case COIN:
+		{
+			Coin* coin = new Coin(x, y, COIN);
+			entities.add(coin);
+			ret = true;
+			break;
+		}
 		default:
 		{ 
 		break;
@@ -159,5 +167,12 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 				}
 			}
 		}
+	}
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN)
+	{
+		c2->owner->to_destroy = true;
+		c2->to_delete = true;
+
+		App->entities->player->coinsCount++;
 	}
 }

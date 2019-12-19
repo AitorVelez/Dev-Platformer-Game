@@ -15,8 +15,8 @@ enum ENTITY_TYPE
 	NONE,
 	PLAYER,
 	WALKING_ENEMY,
-	SKELETON,
-	BIGBAT
+	BIGBAT,
+	COIN
 };
 
 class ModuleEntities : public j1Module
