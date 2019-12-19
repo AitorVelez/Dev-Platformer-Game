@@ -70,7 +70,11 @@ bool j1Scene::Start()
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
 		}
-
+		else if (layer->data->data[i] == 271)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+		}
 	}
 	
 	camPos = App->render->camera.x;
@@ -244,6 +248,11 @@ void j1Scene::LoadScene(int map)
 		{
 			spawnEntity = App->map->TileToWorld(i);
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+		}
+		else if (layer->data->data[i] == 271)
+		{
+			spawnEntity = App->map->TileToWorld(i);
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
 		}
 	}
 	/*App->player->FindPlayerSpawn();
