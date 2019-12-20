@@ -49,6 +49,8 @@ bool Player::Start()
 	LoadTexture();
 	App->audio->LoadFx("audio/fx/Jump.wav");
 	App->audio->LoadFx("audio/fx/Die.wav");
+	App->audio->LoadFx("audio/fx/CoinFX.wav");
+	App->audio->LoadFx("audio/fx/DeathFX.wav");
 
 	animation = &idle;
 	FindPlayerSpawn();
@@ -104,6 +106,7 @@ bool Player::Update(float dt)
 			if (!god_mode)
 			{
 				App->audio->PlayFx(2);
+				//App->audio->PlayFx(4);
 				--lives;
 				if (lives > 0)
 					SpawnPlayer();
