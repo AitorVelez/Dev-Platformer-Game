@@ -155,6 +155,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (!App->entities->player->god_mode)
 			{
+				//App->audio->PlayFx(4);
 				--App->entities->player->lives;
 				if (App->entities->player->lives > 0)
 				{
@@ -171,6 +172,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 	}
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN)
 	{
+		App->audio->PlayFx(3);
 		c2->owner->to_destroy = true;
 		c2->to_delete = true;
 
