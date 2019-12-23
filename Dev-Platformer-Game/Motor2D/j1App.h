@@ -23,6 +23,7 @@ class ModulePathfinding;
 class ModulePathfindingWalker;
 class j1Gui;
 class j1Fonts;
+class j1StartMenu;
 
 class j1App
 {
@@ -106,6 +107,7 @@ public:
 	ModulePathfindingWalker*	pathfindingWalker= nullptr;
 	j1Gui*						gui = nullptr;
 	j1Fonts*					fonts = nullptr;
+	j1StartMenu*				startmenu = nullptr;
 
 
 	uint32				frame_limit = 30;
