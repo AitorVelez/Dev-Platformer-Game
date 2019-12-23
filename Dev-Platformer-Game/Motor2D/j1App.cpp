@@ -13,6 +13,7 @@
 #include "j1Map.h"
 #include "j1App.h"
 #include "ModuleEntities.h"
+#include "j1Gui.h"
 #include "ModuleCollision.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new ModuleCollision();
 	pathfinding = new ModulePathfinding();
 	pathfindingWalker = new ModulePathfindingWalker();
+	gui = new j1Gui();
 
 
 	// Ordered for awake / Start / Update
@@ -52,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collision);
 	AddModule(pathfinding);
 	AddModule(pathfindingWalker);
+	AddModule(gui);
 
 	// render last to swap buffer
 	AddModule(render);

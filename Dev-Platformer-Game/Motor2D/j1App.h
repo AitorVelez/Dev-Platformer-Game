@@ -21,6 +21,7 @@ class ModuleEntities;
 class ModuleCollision;
 class ModulePathfinding;
 class ModulePathfindingWalker;
+class j1Gui;
 
 class j1App
 {
@@ -91,17 +92,19 @@ private:
 public:
 
 	// Modules
-	j1Window*			win = nullptr;
-	j1Input*			input = nullptr;
-	j1Render*			render = nullptr;
-	j1Textures*			tex = nullptr;
-	j1Audio*			audio = nullptr;
-	j1Scene*			scene = nullptr;
-	j1Map*				map = nullptr;
-	ModuleEntities*		entities = nullptr;
-	ModuleCollision*	collision = nullptr;
-	ModulePathfinding*	pathfinding = nullptr;
-	ModulePathfindingWalker* pathfindingWalker= nullptr;
+	j1Window*					win = nullptr;
+	j1Input*					input = nullptr;
+	j1Render*					render = nullptr;
+	j1Textures*					tex = nullptr;
+	j1Audio*					audio = nullptr;
+	j1Scene*					scene = nullptr;
+	j1Map*						map = nullptr;
+	ModuleEntities*				entities = nullptr;
+	ModuleCollision*			collision = nullptr;
+	ModulePathfinding*			pathfinding = nullptr;
+	ModulePathfindingWalker*	pathfindingWalker= nullptr;
+	j1Gui*						gui = nullptr;
+
 	uint32				frame_limit = 30;
 
 	float				dt = 0.0f;
