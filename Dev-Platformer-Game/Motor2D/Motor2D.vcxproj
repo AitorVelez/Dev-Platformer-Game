@@ -101,6 +101,7 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="WalkingEnemy.cpp" />
   </ItemGroup>
@@ -137,6 +138,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="WalkingEnemy.h" />
   </ItemGroup>

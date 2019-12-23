@@ -76,6 +76,9 @@
     <ClCompile Include="j1Fonts.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="j1Fonts.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
