@@ -37,6 +37,8 @@ public:
 	bool debug = false;
 
 
+	UIObject* CreateUIImage(int x, int y, SDL_Rect rect, SDL_Texture* texture, bool is_hud);
+
 private:
 
 	p2List<UIObject*> UIObjects;

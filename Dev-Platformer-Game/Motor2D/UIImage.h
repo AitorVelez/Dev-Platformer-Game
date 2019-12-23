@@ -6,12 +6,9 @@
 
 class UIImage : public UIObject {
 
-
-
-
 public:
 
-	UIImage();
+	UIImage(int x, int y, SDL_Rect rect, SDL_Texture* tex, bool is_hud);
 	~UIImage();
 
 	void Draw();

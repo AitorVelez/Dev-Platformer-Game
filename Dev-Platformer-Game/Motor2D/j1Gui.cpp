@@ -7,6 +7,7 @@
 #include "p2List.h"
 #include "j1Input.h"
 #include "UIObject.h"
+#include "UIImage.h"
 
 
 j1Gui::j1Gui() : j1Module() {
@@ -93,6 +94,40 @@ bool j1Gui::HUDCleanUp()
 		item = item->next;
 	}
 	return true;
+}
+
+UIObject* j1Gui::CreateUIImage(int x, int y, SDL_Rect rect, SDL_Texture* texture, bool is_hud) {
+
+	if (texture == nullptr) {
+		UIImage* image = new UIImage(x, y, rect, atlas, is_hud);
+
+		if (is_hud)
+		{
+			HUDObjects.add(image);
+		}
+		else if (!is_hud)
+		{
+			UIObjects.add(image);
+		}
+		return image;
+
+	}
+	else {
+		UIImage* image = new UIImage(x, y, rect, texture, is_hud);
+
+		if (is_hud)
+		{
+			HUDObjects.add(image);
+		}
+		else if (!is_hud)
+		{
+			UIObjects.add(image);
+		}
+		return image;
+
+	}
+
+
 }
 
 

@@ -27,6 +27,15 @@ bool j1StartMenu::Start() {
 
 	SDL_Texture* texture = App->gui->atlas;
 
+	SDL_Rect background_rect = { 40,36,1024,768 };
+
+	//background
+	background = App->gui->CreateUIImage(0, 0, background_rect, texture, false);
+
+	//App->startmenu->active = false;
+	//App->scene->active = true;
+	//App->scene->Start();
+
 	return true;
 }
 bool j1StartMenu::PreUpdate() {
@@ -41,7 +50,7 @@ bool j1StartMenu::Update(float) {
 bool j1StartMenu::PostUpdate() {
 
 
-	//return ret;
+	return true;
 
 }
 bool j1StartMenu::CleanUp() {

@@ -22,10 +22,19 @@ public:
 	virtual void Draw();
 
 
+	UIObject* object;
+	int x;
+	int y;
+	int margin_right;
+	int margin_left;
+	SDL_Rect rect;
+
+	bool is_hud;
+
 	p2SString text;
 	SDL_Texture* texture = nullptr;
 
-
+	bool debug = false;
 };
 
 
