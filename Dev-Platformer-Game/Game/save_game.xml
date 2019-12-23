@@ -7,12 +7,15 @@
 	<map />
 	<scene>
 		<Map CurrentMap="1" />
-		<position x="96" y="305.866577" />
+		<position x="207.439957" y="282.364441" />
+		<gameData score="0" lives="3" />
 	</scene>
 	<entities />
 	<:anonymous />
 	<pathfinding />
 	<pathfinding />
+	<gui />
+	<fonts />
 	<renderer>
 		<camera x="0" y="0" />
 	</renderer>

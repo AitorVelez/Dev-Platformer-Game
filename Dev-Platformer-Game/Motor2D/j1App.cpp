@@ -14,6 +14,7 @@
 #include "j1App.h"
 #include "ModuleEntities.h"
 #include "j1Gui.h"
+#include "j1Fonts.h"
 #include "ModuleCollision.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
@@ -40,6 +41,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new ModulePathfinding();
 	pathfindingWalker = new ModulePathfindingWalker();
 	gui = new j1Gui();
+	fonts = new j1Fonts();
 
 
 	// Ordered for awake / Start / Update
@@ -55,6 +57,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(pathfindingWalker);
 	AddModule(gui);
+	AddModule(fonts);
 
 	// render last to swap buffer
 	AddModule(render);

@@ -22,6 +22,7 @@ class ModuleCollision;
 class ModulePathfinding;
 class ModulePathfindingWalker;
 class j1Gui;
+class j1Fonts;
 
 class j1App
 {
@@ -104,6 +105,8 @@ public:
 	ModulePathfinding*			pathfinding = nullptr;
 	ModulePathfindingWalker*	pathfindingWalker= nullptr;
 	j1Gui*						gui = nullptr;
+	j1Fonts*					fonts = nullptr;
+
 
 	uint32				frame_limit = 30;
 
