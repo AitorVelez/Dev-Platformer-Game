@@ -31,4 +31,8 @@
     <maps map ="Map2.tmx"></maps>
   </scene>
 
+  <gui>
+    <atlas file = "gui/atlas.png"/>
+  </gui>
+
 </config>

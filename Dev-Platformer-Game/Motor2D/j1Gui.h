@@ -39,6 +39,9 @@ public:
 
 private:
 
+	p2List<UIObject*> UIObjects;
+
+	p2List<UIObject*> HUDObjects;
 
 	p2SString atlas_file_name;
 };

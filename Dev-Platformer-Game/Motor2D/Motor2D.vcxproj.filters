@@ -70,6 +70,9 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -162,6 +165,9 @@
     <ClInclude Include="j1Gui.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -184,6 +190,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Entities">
       <UniqueIdentifier>{25be8eb8-d9f9-46af-a027-a335116627e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\GUI">
+      <UniqueIdentifier>{d4ced7c0-0b3c-441f-ae9b-c8f0e6890739}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

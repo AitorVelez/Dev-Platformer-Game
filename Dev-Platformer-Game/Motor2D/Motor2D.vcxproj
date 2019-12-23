@@ -100,6 +100,7 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="WalkingEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="UIObject.h" />
     <ClInclude Include="WalkingEnemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
