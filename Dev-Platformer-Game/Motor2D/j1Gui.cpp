@@ -6,6 +6,7 @@
 #include "p2Log.h"
 #include "p2List.h"
 #include "j1Input.h"
+#include "UIObject.h"
 
 
 j1Gui::j1Gui() : j1Module() {
@@ -41,6 +42,24 @@ bool j1Gui::PreUpdate() {
 
 bool j1Gui::Update(float dt) {
 
+	for (int i = 0; i < UIObjects.count(); ++i) {
+
+		if (UIObjects.At(i) != nullptr) {
+
+			UIObjects.At(i)->data->Draw();
+			UIObjects.At(i)->data->Update();
+
+		}
+	}
+
+	for (int i = 0; i < HUDObjects.count(); i++)
+	{
+		if (HUDObjects.At(i) != nullptr)
+		{
+			HUDObjects.At(i)->data->Draw();
+			HUDObjects.At(i)->data->Update();
+		}
+	}
 
 	return true;
 }
