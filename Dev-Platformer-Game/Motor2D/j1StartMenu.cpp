@@ -43,6 +43,12 @@ bool j1StartMenu::Start() {
 	//start text
 	text_start = App->gui->CreateUILabel(-App->render->camera.x + 260, 175, "START", false);
 
+	//exit button
+	exit_button = App->gui->CreateUIButton(860, 560, return_rect_off, return_rect_on, return_rect_off, texture);
+
+	//exit text
+	text_exit = App->gui->CreateUILabel(-App->render->camera.x + 908, 585, "EXIT", false);
+
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
@@ -73,12 +79,25 @@ bool j1StartMenu::Update(float) {
 			}
 		}*/
 
+		//check if mouse is on exit button
+	if (mouse_pos.x > exit_button->x&&mouse_pos.x<exit_button->x + exit_button->button_on.w&&mouse_pos.y>exit_button->y&&mouse_pos.y < exit_button->y + exit_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			close_game = true;
+		}
+	}
+
 	return true;
 }
 bool j1StartMenu::PostUpdate() {
 
+	bool ret = true;
 
-	return true;
+	if (close_game)
+		ret = false;
+
+	return ret;
 
 }
 bool j1StartMenu::CleanUp() {

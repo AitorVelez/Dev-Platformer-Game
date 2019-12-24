@@ -21,10 +21,14 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	UIObject * background = nullptr;
-	UIObject * play_button = nullptr;
+	UIObject* background = nullptr;
+	UIObject* play_button = nullptr;
+	UIObject* exit_button = nullptr;
 
 	UIObject* text_start = nullptr;
+	UIObject* text_exit = nullptr;
+
+	bool close_game = false;
 
 	iPoint mouse_position, mouse_pos;
 };
