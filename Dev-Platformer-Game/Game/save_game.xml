@@ -8,27 +8,14 @@
 	<scene>
 		<Map CurrentMap="1" />
 		<position x="1664" y="96" />
-		<position x="1760" y="121.189049" />
+		<position x="1760" y="397.498108" />
 		<position x="3552" y="128" />
 		<position x="416" y="192" />
 		<position x="4544" y="224" />
-		<position x="2208" y="281.189026" />
+		<position x="2208" y="557.498169" />
 		<position x="2464" y="256" />
 		<position x="3584" y="256" />
-		<position x="96" y="351.917328" />
-		<gameData score="0" lives="3" />
-		<position x="864" y="288" />
-		<position x="1696" y="288" />
-		<position x="1248" y="448" />
-		<position x="1664" y="96" />
-		<position x="1760" y="121.189049" />
-		<position x="3552" y="128" />
-		<position x="416" y="192" />
-		<position x="4544" y="224" />
-		<position x="2208" y="281.189026" />
-		<position x="2464" y="256" />
-		<position x="3584" y="256" />
-		<position x="96" y="351.917328" />
+		<position x="173.187851" y="1192.49451" />
 		<gameData score="0" lives="3" />
 		<position x="864" y="288" />
 		<position x="1696" y="288" />

@@ -85,23 +85,24 @@ bool j1StartMenu::PreUpdate() {
 bool j1StartMenu::Update(float) {
 	BROFILER_CATEGORY("UpdateStartMenu", Profiler::Color::White)
 
-		mouse_pos = App->input->GetMousePosition(mouse_position);
+	mouse_pos = App->input->GetMousePosition(mouse_position);
 
-		//check if mouse is on play button
-		if (mouse_pos.x > play_button->x&&mouse_pos.x<play_button->x + play_button->button_on.w&&mouse_pos.y>play_button->y&&mouse_pos.y < play_button->y + play_button->button_on.h)
+	//check if mouse is on play button
+	if (mouse_pos.x > play_button->x&&mouse_pos.x<play_button->x + play_button->button_on.w&&mouse_pos.y>play_button->y&&mouse_pos.y < play_button->y + play_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
-			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-			{
-				App->startmenu->active = false;
-				App->scene->active = true;
-				App->entities->active = true;				
-				App->gui->CleanUp();
-				App->gui->HUDCleanUp();
-				App->startmenu->CleanUp();
-				App->scene->Start();
-			}
+			App->startmenu->active = false;
+			App->scene->active = true;
+			App->entities->active = true;				
+			App->gui->CleanUp();
+			App->gui->HUDCleanUp();
+			App->startmenu->CleanUp();
+			App->scene->Start();
+			App->scene->time_pause = false;
 		}
-		//check if mouse is on credits button
+	}
+		
 	//check if mouse is on settings button
 	if (mouse_pos.x > settings_button->x&&mouse_pos.x<settings_button->x + settings_button->button_on.w&&mouse_pos.y>settings_button->y&&mouse_pos.y < settings_button->y + settings_button->button_on.h)
 	{
@@ -116,6 +117,7 @@ bool j1StartMenu::Update(float) {
 
 		}
 	}
+	//check if mouse is on credits button
 	if (mouse_pos.x > credits_button->x&&mouse_pos.x<credits_button->x + credits_button->button_on.w&&mouse_pos.y>credits_button->y&&mouse_pos.y < credits_button->y + credits_button->button_on.h)
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
@@ -142,10 +144,7 @@ bool j1StartMenu::Update(float) {
 			App->startmenu->CleanUp();
 			App->scene->Start();
 			App->LoadGame("save_game.xml");
-			//App->scene->time_pause = false;
-
-
-
+			App->scene->time_pause = false;
 		}
 	}
 

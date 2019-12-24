@@ -55,9 +55,13 @@ public:
 
 	UIObject* resume_button = nullptr;
 	UIObject* exit_button = nullptr;
-
+	UIObject * main_menu_button = nullptr;
+	
 	UIObject* text_resume = nullptr;
 	UIObject* text_exit = nullptr;
+	UIObject* text_main_menu = nullptr;
+	
+	
 
 	bool time_pause = false;
 

@@ -15,6 +15,7 @@
 #include "UIButton.h"
 #include "UILabel.h"
 #include "j1Gui.h"
+#include "j1StartMenu.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -214,6 +215,15 @@ bool j1Scene::Update(float dt)
 
 		//exit text
 		text_exit = App->gui->CreateUILabel(-App->render->camera.x + 415, 385, "SAVE & EXIT", false);
+
+		//main menu button
+		main_menu_button = App->gui->CreateUIButton(400, 280, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+
+		//main menu text
+		text_main_menu = App->gui->CreateUILabel(-App->render->camera.x + 430, 305, "MAIN MENU", false);
+
+
 	}
 
 	//PAUSE BUTTONS FUNCTIONALITY
@@ -238,6 +248,21 @@ bool j1Scene::Update(float dt)
 			{
 				App->SaveGame("save_game.xml");
 				close_game = true;
+			}
+		}
+		//check if mouse is on main_menu button
+		if (mouse_pos.x > main_menu_button->x&&mouse_pos.x<main_menu_button->x + main_menu_button->button_on.w&&mouse_pos.y>main_menu_button->y&&mouse_pos.y < main_menu_button->y + main_menu_button->button_on.h)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+			{
+				time_pause = true;
+				pause_menu = false;
+				App->scene->active = false;
+				App->startmenu->active = true;
+				App->startmenu->Start();
+				App->scene->CleanUp();
+				App->gui->HUDCleanUp();
+				App->entities->CleanUp();
 			}
 		}
 	}
