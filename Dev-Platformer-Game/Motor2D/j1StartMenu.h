@@ -25,10 +25,12 @@ public:
 	UIObject* play_button = nullptr;
 	UIObject* exit_button = nullptr;
 	UIObject* credits_button = nullptr;
+	UIObject* settings_button = nullptr;
 
 	UIObject* text_start = nullptr;
 	UIObject* text_exit = nullptr;
 	UIObject* text_credits = nullptr;
+	UIObject* text_settings = nullptr;
 
 	bool close_game = false;
 

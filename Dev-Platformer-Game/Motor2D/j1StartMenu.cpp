@@ -56,6 +56,12 @@ bool j1StartMenu::Start() {
 	//credits text
 	text_credits = App->gui->CreateUILabel(-App->render->camera.x + 245, 385, "CREDITS", false);
 
+	//settings button
+	settings_button = App->gui->CreateUIButton(200, 290, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+	//settings text
+	text_settings = App->gui->CreateUILabel(-App->render->camera.x + 240, 315, "SETTINGS", false);
+
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
