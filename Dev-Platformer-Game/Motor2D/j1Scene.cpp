@@ -264,12 +264,10 @@ bool j1Scene::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node map = data.append_child("Map");
 
-	/*for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
+	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{
 		entity->data->Save(data);
-	}*/
-
-	App->entities->player->Save(data);
+	}
 
 	map.append_attribute("CurrentMap") = current_map;
 
@@ -281,6 +279,8 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 	current_map = savegame.child("Map").attribute("CurrentMap").as_int();
 
 	App->map->CleanUp();
+	App->tex->FreeTextures();
+	App->entities->CleanUp();
 
 	switch (current_map)
 	{
@@ -294,12 +294,10 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 		break;
 	}
 
-	/*for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
+	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{
 		entity->data->Load(savegame);
-	}*/
-
-	App->entities->player->Load(savegame);
+	}
 
 	return true;
 }
