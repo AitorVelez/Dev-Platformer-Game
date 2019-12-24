@@ -9,6 +9,7 @@
 #include "UIObject.h"
 #include "UIImage.h"
 #include "UILabel.h"
+#include "UIButton.h"
 
 
 j1Gui::j1Gui() : j1Module() {
@@ -148,6 +149,14 @@ UIObject* j1Gui::CreateUILabel(int x, int y, p2SString text, bool is_hud) {
 
 }
 
+UIObject * j1Gui::CreateUIButton(int x, int y, SDL_Rect mouse_off, SDL_Rect mouse_on, SDL_Rect mouse_click, SDL_Texture * texture)
+{
+	UIButton* button = new UIButton(x, y, mouse_off, mouse_on, mouse_click, texture);
+	UIObjects.add(button);
+
+
+	return button;
+}
 
 
 
