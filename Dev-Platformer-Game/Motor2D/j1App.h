@@ -25,6 +25,7 @@ class j1Gui;
 class j1Fonts;
 class j1StartMenu;
 class j1CreditsScene;
+class j1SettingsScene;
 
 class j1App
 {
@@ -110,6 +111,7 @@ public:
 	j1Fonts*					fonts = nullptr;
 	j1StartMenu*				startmenu = nullptr;
 	j1CreditsScene*				creditsscene = nullptr;
+	j1SettingsScene*			settingsscene = nullptr;
 
 
 	uint32				frame_limit = 30;

@@ -24,7 +24,13 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	UIObject* background = nullptr;
+
+	SDL_Rect background_rect = { 39,845,1024,770 };
+
 	SDL_Texture* texture;
+
+	iPoint mouse_position, mouse_pos;
 
 };
 

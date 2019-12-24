@@ -17,6 +17,7 @@
 #include "j1Fonts.h"
 #include "j1StartMenu.h"
 #include "j1CreditsScene.h"
+#include "j1SettingsScene.h"
 #include "ModuleCollision.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
@@ -46,6 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new j1Fonts();
 	startmenu = new j1StartMenu();
 	creditsscene = new j1CreditsScene();
+	settingsscene = new j1SettingsScene();
 
 
 	// Ordered for awake / Start / Update
@@ -64,6 +66,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(fonts);
 	AddModule(creditsscene);
+	AddModule(settingsscene);
 	AddModule(startmenu);
 	
 
@@ -75,6 +78,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	//entities->active = false;
 	startmenu->active = true;
 	creditsscene->active = false;
+	settingsscene->active = false;
 
 	PERF_PEEK(ptimer);
 }

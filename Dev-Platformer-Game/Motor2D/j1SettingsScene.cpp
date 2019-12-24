@@ -27,6 +27,9 @@ bool j1SettingsScene::Start()
 {
 	texture = App->gui->atlas;
 
+	//background
+	background = App->gui->CreateUIImage(0, 0, background_rect, texture, false);
+
 	return true;
 }
 

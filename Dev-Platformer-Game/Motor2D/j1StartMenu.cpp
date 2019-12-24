@@ -12,6 +12,7 @@
 #include "j1Fonts.h"
 #include "Player.h"
 #include "j1CreditsScene.h"
+#include "j1SettingsScene.h"
 #include "Brofiler/Brofiler.h"
 
 j1StartMenu::j1StartMenu() : j1Module() {
@@ -92,6 +93,20 @@ bool j1StartMenu::Update(float) {
 			}
 		}*/
 		//check if mouse is on credits button
+	//check if mouse is on settings button
+	if (mouse_pos.x > settings_button->x&&mouse_pos.x<settings_button->x + settings_button->button_on.w&&mouse_pos.y>settings_button->y&&mouse_pos.y < settings_button->y + settings_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			App->startmenu->active = false;
+			App->settingsscene->active = true;
+			App->startmenu->CleanUp();
+			App->gui->CleanUp();
+			App->gui->HUDCleanUp();
+			App->settingsscene->Start();
+
+		}
+	}
 	if (mouse_pos.x > credits_button->x&&mouse_pos.x<credits_button->x + credits_button->button_on.w&&mouse_pos.y>credits_button->y&&mouse_pos.y < credits_button->y + credits_button->button_on.h)
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
