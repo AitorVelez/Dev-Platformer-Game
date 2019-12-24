@@ -25,8 +25,13 @@ public:
 	bool CleanUp();
 
 	UIObject* background = nullptr;
+	UIObject* title = nullptr;
+	UIObject* return_button = nullptr;
 
 	SDL_Rect background_rect = { 39,845,1024,770 };
+	SDL_Rect return_rect_on = { 1440,296,142,59 };
+	SDL_Rect return_rect_off = { 1440,220,141,59 };
+	UIObject* menu_label = nullptr;
 
 	SDL_Texture* texture;
 
