@@ -12,6 +12,9 @@
 #include "Player.h"
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
+#include "UIButton.h"
+#include "UILabel.h"
+#include "j1Gui.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -76,6 +79,12 @@ bool j1Scene::Start()
 			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
 		}
 	}
+
+	texture = App->gui->atlas;
+
+	//background_rect = { 1944,847,1022,7680 };
+	button_off_mouse = { 1193,210,168,63 };
+	button_on_mouse = { 1189,286,170,65 };
 	
 	camPos = App->render->camera.x;
 
@@ -91,6 +100,10 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+
+	//get mouse pos
+	mouse_pos = App->input->GetMousePosition(mouse_position);
+
 	//start from first level
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -182,13 +195,36 @@ bool j1Scene::Update(float dt)
 			camPos += camera_speed;
 	}
 
-
+	//PAUSE
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && !pause_menu && time_pause == false)
 	{
 		pause_menu = true;
 		time_pause = true;
 
 		App->entities->active = false;
+
+		//resume button
+		resume_button = App->gui->CreateUIButton(400, 200, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+		//resume text
+		text_resume = App->gui->CreateUILabel(-App->render->camera.x + 450, 225, "RESUME", false);
+	}
+
+	//PAUSE BUTTONS FUNCTIONALITY
+	if (App->entities->active == false) 
+	{
+		//check if mouse is on resume button
+		if (mouse_pos.x > resume_button->x&&mouse_pos.x<resume_button->x + resume_button->button_on.w&&mouse_pos.y>resume_button->y&&mouse_pos.y < resume_button->y + resume_button->button_on.h)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+			{
+				pause_menu = false;
+				App->gui->CleanUp();
+				App->entities->active = true;
+				time_pause = false;
+
+			}
+		}
 	}
 
 	int x = 0;

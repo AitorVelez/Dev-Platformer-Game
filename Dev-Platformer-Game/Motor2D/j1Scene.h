@@ -4,6 +4,7 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+class UIObject;
 
 class j1Scene : public j1Module
 {
@@ -44,8 +45,21 @@ public:
 
 	float camPos;
 
+	iPoint mouse_position, mouse_pos;
+
+	SDL_Rect return_rect_on = { 1443, 298,142,58 };
+	SDL_Rect return_rect_off = { 1443,222,141,58 };
+
+	SDL_Rect button_off_mouse;
+	SDL_Rect button_on_mouse;
+
+	UIObject* resume_button = nullptr;
+
+	UIObject* text_resume = nullptr;
 
 	bool time_pause = false;
+
+	SDL_Texture* texture;
 
 private:
 
