@@ -75,7 +75,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(render);
 
 	scene->active = false;
-	//entities->active = false;
+	entities->active = false;
 	startmenu->active = true;
 	creditsscene->active = false;
 	settingsscene->active = false;

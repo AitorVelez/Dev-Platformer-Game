@@ -7,8 +7,8 @@
 	<map />
 	<scene>
 		<Map CurrentMap="1" />
-		<position x="500.416962" y="240.22728" />
-		<gameData score="200" lives="3" />
+		<position x="189.65509" y="147.347443" />
+		<gameData score="0" lives="3" />
 	</scene>
 	<entities />
 	<:anonymous />
@@ -16,6 +16,8 @@
 	<pathfinding />
 	<gui />
 	<fonts />
+	<credits_scene />
+	<settings_scene />
 	<startmenu />
 	<renderer>
 		<camera x="0" y="0" />

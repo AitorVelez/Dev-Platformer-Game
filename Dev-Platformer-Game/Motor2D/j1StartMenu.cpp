@@ -63,6 +63,15 @@ bool j1StartMenu::Start() {
 	//settings text
 	text_settings = App->gui->CreateUILabel(-App->render->camera.x + 240, 315, "SETTINGS", false);
 
+	//continue button
+	continue_button = App->gui->CreateUIButton(200, 220, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+	//continue text
+	text_continue = App->gui->CreateUILabel(-App->render->camera.x + 240, 245, "CONTINUE", false);
+
+	//title text
+	text_title = App->gui->CreateUILabel(-App->render->camera.x + 30, 30, "C  I  T  Y     H  E  R  O", false);
+
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
@@ -79,7 +88,7 @@ bool j1StartMenu::Update(float) {
 		mouse_pos = App->input->GetMousePosition(mouse_position);
 
 		//check if mouse is on play button
-		/*if (mouse_pos.x > play_button->x&&mouse_pos.x<play_button->x + play_button->button_on.w&&mouse_pos.y>play_button->y&&mouse_pos.y < play_button->y + play_button->button_on.h)
+		if (mouse_pos.x > play_button->x&&mouse_pos.x<play_button->x + play_button->button_on.w&&mouse_pos.y>play_button->y&&mouse_pos.y < play_button->y + play_button->button_on.h)
 		{
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			{
@@ -91,7 +100,7 @@ bool j1StartMenu::Update(float) {
 				App->startmenu->CleanUp();
 				App->scene->Start();
 			}
-		}*/
+		}
 		//check if mouse is on credits button
 	//check if mouse is on settings button
 	if (mouse_pos.x > settings_button->x&&mouse_pos.x<settings_button->x + settings_button->button_on.w&&mouse_pos.y>settings_button->y&&mouse_pos.y < settings_button->y + settings_button->button_on.h)
@@ -120,6 +129,24 @@ bool j1StartMenu::Update(float) {
 
 		}
 
+	}
+	//check if mouse is on continue button plus savegame
+	if (mouse_pos.x > continue_button->x&&mouse_pos.x<continue_button->x + continue_button->button_on.w&&mouse_pos.y>continue_button->y&&mouse_pos.y < continue_button->y + continue_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+
+			App->startmenu->active = false;
+			App->scene->active = true;
+			App->entities->active = true;
+			App->startmenu->CleanUp();
+			App->scene->Start();
+			App->LoadGame("save_game.xml");
+			//App->scene->time_pause = false;
+
+
+
+		}
 	}
 
 		//check if mouse is on exit button

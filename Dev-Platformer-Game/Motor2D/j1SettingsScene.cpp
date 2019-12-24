@@ -60,6 +60,7 @@ bool j1SettingsScene::Update(float)
 			App->settingsscene->active = false;
 			App->startmenu->active = true;
 			App->startmenu->Start();
+			App->settingsscene->CleanUp();
 
 		}
 	}
