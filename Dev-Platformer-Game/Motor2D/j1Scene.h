@@ -54,8 +54,10 @@ public:
 	SDL_Rect button_on_mouse;
 
 	UIObject* resume_button = nullptr;
+	UIObject* exit_button = nullptr;
 
 	UIObject* text_resume = nullptr;
+	UIObject* text_exit = nullptr;
 
 	bool time_pause = false;
 

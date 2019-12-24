@@ -208,6 +208,12 @@ bool j1Scene::Update(float dt)
 
 		//resume text
 		text_resume = App->gui->CreateUILabel(-App->render->camera.x + 450, 225, "RESUME", false);
+
+		//exit button
+		exit_button = App->gui->CreateUIButton(400, 360, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+		//exit text
+		text_exit = App->gui->CreateUILabel(-App->render->camera.x + 415, 385, "SAVE & EXIT", false);
 	}
 
 	//PAUSE BUTTONS FUNCTIONALITY
@@ -223,6 +229,15 @@ bool j1Scene::Update(float dt)
 				App->entities->active = true;
 				time_pause = false;
 
+			}
+		}
+		//check if mouse is on exti button
+		if (mouse_pos.x > exit_button->x&&mouse_pos.x<exit_button->x + exit_button->button_on.w&&mouse_pos.y>exit_button->y&&mouse_pos.y < exit_button->y + exit_button->button_on.h)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+			{
+				App->SaveGame("save_game.xml");
+				close_game = true;
 			}
 		}
 	}
@@ -242,8 +257,8 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	/*if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;*/
+	if (close_game)
+		ret = false;
 
 	return ret;
 }
