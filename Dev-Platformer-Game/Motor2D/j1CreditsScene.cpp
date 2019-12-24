@@ -35,6 +35,12 @@ bool j1CreditsScene::Start()
 	//return to menu label
 	menu_text = App->gui->CreateUILabel(-App->render->camera.x + 65, 575, "MENU", false);
 
+	//github repository button
+	github_button = App->gui->CreateUIButton(20, 350, return_rect_off, return_rect_on, return_rect_off, texture);
+
+	//github label
+	github_label = App->gui->CreateUILabel(-App->render->camera.x + 32, 375, "REPOSITORY", false);
+
 	return true;
 }
 
@@ -58,6 +64,16 @@ bool j1CreditsScene::Update(float)
 				App->startmenu->active = true;
 				App->startmenu->Start();
 				App->creditsscene->CleanUp();
+		}
+	}
+
+	//check if mouse is on repository button
+	if (mouse_pos.x > github_button->x&&mouse_pos.x<github_button->x + github_button->button_on.w&&mouse_pos.y>github_button->y&&mouse_pos.y < github_button->y + github_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			//go to the link
+			system("start https://github.com/AitorVelez/Dev-Platformer-Game");
 		}
 	}
 
