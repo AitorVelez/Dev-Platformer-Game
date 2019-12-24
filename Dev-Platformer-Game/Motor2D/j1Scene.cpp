@@ -182,6 +182,15 @@ bool j1Scene::Update(float dt)
 			camPos += camera_speed;
 	}
 
+
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && !pause_menu && time_pause == false)
+	{
+		pause_menu = true;
+		time_pause = true;
+
+		App->entities->active = false;
+	}
+
 	int x = 0;
 	int y = 0;
 	//App->input->GetMousePosition(x, y);
@@ -197,8 +206,8 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	/*if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ret = false;*/
 
 	return ret;
 }

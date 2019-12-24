@@ -44,9 +44,14 @@ public:
 
 	float camPos;
 
+
+	bool time_pause = false;
+
 private:
 
 	bool change_volume = false;
+	bool close_game = false;
+	bool pause_menu = false;
 };
 
 #endif // __j1SCENE_H__
