@@ -11,6 +11,7 @@
 #include "p2Log.h"
 #include "j1Fonts.h"
 #include "Player.h"
+#include "j1CreditsScene.h"
 #include "Brofiler/Brofiler.h"
 
 j1StartMenu::j1StartMenu() : j1Module() {
@@ -49,6 +50,12 @@ bool j1StartMenu::Start() {
 	//exit text
 	text_exit = App->gui->CreateUILabel(-App->render->camera.x + 908, 585, "EXIT", false);
 
+	//credits button
+	credits_button = App->gui->CreateUIButton(200, 360, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+	//credits text
+	text_credits = App->gui->CreateUILabel(-App->render->camera.x + 245, 385, "CREDITS", false);
+
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
@@ -78,6 +85,21 @@ bool j1StartMenu::Update(float) {
 				App->scene->Start();
 			}
 		}*/
+		//check if mouse is on credits button
+	if (mouse_pos.x > credits_button->x&&mouse_pos.x<credits_button->x + credits_button->button_on.w&&mouse_pos.y>credits_button->y&&mouse_pos.y < credits_button->y + credits_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			App->startmenu->active = false;
+			App->creditsscene->active = true;
+			App->gui->CleanUp();
+			App->gui->HUDCleanUp();
+			App->startmenu->CleanUp();
+			App->creditsscene->Start();
+
+		}
+
+	}
 
 		//check if mouse is on exit button
 	if (mouse_pos.x > exit_button->x&&mouse_pos.x<exit_button->x + exit_button->button_on.w&&mouse_pos.y>exit_button->y&&mouse_pos.y < exit_button->y + exit_button->button_on.h)
