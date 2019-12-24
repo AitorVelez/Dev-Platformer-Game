@@ -103,6 +103,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
     <ClCompile Include="UIImage.cpp" />
+    <ClCompile Include="UILabel.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="WalkingEnemy.cpp" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="UIImage.h" />
+    <ClInclude Include="UILabel.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="WalkingEnemy.h" />
   </ItemGroup>

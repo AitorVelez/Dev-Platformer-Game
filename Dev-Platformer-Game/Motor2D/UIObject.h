@@ -28,13 +28,14 @@ public:
 	int margin_right;
 	int margin_left;
 	SDL_Rect rect;
-
-	bool is_hud;
-
 	p2SString text;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* texture_fonts = nullptr;
+	SDL_Rect size = { 0,0,0,0 };
 
 	bool debug = false;
+
+	bool is_hud;
 };
 
 

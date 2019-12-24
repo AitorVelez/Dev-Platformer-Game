@@ -38,6 +38,7 @@ public:
 
 
 	UIObject* CreateUIImage(int x, int y, SDL_Rect rect, SDL_Texture* texture, bool is_hud);
+	UIObject* CreateUILabel(int x, int y, p2SString text, bool is_hud);
 
 private:
 

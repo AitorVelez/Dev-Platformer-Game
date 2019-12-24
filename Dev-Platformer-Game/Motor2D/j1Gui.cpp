@@ -8,6 +8,7 @@
 #include "j1Input.h"
 #include "UIObject.h"
 #include "UIImage.h"
+#include "UILabel.h"
 
 
 j1Gui::j1Gui() : j1Module() {
@@ -130,6 +131,22 @@ UIObject* j1Gui::CreateUIImage(int x, int y, SDL_Rect rect, SDL_Texture* texture
 
 }
 
+UIObject* j1Gui::CreateUILabel(int x, int y, p2SString text, bool is_hud) {
+
+	UILabel* label = new UILabel(x, y, text, is_hud);
+
+	if (is_hud)
+	{
+		HUDObjects.add(label);
+	}
+	else if (!is_hud)
+	{
+		UIObjects.add(label);
+	}
+
+	return label;
+
+}
 
 
 
