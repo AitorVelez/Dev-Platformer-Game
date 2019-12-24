@@ -53,7 +53,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	AddModule(startmenu);
+	
 	AddModule(scene);
 	AddModule(entities);
 	AddModule(collision);
@@ -61,10 +61,15 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfindingWalker);
 	AddModule(gui);
 	AddModule(fonts);
+	AddModule(startmenu);
 
 
 	// render last to swap buffer
 	AddModule(render);
+
+	scene->active = false;
+	//entities->active = false;
+	startmenu->active = true;
 
 	PERF_PEEK(ptimer);
 }

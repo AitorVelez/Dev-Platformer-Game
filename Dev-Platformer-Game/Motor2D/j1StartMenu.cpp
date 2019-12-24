@@ -29,8 +29,19 @@ bool j1StartMenu::Start() {
 
 	SDL_Rect background_rect = { 40,36,1024,768 };
 
+	SDL_Rect button_off_mouse = { 1193,210,168,63 };
+	SDL_Rect button_on_mouse = { 1189,286,170,65 };
+	SDL_Rect return_rect_on = { 1440,296,142,59 };
+	SDL_Rect return_rect_off = { 1440,220,141,59 };
+
 	//background
 	background = App->gui->CreateUIImage(0, 0, background_rect, texture, false);
+
+	//play button
+	play_button = App->gui->CreateUIButton(200, 150, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+
+	//start text
+	text_start = App->gui->CreateUILabel(-App->render->camera.x + 260, 175, "START", false);
 
 	//App->startmenu->active = false;
 	//App->scene->active = true;
@@ -44,6 +55,23 @@ bool j1StartMenu::PreUpdate() {
 }
 bool j1StartMenu::Update(float) {
 	BROFILER_CATEGORY("UpdateStartMenu", Profiler::Color::White)
+
+		mouse_pos = App->input->GetMousePosition(mouse_position);
+
+		//check if mouse is on play button
+		/*if (mouse_pos.x > play_button->x&&mouse_pos.x<play_button->x + play_button->button_on.w&&mouse_pos.y>play_button->y&&mouse_pos.y < play_button->y + play_button->button_on.h)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+			{
+				App->startmenu->active = false;
+				App->scene->active = true;
+				App->entities->active = true;				
+				App->gui->CleanUp();
+				App->gui->HUDCleanUp();
+				App->startmenu->CleanUp();
+				App->scene->Start();
+			}
+		}*/
 
 	return true;
 }

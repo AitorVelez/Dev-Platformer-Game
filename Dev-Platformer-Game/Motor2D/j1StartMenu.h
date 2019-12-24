@@ -22,6 +22,11 @@ public:
 	bool CleanUp();
 
 	UIObject * background = nullptr;
+	UIObject * play_button = nullptr;
+
+	UIObject* text_start = nullptr;
+
+	iPoint mouse_position, mouse_pos;
 };
 
 
