@@ -23,9 +23,17 @@ bool j1CreditsScene::Start()
 	SDL_Texture* texture = App->gui->atlas;
 
 	SDL_Rect back_rect = { 39,845,1024,770 };
+	SDL_Rect return_rect_on = { 1440,296,142,59 };
+	SDL_Rect return_rect_off = { 1440,220,141,59 };
 
 	//background
 	background = App->gui->CreateUIImage(0, 0, back_rect, texture, false);
+
+	//return button
+	return_button = App->gui->CreateUIButton(20, 550, return_rect_off, return_rect_on, return_rect_off, texture);
+
+	//return to menu label
+	menu_text = App->gui->CreateUILabel(-App->render->camera.x + 65, 575, "MENU", false);
 
 	return true;
 }
@@ -38,6 +46,20 @@ bool j1CreditsScene::PreUpdate()
 bool j1CreditsScene::Update(float)
 {
 	BROFILER_CATEGORY("UpdateCreditsScene", Profiler::Color::BurlyWood)
+
+	mouse_pos = App->input->GetMousePosition(mouse_position);
+
+		//check if mouse is on menu button
+	if (mouse_pos.x > return_button->x&&mouse_pos.x<return_button->x + return_button->button_on.w&&mouse_pos.y>return_button->y&&mouse_pos.y < return_button->y + return_button->button_on.h)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+				App->creditsscene->active = false;
+				App->startmenu->active = true;
+				App->startmenu->Start();
+				App->creditsscene->CleanUp();
+		}
+	}
 
 	return true;
 }

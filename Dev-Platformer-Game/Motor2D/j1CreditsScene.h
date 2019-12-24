@@ -24,6 +24,10 @@ public:
 	bool CleanUp();
 
 	UIObject* background = nullptr;
+	UIObject* return_button = nullptr;
+	UIObject* menu_text = nullptr;
+
+	iPoint mouse_position, mouse_pos;
 
 };
 
