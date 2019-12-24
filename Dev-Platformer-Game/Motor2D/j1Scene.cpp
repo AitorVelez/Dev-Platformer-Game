@@ -182,8 +182,8 @@ bool j1Scene::Update(float dt)
 			camPos += camera_speed;
 	}
 
-	int x, y;
-	App->input->GetMousePosition(x, y);
+	//int x, y;
+	//App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 
 	App->render->camera.x = camPos;

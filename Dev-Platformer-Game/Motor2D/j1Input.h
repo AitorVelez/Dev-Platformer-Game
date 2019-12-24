@@ -2,6 +2,7 @@
 #define __j1INPUT_H__
 
 #include "j1Module.h"
+#include "p2Point.h"
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
@@ -65,7 +66,7 @@ public:
 	bool GetWindowEvent(int code);
 
 	// Get mouse / axis position
-	void GetMousePosition(int &x, int &y);
+	iPoint GetMousePosition(iPoint mouse_position);
 	void GetMouseMotion(int& x, int& y);
 
 private:
