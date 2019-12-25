@@ -16,6 +16,10 @@
 #include "UILabel.h"
 #include "j1Gui.h"
 #include "j1StartMenu.h"
+#include <chrono>
+#include <time.h>
+#include <ctime>
+#include <iostream>
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -132,7 +136,9 @@ bool j1Scene::Update(float dt)
 	//load game
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
+		loading = true;
 		App->LoadGame("save_game.xml");
+		loading = false;
 	}
 
 	//volume down
@@ -161,6 +167,10 @@ bool j1Scene::Update(float dt)
 		App->entities->player->god_mode = !App->entities->player->god_mode;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		foto_mode = !foto_mode;
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
@@ -282,6 +292,28 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && foto_mode)
+	{
+		SDL_RenderReadPixels(App->render->renderer, NULL, SDL_PIXELFORMAT_ARGB8888, App->win->screen_surface->pixels, App->win->screen_surface->pitch);
+		auto now = std::chrono::system_clock::now();
+		std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+		tm time;
+		localtime_s(&time, &now_c);
+
+		int secs = time.tm_sec;
+		int mins = time.tm_min;
+		int hour = time.tm_hour;
+		int day = time.tm_mday;
+		int month = time.tm_mon + 1;
+		int year = time.tm_year + 1900;
+
+		static char photo_name[60];
+
+		sprintf_s(photo_name, 60, "screenshots/City Hero on %i-%02i-%02i at %02i.%02i.%02i.png", year, month, day, hour, mins, secs);
+
+		SDL_SaveBMP(App->win->screen_surface, photo_name);
+	}
+
 	if (close_game)
 		ret = false;
 
@@ -305,42 +337,44 @@ void j1Scene::LoadScene(int map)
 
 	if (map == 1) 
 	{
-		
 		App->map->Load("Map1.tmx");
 		current_map = 1;
 	}
 	else if (map == 2)
 	{
-		
 		App->map->Load("Map2.tmx");
 		current_map = 2;
 	}
 
-	iPoint spawnEntity;
-	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
-	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	if (!loading)
 	{
-		if (layer->data->data[i] == 204)
+		iPoint spawnEntity;
+		p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+		for (int i = 0; i < (layer->data->width * layer->data->height); i++)
 		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
-		}
-		else if (layer->data->data[i] == 269)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
-		}
-		else if (layer->data->data[i] == 336)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
-		}
-		else if (layer->data->data[i] == 271)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+			if (layer->data->data[i] == 204)
+			{
+				spawnEntity = App->map->TileToWorld(i);
+				App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+			}
+			else if (layer->data->data[i] == 269)
+			{
+				spawnEntity = App->map->TileToWorld(i);
+				App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
+			}
+			else if (layer->data->data[i] == 336)
+			{
+				spawnEntity = App->map->TileToWorld(i);
+				App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+			}
+			else if (layer->data->data[i] == 271)
+			{
+				spawnEntity = App->map->TileToWorld(i);
+				App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+			}
 		}
 	}
+	
 	/*App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();*/
 }
@@ -378,6 +412,32 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 	default:
 		break;
 	}
+
+	/*ENTITY_TYPE type = (ENTITY_TYPE)savegame.child("entity").attribute("type").as_int();
+
+	iPoint spawnEntity;
+	spawnEntity.x = savegame.child("entity").attribute("x").as_int();
+	spawnEntity.y = savegame.child("entity").attribute("y").as_int();
+
+	switch (type)
+	{
+	case NONE:
+		break;
+	case PLAYER:
+		App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+		break;
+	case WALKING_ENEMY:
+		App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+		break;
+	case BIGBAT:
+		App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
+		break;
+	case COIN:
+		App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+		break;
+	default:
+		break;
+	}*/
 
 	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{

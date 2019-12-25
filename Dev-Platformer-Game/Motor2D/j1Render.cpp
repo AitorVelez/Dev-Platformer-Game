@@ -215,7 +215,7 @@ bool j1Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 
 
 	if(result != 0)
 	{
-		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		LOG("Cannot draw line to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
 
@@ -245,7 +245,7 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 	if(result != 0)
 	{
-		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		LOG("Cannot draw circle to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}
 

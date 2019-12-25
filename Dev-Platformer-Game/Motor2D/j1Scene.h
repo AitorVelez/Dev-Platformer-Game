@@ -60,10 +60,10 @@ public:
 	UIObject* text_resume = nullptr;
 	UIObject* text_exit = nullptr;
 	UIObject* text_main_menu = nullptr;
-	
-	
 
 	bool time_pause = false;
+
+	bool loading = false;
 
 	SDL_Texture* texture;
 
@@ -72,6 +72,7 @@ private:
 	bool change_volume = false;
 	bool close_game = false;
 	bool pause_menu = false;
+	bool foto_mode = false;
 };
 
 #endif // __j1SCENE_H__

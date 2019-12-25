@@ -42,7 +42,6 @@ public:
 	p2List<Entity*> entities;
 
 	Player* player;
-
 };
 
 #endif // !_MODULEENTITIES_H_

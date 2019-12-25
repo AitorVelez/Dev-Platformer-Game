@@ -7,18 +7,29 @@
 	<map />
 	<scene>
 		<Map CurrentMap="1" />
-		<position x="1664" y="96" />
-		<position x="1760" y="397.498108" />
-		<position x="3552" y="128" />
-		<position x="416" y="192" />
-		<position x="4544" y="224" />
-		<position x="2208" y="557.498169" />
-		<position x="2464" y="256" />
-		<position x="3584" y="256" />
-		<position x="173.187851" y="1192.49451" />
-		<gameData score="0" lives="3" />
-		<position x="864" y="288" />
-		<position x="1696" y="288" />
+		<entity type="4" x="1664" y="96" />
+		<entity type="2" x="1760" y="121.394699" />
+		<entity type="3" x="3552" y="128" />
+		<entity type="3" x="416" y="192" />
+		<entity type="3" x="4544" y="224" />
+		<entity type="2" x="2208" y="281.394745" />
+		<entity type="4" x="2464" y="256" />
+		<entity type="4" x="3584" y="256" />
+		<entity type="1" x="96" y="352.499268" score="0" lives="3" />
+		<entity type="3" x="864" y="288" />
+		<entity type="3" x="1696" y="288" />
+		<entity type="4" x="1248" y="448" />
+		<entity type="4" x="1664" y="96" />
+		<entity type="2" x="1760" y="121.394699" />
+		<entity type="3" x="3552" y="128" />
+		<entity type="3" x="416" y="192" />
+		<entity type="3" x="4544" y="224" />
+		<entity type="2" x="2208" y="281.394745" />
+		<entity type="4" x="2464" y="256" />
+		<entity type="4" x="3584" y="256" />
+		<entity type="1" x="96" y="352.499268" score="0" lives="3" />
+		<entity type="3" x="864" y="288" />
+		<entity type="3" x="1696" y="288" />
 	</scene>
 	<entities />
 	<:anonymous />
