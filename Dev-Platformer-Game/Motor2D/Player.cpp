@@ -206,7 +206,7 @@ bool Player::Update(float dt)
 			}
 		}
 		// PUNCHES AND KICKS
-		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !is_punching && !is_jumping && !is_falling)
 		{
 			
 			is_punching = true;
@@ -240,7 +240,7 @@ bool Player::Update(float dt)
 		}
 
 
-		if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN && !is_punching && is_falling)   //multiple kicks while falling, need to think about attack design
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !is_punching && is_falling)   //multiple kicks while falling, need to think about attack design
 		{
 			is_kicking = true;
 			kick1.Reset();
@@ -379,23 +379,23 @@ bool Player::Load(pugi::xml_node& data)
 	pos.x = data.child("position").attribute("x").as_float();
 	pos.y = data.child("position").attribute("y").as_float();
 
-	score = data.child("gameData").attribute("score").as_int();
-	lives = data.child("gameData").attribute("lives").as_int();
+	score = data.child("entity").attribute("score").as_int();
+	lives = data.child("entity").attribute("lives").as_int();
 
 	return true;
 }
 
 bool Player::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node position = data.append_child("position");
+	pugi::xml_node entity = data.append_child("entity");
 
-	position.append_attribute("x") = pos.x;
-	position.append_attribute("y") = pos.y;
+	entity.append_attribute("type") = type;
 
-	pugi::xml_node gameData = data.append_child("gameData");
+	entity.append_attribute("x") = pos.x;
+	entity.append_attribute("y") = pos.y;
 
-	gameData.append_attribute("score") = score;
-	gameData.append_attribute("lives") = lives;
+	entity.append_attribute("score") = score;
+	entity.append_attribute("lives") = lives;	
 
 	return true;
 }
