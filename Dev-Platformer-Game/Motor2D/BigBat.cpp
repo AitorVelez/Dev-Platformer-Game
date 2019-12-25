@@ -153,19 +153,21 @@ bool BigBat::CleanUp()
 
 bool BigBat::Load(pugi::xml_node& data)
 {
-	pos.x = data.child("position").attribute("x").as_float();
-	pos.y = data.child("position").attribute("y").as_float();
+	pos.x = data.child("entity").attribute("x").as_float();
+	pos.y = data.child("entity").attribute("y").as_float();
 
 	return true;
 }
 
 bool BigBat::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node position = data.append_child("position");
+	pugi::xml_node entity = data.append_child("entity");
 
-	position.append_attribute("x") = (float)pos.x;
-	position.append_attribute("y") = (float)pos.y;
+	entity.append_attribute("type") = type;
 
+	entity.append_attribute("x") = (float)pos.x;
+	entity.append_attribute("y") = (float)pos.y;
+	
 	return true;
 }
 
