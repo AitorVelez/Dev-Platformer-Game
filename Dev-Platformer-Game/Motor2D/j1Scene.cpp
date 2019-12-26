@@ -44,6 +44,8 @@ bool j1Scene::Start()
 {
 	App->map->Load("Map1.tmx");
 
+	timer.Start();
+
 	camerafx = App->audio->LoadFx("audio/fx/Camera.wav");
 	photofx = App->audio->LoadFx("audio/fx/Photo.wav");
 
@@ -108,6 +110,10 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	if (!pause_menu)
+	{
+		cont_timer = time_start + timer.ReadSec() - cont_pause_timer;
+	}
 	//get mouse pos
 	mouse_pos = App->input->GetMousePosition(mouse_position);
 
@@ -236,7 +242,7 @@ bool j1Scene::Update(float dt)
 		//main menu text
 		text_main_menu = App->gui->CreateUILabel(-App->render->camera.x + 430, 305, "MAIN MENU", false);
 
-
+		pause_timer.Start();
 	}
 
 	//PAUSE BUTTONS FUNCTIONALITY
@@ -251,7 +257,7 @@ bool j1Scene::Update(float dt)
 				App->gui->CleanUp();
 				App->entities->active = true;
 				time_pause = false;
-
+				cont_pause_timer += pause_timer.ReadSec();
 			}
 		}
 		//check if mouse is on exti button
@@ -261,6 +267,7 @@ bool j1Scene::Update(float dt)
 			{
 				App->SaveGame("save_game.xml");
 				close_game = true;
+				cont_pause_timer = 0.0f;
 			}
 		}
 		//check if mouse is on main_menu button
@@ -276,6 +283,7 @@ bool j1Scene::Update(float dt)
 				App->scene->CleanUp();
 				App->gui->HUDCleanUp();
 				App->entities->CleanUp();
+				cont_pause_timer = 0.0f;
 			}
 		}
 	}
@@ -335,6 +343,8 @@ bool j1Scene::CleanUp()
 
 void j1Scene::LoadScene(int map) 
 {
+	timer.Start();
+	cont_pause_timer = 0.0f;
 	App->map->CleanUp();
 	App->tex->FreeTextures();
 	App->entities->CleanUp();
@@ -388,12 +398,15 @@ bool j1Scene::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node map = data.append_child("Map");
 
+	pugi::xml_node time = data.append_child("Time");
+
 	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{
 		entity->data->Save(data);
 	}
 
 	map.append_attribute("CurrentMap") = current_map;
+	time.append_attribute("CurrentTime") = cont_timer;
 
 	return true;
 }
@@ -401,6 +414,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 bool j1Scene::Load(pugi::xml_node& savegame)
 {
 	current_map = savegame.child("Map").attribute("CurrentMap").as_int();
+	time_start = savegame.child("Time").attribute("CurrentTime").as_float();
 
 	App->map->CleanUp();
 	App->tex->FreeTextures();

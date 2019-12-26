@@ -2,6 +2,7 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 class UIObject;
@@ -77,6 +78,13 @@ private:
 
 	unsigned int camerafx;
 	unsigned int photofx;
+
+	j1Timer timer;
+	j1Timer pause_timer;
+
+	float cont_pause_timer = 0.0f;
+	float cont_timer = 0.0f;
+	float time_start = 0.0f;
 };
 
 #endif // __j1SCENE_H__
