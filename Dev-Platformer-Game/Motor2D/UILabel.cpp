@@ -37,6 +37,4 @@ void UILabel::Draw() {
 	BROFILER_CATEGORY("UILabelDraw", Profiler::Color::Green)
 
 		App->render->Blit(texture_fonts, x, y);
-
-
 }

@@ -44,6 +44,9 @@ bool j1Scene::Start()
 {
 	App->map->Load("Map1.tmx");
 
+	camerafx = App->audio->LoadFx("audio/fx/Camera.wav");
+	photofx = App->audio->LoadFx("audio/fx/Photo.wav");
+
 	int w, h;
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data, true))
@@ -105,7 +108,6 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-
 	//get mouse pos
 	mouse_pos = App->input->GetMousePosition(mouse_position);
 
@@ -167,8 +169,9 @@ bool j1Scene::Update(float dt)
 		App->entities->player->god_mode = !App->entities->player->god_mode;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && !pause_menu)
 	{
+		App->audio->PlayFx(camerafx);
 		foto_mode = !foto_mode;
 	}
 
@@ -308,6 +311,8 @@ bool j1Scene::PostUpdate()
 		int year = time.tm_year + 1900;
 
 		static char photo_name[60];
+
+		App->audio->PlayFx(photofx);
 
 		sprintf_s(photo_name, 60, "screenshots/City Hero on %i-%02i-%02i at %02i.%02i.%02i.png", year, month, day, hour, mins, secs);
 

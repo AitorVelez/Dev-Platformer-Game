@@ -5,6 +5,7 @@
 
 struct SDL_Texture;
 class UIObject;
+class UILabel;
 
 class j1Scene : public j1Module
 {
@@ -73,6 +74,9 @@ private:
 	bool close_game = false;
 	bool pause_menu = false;
 	bool foto_mode = false;
+
+	unsigned int camerafx;
+	unsigned int photofx;
 };
 
 #endif // __j1SCENE_H__
