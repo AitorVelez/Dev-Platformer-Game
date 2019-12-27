@@ -47,10 +47,9 @@ Player::~Player() { CleanUp(); }
 bool Player::Start()
 {
 	LoadTexture();
-	App->audio->LoadFx("audio/fx/Jump.wav");
-	App->audio->LoadFx("audio/fx/Die.wav");
-	App->audio->LoadFx("audio/fx/CoinFX.wav");
-	App->audio->LoadFx("audio/fx/DeathFX.wav");
+	jumpfx = App->audio->LoadFx("audio/fx/Jump.wav");
+	diefx = App->audio->LoadFx("audio/fx/Die.wav");
+	coinfx = App->audio->LoadFx("audio/fx/CoinFX.wav");
 
 	animation = &idle;
 	FindPlayerSpawn();
@@ -105,8 +104,7 @@ bool Player::Update(float dt)
 		{
 			if (!god_mode)
 			{
-				App->audio->PlayFx(2);
-				//App->audio->PlayFx(4);
+				App->audio->PlayFx(diefx);
 				--lives;
 				if (lives > 0)
 					SpawnPlayer();
@@ -182,7 +180,7 @@ bool Player::Update(float dt)
 		}
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && is_jumping == false && can_jump)
 		{
-			App->audio->PlayFx(1);
+			App->audio->PlayFx(jumpfx);
 			can_jump = false;
 			jumping.Reset();
 			is_jumping = true;
@@ -358,10 +356,33 @@ void Player::FindPlayerSpawn()
 
 void Player::SpawnPlayer()
 {
-	pos.x = spawn_pos.x;
-	pos.y = spawn_pos.y;
-	App->render->camera.x = 0;
-	App->scene->camPos = 0.0f;
+	if (!App->scene->loading)
+	{
+		pos.x = spawn_pos.x;
+		pos.y = spawn_pos.y;
+		App->render->camera.x = 0;
+		App->scene->camPos = 0.0f;
+	}
+
+	else if (App->scene->loading)
+	{
+		if (pos.x - (App->render->camera.w / 2) < 0)
+		{
+			App->render->camera.x = 0;
+			App->scene->camPos = 0.0f;
+		}
+		else if (pos.x + (App->render->camera.w / 2) > (App->map->data.width * App->map->data.tile_width))
+		{
+			App->scene->camPos = -(App->map->data.width * App->map->data.tile_width) + App->render->camera.w;
+		}
+		else
+		{
+			App->scene->camPos = pos.x - (App->render->camera.w / 2);
+		}
+	}
+	
+	App->scene->loading = false;
+
 	collider->SetPos(pos.x, pos.y);
 }
 

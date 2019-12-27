@@ -67,6 +67,12 @@ public:
 
 	int coinsCount = 0;
 
+	unsigned int jumpfx;
+	unsigned int diefx;
+	unsigned int coinfx;
+
+	bool player_exists = false;
+
 	iPoint spawn_pos;
 
 	EntityData playerData;
