@@ -377,7 +377,7 @@ void Player::SpawnPlayer()
 		}
 		else
 		{
-			App->scene->camPos = pos.x - (App->render->camera.w / 2);
+			App->scene->camPos = - (pos.x - (App->render->camera.w / 2));
 		}
 	}
 	
