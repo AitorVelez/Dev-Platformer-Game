@@ -42,61 +42,68 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("Map1.tmx");
-
-	timer.Start();
-
-	camerafx = App->audio->LoadFx("audio/fx/Camera.wav");
-	photofx = App->audio->LoadFx("audio/fx/Photo.wav");
-
-	int w, h;
-	uchar* data = NULL;
-	if (App->map->CreateWalkabilityMap(w, h, &data, true))
-		App->pathfinding->SetMap(w, h, data);
-
-	int w2, h2;
-	uchar* data2 = NULL;
-	if (App->map->CreateWalkabilityMap(w2, h2, &data2, false))
-		App->pathfindingWalker->SetMap(w2, h2, data2);
-
-	RELEASE_ARRAY(data);
-
-	App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
-	App->audio->MusicVolume(App->audio->music_volume);
-
-	iPoint spawnEntity;
-	p2List_item<MapLayer*>* layer = App->map->data.layers.end;
-	for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+	if (App->scene->active)
 	{
-		if (layer->data->data[i] == 204)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
-		}
-		else if (layer->data->data[i] == 269)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
-		}
-		else if (layer->data->data[i] == 336)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
-		}
-		else if (layer->data->data[i] == 271)
-		{
-			spawnEntity = App->map->TileToWorld(i);
-			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
-		}
-	}
 
-	texture = App->gui->atlas;
+		App->map->Load("Map1.tmx");
 
-	//background_rect = { 1944,847,1022,7680 };
-	button_off_mouse = { 1193,210,168,63 };
-	button_on_mouse = { 1189,286,170,65 };
+		timer.Start();
+
+		camerafx = App->audio->LoadFx("audio/fx/Camera.wav");
+		photofx = App->audio->LoadFx("audio/fx/Photo.wav");
+
+		int w, h;
+		uchar* data = NULL;
+		if (App->map->CreateWalkabilityMap(w, h, &data, true))
+			App->pathfinding->SetMap(w, h, data);
+
+		int w2, h2;
+		uchar* data2 = NULL;
+		if (App->map->CreateWalkabilityMap(w2, h2, &data2, false))
+			App->pathfindingWalker->SetMap(w2, h2, data2);
+
+		RELEASE_ARRAY(data);
+
+		App->audio->PlayMusic("audio/music/CityHeroTheme.ogg");
+		App->audio->MusicVolume(App->audio->music_volume);
+
+		if (!loading)
+		{
+			iPoint spawnEntity;
+			p2List_item<MapLayer*>* layer = App->map->data.layers.end;
+			for (int i = 0; i < (layer->data->width * layer->data->height); i++)
+			{
+				if (layer->data->data[i] == 204)
+				{
+					spawnEntity = App->map->TileToWorld(i);
+					App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);		
+				}
+				else if (layer->data->data[i] == 269)
+				{
+					spawnEntity = App->map->TileToWorld(i);
+					App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
+				}
+				else if (layer->data->data[i] == 336)
+				{
+					spawnEntity = App->map->TileToWorld(i);
+					App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+				}
+				else if (layer->data->data[i] == 271)
+				{
+					spawnEntity = App->map->TileToWorld(i);
+					App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+				}
+			}
+		}
+
+		texture = App->gui->atlas;
+
+		//background_rect = { 1944,847,1022,7680 };
+		button_off_mouse = { 1193,210,168,63 };
+		button_on_mouse = { 1189,286,170,65 };
 	
-	camPos = App->render->camera.x;
+		camPos = App->render->camera.x;
+	}
 
 	return true;
 }
@@ -146,7 +153,6 @@ bool j1Scene::Update(float dt)
 	{
 		loading = true;
 		App->LoadGame("save_game.xml");
-		loading = false;
 	}
 
 	//volume down
@@ -350,6 +356,9 @@ void j1Scene::LoadScene(int map)
 	App->entities->CleanUp();
 	//App->player->LoadTexture();	
 
+	App->gui->atlas = App->tex->Load(App->gui->atlas_file_name.GetString());
+	texture = App->gui->atlas;
+
 	if (map == 1) 
 	{
 		App->map->Load("Map1.tmx");
@@ -392,6 +401,7 @@ void j1Scene::LoadScene(int map)
 	
 	/*App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();*/
+	//loading = false;
 }
 
 bool j1Scene::Save(pugi::xml_node& data) const 
@@ -400,13 +410,13 @@ bool j1Scene::Save(pugi::xml_node& data) const
 
 	pugi::xml_node time = data.append_child("Time");
 
+	map.append_attribute("CurrentMap") = current_map;
+	time.append_attribute("CurrentTime") = cont_timer;
+
 	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{
 		entity->data->Save(data);
 	}
-
-	map.append_attribute("CurrentMap") = current_map;
-	time.append_attribute("CurrentTime") = cont_timer;
 
 	return true;
 }
@@ -430,6 +440,35 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 		break;
 	default:
 		break;
+	}
+
+	for (pugi::xml_node it = savegame.child("entity"); it.empty() == false; it = it.next_sibling())
+	{
+		ENTITY_TYPE type = (ENTITY_TYPE)it.attribute("type").as_int();		
+
+		iPoint spawnEntity;
+		spawnEntity.x = it.attribute("x").as_int();
+		spawnEntity.y = it.attribute("y").as_int();
+
+		switch (type)
+		{
+		case NONE:
+			break;
+		case PLAYER:
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, PLAYER);
+			break;
+		case WALKING_ENEMY:
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, WALKING_ENEMY);
+			break;
+		case BIGBAT:
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, BIGBAT);
+			break;
+		case COIN:
+			App->entities->SpawnEntity(spawnEntity.x, spawnEntity.y, COIN);
+			break;
+		default:
+			break;
+		}
 	}
 
 	/*ENTITY_TYPE type = (ENTITY_TYPE)savegame.child("entity").attribute("type").as_int();
@@ -458,10 +497,10 @@ bool j1Scene::Load(pugi::xml_node& savegame)
 		break;
 	}*/
 
-	for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
+	/*for (p2List_item<Entity*>* entity = App->entities->entities.start; entity != App->entities->entities.end; entity = entity->next)
 	{
 		entity->data->Load(savegame);
-	}
+	}*/
 
 	return true;
 }

@@ -138,14 +138,14 @@ bool j1StartMenu::Update(float) {
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
-
+			App->scene->loading = true;
 			App->startmenu->active = false;
 			App->scene->active = true;
 			App->entities->active = true;
 			App->startmenu->CleanUp();
-			App->scene->Start();
+			App->scene->Start();			
 			App->LoadGame("save_game.xml");
-			App->scene->time_pause = false;
+			App->scene->time_pause = false;			
 		}
 	}
 
