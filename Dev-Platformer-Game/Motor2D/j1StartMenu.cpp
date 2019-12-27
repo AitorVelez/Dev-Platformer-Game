@@ -10,6 +10,7 @@
 #include "j1Audio.h"
 #include "p2Log.h"
 #include "j1Fonts.h"
+#include "j1Window.h"
 #include "Player.h"
 #include "j1CreditsScene.h"
 #include "j1SettingsScene.h"
@@ -40,37 +41,37 @@ bool j1StartMenu::Start() {
 	background = App->gui->CreateUIImage(0, 0, background_rect, texture, false);
 
 	//play button
-	play_button = App->gui->CreateUIButton(200, 150, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+	play_button = App->gui->CreateUIButton(App->win->width*0.5-82, 220, button_off_mouse, button_on_mouse, button_off_mouse, texture);
 
 	//start text
-	text_start = App->gui->CreateUILabel(-App->render->camera.x + 260, 175, "START", false);
+	text_start = App->gui->CreateUILabel(App->win->width*0.5 - 40, 245, "START", false);
 
 	//exit button
-	exit_button = App->gui->CreateUIButton(860, 560, return_rect_off, return_rect_on, return_rect_off, texture);
+	exit_button = App->gui->CreateUIButton(App->win->width - 200, 560, return_rect_off, return_rect_on, return_rect_off, texture);
 
 	//exit text
-	text_exit = App->gui->CreateUILabel(-App->render->camera.x + 908, 585, "EXIT", false);
+	text_exit = App->gui->CreateUILabel(App->win->width-150, 585, "EXIT", false);
 
 	//credits button
-	credits_button = App->gui->CreateUIButton(200, 360, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+	credits_button = App->gui->CreateUIButton(App->win->width*0.5 - 82, 430, button_off_mouse, button_on_mouse, button_off_mouse, texture);
 
 	//credits text
-	text_credits = App->gui->CreateUILabel(-App->render->camera.x + 245, 385, "CREDITS", false);
+	text_credits = App->gui->CreateUILabel(App->win->width*0.5 - 40, 455, "CREDITS", false);
 
 	//settings button
-	settings_button = App->gui->CreateUIButton(200, 290, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+	settings_button = App->gui->CreateUIButton(App->win->width*0.5 - 82, 360, button_off_mouse, button_on_mouse, button_off_mouse, texture);
 
 	//settings text
-	text_settings = App->gui->CreateUILabel(-App->render->camera.x + 240, 315, "SETTINGS", false);
+	text_settings = App->gui->CreateUILabel(App->win->width*0.5 - 40, 385, "SETTINGS", false);
 
 	//continue button
-	continue_button = App->gui->CreateUIButton(200, 220, button_off_mouse, button_on_mouse, button_off_mouse, texture);
+	continue_button = App->gui->CreateUIButton(App->win->width*0.5 - 82, 290, button_off_mouse, button_on_mouse, button_off_mouse, texture);
 
 	//continue text
-	text_continue = App->gui->CreateUILabel(-App->render->camera.x + 240, 245, "CONTINUE", false);
+	text_continue = App->gui->CreateUILabel(App->win->width*0.5 - 40, 315, "CONTINUE", false);
 
 	//title text
-	text_title = App->gui->CreateUILabel(-App->render->camera.x + 30, 30, "C  I  T  Y     H  E  R  O", false);
+	//text_title = App->gui->CreateUILabel(-App->render->camera.x + 30, 30, "C  I  T  Y     H  E  R  O", false);
 
 	//App->startmenu->active = false;
 	//App->scene->active = true;
