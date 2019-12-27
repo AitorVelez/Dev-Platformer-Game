@@ -1,35 +1,46 @@
 <?xml version="1.0"?>
 <game_state>
-	<input />
-	<window />
-	<textures />
-	<audio />
-	<map />
-	<scene>
-		<Map CurrentMap="1" />
-		<Time CurrentTime="3.26900005" />
-		<entity type="4" x="1664" y="96" />
-		<entity type="2" x="1664" y="373.233276" />
-		<entity type="3" x="1833.45313" y="-73.4531555" />
-		<entity type="3" x="1494.54688" y="-73.4531555" />
-		<entity type="3" x="1833.45313" y="-73.4531555" />
-		<entity type="2" x="1664" y="373.233276" />
-		<entity type="4" x="1664" y="96" />
-		<entity type="4" x="1664" y="96" />
-		<entity type="1" x="0" y="0" score="0" lives="0" />
-		<entity type="3" x="1494.54688" y="265.453156" />
-		<entity type="3" x="1494.54688" y="265.453156" />
-	</scene>
-	<entities />
-	<:anonymous />
-	<pathfinding />
-	<pathfinding />
-	<gui />
-	<fonts />
-	<credits_scene />
-	<settings_scene />
-	<startmenu />
-	<renderer>
-		<camera x="0" y="0" />
-	</renderer>
+  <input />
+  <window />
+  <textures />
+  <audio />
+  <map />
+  <scene>
+    <Map CurrentMap="1" />
+    <entity type="4" x="1664" y="96" />
+    <entity type="2" x="1760" y="121.394699" />
+    <entity type="3" x="3552" y="128" />
+    <entity type="3" x="416" y="192" />
+    <entity type="3" x="4544" y="224" />
+    <entity type="2" x="2208" y="281.394745" />
+    <entity type="4" x="2464" y="256" />
+    <entity type="4" x="3584" y="256" />
+    <entity type="1" x="96" y="352.499268" score="0" lives="3" />
+    <entity type="3" x="864" y="288" />
+    <entity type="3" x="1696" y="288" />
+    <entity type="4" x="1248" y="448" />
+    <entity type="4" x="1664" y="96" />
+    <entity type="2" x="1760" y="121.394699" />
+    <entity type="3" x="3552" y="128" />
+    <entity type="3" x="416" y="192" />
+    <entity type="3" x="4544" y="224" />
+    <entity type="2" x="2208" y="281.394745" />
+    <entity type="4" x="2464" y="256" />
+    <entity type="4" x="3584" y="256" />
+    <entity type="1" x="96" y="352.499268" score="0" lives="3" />
+    <entity type="3" x="864" y="288" />
+    <entity type="3" x="1696" y="288" />
+  </scene>
+  <entities />
+  <:anonymous />
+  <pathfinding />
+  <pathfinding />
+  <gui />
+  <fonts />
+  <credits_scene />
+  <settings_scene />
+  <startmenu />
+  <renderer>
+    <camera x="0" y="0" />
+  </renderer>
 </game_state>
