@@ -77,7 +77,6 @@ bool ModuleEntities::CleanUp()
 		delete item->data;
 		entities.del(item);
 		item = item->next;
-
 	}
 	return true;
 }
@@ -90,17 +89,17 @@ bool ModuleEntities::SpawnEntity(int x, int y, ENTITY_TYPE type)
 	{
 		case PLAYER:
 		{
-		player = new Player(x, y, PLAYER);
-		entities.add(player);
-		ret = true;
-		break;
+			player = new Player(x, y, PLAYER);
+			entities.add(player);
+			ret = true;
+			break;
 		}
 		case BIGBAT:
 		{
-		BigBat* bat = new BigBat(x, y, BIGBAT);
-		entities.add(bat);
-		ret = true;
-		break;
+			BigBat* bat = new BigBat(x, y, BIGBAT);
+			entities.add(bat);
+			ret = true;
+			break;
 		}
 		case WALKING_ENEMY:
 		{
@@ -155,7 +154,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (!App->entities->player->god_mode)
 			{
-				//App->audio->PlayFx(4);
+				App->audio->PlayFx(App->entities->player->diefx);
 				--App->entities->player->lives;
 				if (App->entities->player->lives > 0)
 				{
@@ -172,7 +171,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 	}
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_COIN)
 	{
-		App->audio->PlayFx(3);
+		App->audio->PlayFx(App->entities->player->coinfx);
 		c2->owner->to_destroy = true;
 		c2->to_delete = true;
 
