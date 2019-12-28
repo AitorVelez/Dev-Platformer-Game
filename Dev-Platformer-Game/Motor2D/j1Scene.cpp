@@ -13,6 +13,7 @@
 #include "ModulePathfinding.h"
 #include "ModulePathfindingWalker.h"
 #include "UIButton.h"
+#include "UIImage.h"
 #include "UILabel.h"
 #include "j1Gui.h"
 #include "j1StartMenu.h"
@@ -332,7 +333,6 @@ bool j1Scene::PostUpdate()
 
 		SDL_SaveBMP(App->win->screen_surface, photo_name);
 	}
-
 	if (close_game)
 		ret = false;
 
@@ -342,6 +342,9 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
+	/*delete heart1;
+	delete heart2;
+	delete heart3;*/
 	LOG("Freeing scene");
 
 	return true;
@@ -398,7 +401,14 @@ void j1Scene::LoadScene(int map)
 			}
 		}
 	}
-	
+	if (App->entities->player->lives >= 1)
+		App->scene->heart1 = App->gui->CreateUIImage(800, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+	if (App->entities->player->lives >= 2)
+		App->scene->heart2 = App->gui->CreateUIImage(850, 20, { 1565, 489, 36, 32 }, NULL, this);
+
+	if (App->entities->player->lives >= 3)
+		App->scene->heart3 = App->gui->CreateUIImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);
 	/*App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();*/
 	//loading = false;

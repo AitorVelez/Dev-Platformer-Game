@@ -63,6 +63,10 @@ public:
 	UIObject* text_exit = nullptr;
 	UIObject* text_main_menu = nullptr;
 
+	UIImage* heart1 = nullptr;
+	UIImage* heart2 = nullptr;
+	UIImage* heart3 = nullptr;
+
 	bool time_pause = false;
 
 	bool loading = false;
