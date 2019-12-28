@@ -76,9 +76,11 @@ bool j1StartMenu::Start() {
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
+	App->audio->PlayMusic("audio/music/MenuTheme.ogg");
 
 	return true;
 }
+
 bool j1StartMenu::PreUpdate() {
 
 	return true;
@@ -101,6 +103,7 @@ bool j1StartMenu::Update(float) {
 			App->startmenu->CleanUp();
 			App->scene->Start();
 			App->scene->time_pause = false;
+		
 		}
 	}
 		
