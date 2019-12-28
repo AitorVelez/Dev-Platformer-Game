@@ -9,6 +9,8 @@
 #include "p2Log.h"
 #include "j1Window.h"
 #include "j1Audio.h"
+#include "j1StartMenu.h"
+#include "j1Gui.h"
 #include "j1App.h"
 #include "ModuleCollision.h"
 #include "Brofiler/Brofiler.h"
@@ -161,10 +163,18 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 					c1->to_delete = true;
 					App->entities->player->SpawnPlayer();
 					App->entities->player->collider = App->collision->AddCollider({ (int)App->entities->player->pos.x, (int)App->entities->player->pos.y, 21, 30 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities->player, App->entities);
-				}				
+				}
 				else
 				{
-					App->scene->LoadScene(1);
+					App->scene->time_pause = true;
+					App->scene->pause_menu = false;
+					App->scene->active = false;
+					App->startmenu->active = true;
+					App->startmenu->Start();
+					App->scene->CleanUp();
+					App->gui->HUDCleanUp();
+					App->entities->CleanUp();
+					App->scene->cont_pause_timer = 0.0f;
 				}
 			}
 		}

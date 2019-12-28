@@ -63,9 +63,9 @@ public:
 	UIObject* text_exit = nullptr;
 	UIObject* text_main_menu = nullptr;
 
-	UIImage* heart1 = nullptr;
+	/*UIImage* heart1 = nullptr;
 	UIImage* heart2 = nullptr;
-	UIImage* heart3 = nullptr;
+	UIImage* heart3 = nullptr;*/
 
 	bool time_pause = false;
 
@@ -73,22 +73,29 @@ public:
 
 	SDL_Texture* texture;
 
-private:
-
-	bool change_volume = false;
-	bool close_game = false;
-	bool pause_menu = false;
-	bool foto_mode = false;
-
-	unsigned int camerafx;
-	unsigned int photofx;
-
 	j1Timer timer;
 	j1Timer pause_timer;
 
 	float cont_pause_timer = 0.0f;
 	float cont_timer = 0.0f;
 	float time_start = 0.0f;
+	bool pause_menu = false;
+
+private:
+
+	bool change_volume = false;
+	bool close_game = false;
+	bool foto_mode = false;
+
+	unsigned int camerafx;
+	unsigned int photofx;
+
+	//j1Timer timer;
+	//j1Timer pause_timer;
+
+	//float cont_pause_timer = 0.0f;
+	//float cont_timer = 0.0f;
+	//float time_start = 0.0f;
 };
 
 #endif // __j1SCENE_H__

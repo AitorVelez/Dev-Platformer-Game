@@ -401,14 +401,14 @@ void j1Scene::LoadScene(int map)
 			}
 		}
 	}
-	if (App->entities->player->lives >= 1)
+	/*if (App->entities->player->lives >= 1)
 		App->scene->heart1 = App->gui->CreateUIImage(800, 20, { 1565, 489, 36, 32 }, NULL, this);
 
 	if (App->entities->player->lives >= 2)
 		App->scene->heart2 = App->gui->CreateUIImage(850, 20, { 1565, 489, 36, 32 }, NULL, this);
 
 	if (App->entities->player->lives >= 3)
-		App->scene->heart3 = App->gui->CreateUIImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);
+		App->scene->heart3 = App->gui->CreateUIImage(900, 20, { 1565, 489, 36, 32 }, NULL, this);*/
 	/*App->player->FindPlayerSpawn();
 	App->player->SpawnPlayer();*/
 	//loading = false;

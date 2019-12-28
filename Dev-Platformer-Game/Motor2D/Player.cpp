@@ -1,10 +1,14 @@
+#include "p2Defs.h"
+#include "p2Log.h"
 #include "Player.h"
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Textures.h"
 #include "j1Scene.h"
 #include "j1Map.h"
+#include "j1StartMenu.h"
 #include "j1Audio.h"
+#include "j1Gui.h"
 #include "j1Window.h"
 
 Player::Player(int x, int y, ENTITY_TYPE type) : Entity(x, y, type)
@@ -67,6 +71,7 @@ bool Player::Start()
 
 bool Player::Update(float dt)
 {
+	LOG("%i",lives);
 	animation = &idle;
 
 	float falling_speed = playerData.gravity * dt;
@@ -108,10 +113,23 @@ bool Player::Update(float dt)
 				--lives;
 				if (lives > 0)
 					SpawnPlayer();
-				else
+				if (lives == 0)
 				{
-					App->scene->LoadScene(1);
+					App->scene->time_pause = true;
+					App->scene->pause_menu = false;
+					App->scene->active = false;
+					App->startmenu->active = true;
+					App->startmenu->Start();
+					App->scene->CleanUp();
+					App->gui->HUDCleanUp();
+					App->entities->CleanUp();
+					App->scene->cont_pause_timer = 0.0f;
+					
 				}
+			/*	else
+				{
+					App->scene->LoadScene(1);	
+				}*/
 			}
 		}
 
