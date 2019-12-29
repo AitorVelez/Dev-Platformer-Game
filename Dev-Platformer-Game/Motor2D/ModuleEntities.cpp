@@ -166,6 +166,7 @@ void ModuleEntities::OnCollision(Collider* c1, Collider* c2)
 				}
 				else
 				{
+
 					App->scene->time_pause = true;
 					App->scene->pause_menu = false;
 					App->scene->active = false;

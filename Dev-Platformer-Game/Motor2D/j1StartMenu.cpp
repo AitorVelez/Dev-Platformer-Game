@@ -113,6 +113,7 @@ bool j1StartMenu::Update(float) {
 			App->scene->time_pause = false;
 			App->audio->PlayFx(buttonfx);
 			//App->entities->player->SpawnPlayer();
+			
 		
 		}
 	}

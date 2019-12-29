@@ -72,6 +72,8 @@ public:
 
 	UIObject* time_text = nullptr;
 	UIObject* points_text = nullptr;
+	UIObject* coins_text = nullptr;
+
 
 	SDL_Rect three_lifes_rect = { 1124,35,46,84 };
 	SDL_Rect two_lifes_rect = { 1188,34,46,84 };
@@ -79,6 +81,8 @@ public:
 
 	p2SString time_string = nullptr;
 	p2SString points_string = nullptr;
+	p2SString coins_string = nullptr;
+	
 
 	/*UIImage* heart1 = nullptr;
 	UIImage* heart2 = nullptr;

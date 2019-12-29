@@ -311,6 +311,8 @@ bool j1Scene::Update(float dt)
 	//int to string
 	points_string.create("%i", App->entities->player->score);
 
+	coins_string.create("%i", App->entities->player->coinsCount);
+
 	//float to string
 	time_string.create("%.3f", time_start);
 
@@ -319,20 +321,32 @@ bool j1Scene::Update(float dt)
 	case 3:
 		App->gui->HUDCleanUp();
 		three_lifes = App->gui->CreateUIImage(40, 20, three_lifes_rect, texture, true);
-		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
 		break;
 	case 2:
 		App->gui->HUDCleanUp();
 		two_lifes = App->gui->CreateUIImage(40, 20, two_lifes_rect, texture, true);
-		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
 		break;
 	case 1:
 		App->gui->HUDCleanUp();
 		one_life = App->gui->CreateUIImage(40, 20, one_lifes_rect, texture, true);
-		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
+		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
 		break;
 	case 0:
 		//reset to main menu
