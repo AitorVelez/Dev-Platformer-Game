@@ -7,16 +7,18 @@
 	<map />
 	<scene>
 		<Map CurrentMap="1" />
-		<Time CurrentTime="20.9349995" />
-		<entity type="2" x="1760" y="569.289856" />
+		<Time CurrentTime="22.0970001" />
+		<entity type="4" x="1664" y="96" />
+		<entity type="2" x="1760" y="121.318314" />
 		<entity type="3" x="3552" y="128" />
-		<entity type="3" x="446.620789" y="194.372025" />
+		<entity type="3" x="140.755569" y="340.096771" />
 		<entity type="3" x="4544" y="224" />
-		<entity type="2" x="2208" y="569.858032" />
+		<entity type="2" x="2208" y="281.318268" />
 		<entity type="4" x="2464" y="256" />
 		<entity type="4" x="3584" y="256" />
-		<entity type="1" x="1833.30664" y="154.017197" score="200" lives="3" />
-		<entity type="3" x="895.123657" y="288.532898" />
+		<entity type="1" x="65.8240738" y="353.696869" score="0" lives="2" />
+		<entity type="3" x="864" y="288" />
+		<entity type="3" x="1696" y="288" />
 	</scene>
 	<entities />
 	<:anonymous />
@@ -28,6 +30,6 @@
 	<settings_scene />
 	<startmenu />
 	<renderer>
-		<camera x="-1323" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

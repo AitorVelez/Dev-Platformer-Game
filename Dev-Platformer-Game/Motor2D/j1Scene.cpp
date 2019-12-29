@@ -307,14 +307,20 @@ bool j1Scene::Update(float dt)
 
 	App->render->camera.x = camPos;
 
-	//LIFES
+	//UI 
+
+	//int to string
+	//points_string.create("%i", points);
+
+	//float to string
+	time_string.create("%.3f", time_start);
 
 	switch (App->entities->player->lives)
 	{
 	case 3:
 		App->gui->HUDCleanUp();
 		three_lifes = App->gui->CreateUIImage(50, 40, three_lifes_rect, texture, true);
-	//	points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
 		break;
 	case 2:
@@ -344,6 +350,14 @@ bool j1Scene::Update(float dt)
 
 		break;
 	}
+
+	//stop showing time when pause ingame
+	if (time_pause == false) {
+		time_start = timer.ReadSec();
+
+	}
+	App->map->Draw();
+
 
 	return true;
 }
