@@ -62,6 +62,9 @@ public:
 	UIObject* text_resume = nullptr;
 	UIObject* text_exit = nullptr;
 	UIObject* text_main_menu = nullptr;
+	UIObject* lifes_title = nullptr;
+	UIObject* coins_title = nullptr;
+
 
 	/*UIImage* heart1 = nullptr;
 	UIImage* heart2 = nullptr;

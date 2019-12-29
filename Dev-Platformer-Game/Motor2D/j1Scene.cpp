@@ -104,6 +104,9 @@ bool j1Scene::Start()
 		button_on_mouse = { 1189,286,170,65 };
 	
 		camPos = App->render->camera.x;
+
+		lifes_title = App->gui->CreateUILabel(App->win->width-500, 30, "LIFES REMAINING : ", false);
+	
 	}
 
 	return true;
