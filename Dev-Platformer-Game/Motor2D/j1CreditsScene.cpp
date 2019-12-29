@@ -82,7 +82,7 @@ bool j1CreditsScene::Update(float)
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		{
 			//go to the link
-			system("start https://google.com");
+			system("start https://aitorvelez.github.io/Dev-Platformer-Game/");
 		}
 	}
 	//check if mouse is on repository button

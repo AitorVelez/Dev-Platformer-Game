@@ -105,7 +105,9 @@ bool j1Scene::Start()
 	
 		camPos = App->render->camera.x;
 
-		lifes_title = App->gui->CreateUILabel(App->win->width-500, 30, "LIFES REMAINING : ", false);
+		lifes_title = App->gui->CreateUILabel(App->win->width - 600, 30, "LIFES REMAINING : ", false);
+		coins_title = App->gui->CreateUILabel(App->win->width - 900, 30, "COINS : ", false);
+		time_title  = App->gui->CreateUILabel(App->win->width - 150, 30, "TIME : ", false);
 	
 	}
 

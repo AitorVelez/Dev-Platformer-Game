@@ -70,6 +70,12 @@ bool j1StartMenu::Start() {
 	//continue text
 	text_continue = App->gui->CreateUILabel(App->win->width*0.5 - 40, 315, "CONTINUE", false);
 
+	//web button
+	//web_button = App->gui->CreateUIButton(App->win->width - 975, 560, return_rect_off, return_rect_on, return_rect_off, texture);
+
+	//exit text
+	//text_web = App->gui->CreateUILabel(App->win->width - 950, 585, "WEBSITE", false);
+
 	//title text
 	//text_title = App->gui->CreateUILabel(-App->render->camera.x + 30, 30, "C  I  T  Y     H  E  R  O", false);
 
@@ -168,6 +174,8 @@ bool j1StartMenu::Update(float) {
 			close_game = true;
 		}
 	}
+
+
 
 	return true;
 }

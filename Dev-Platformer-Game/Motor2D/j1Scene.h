@@ -64,6 +64,7 @@ public:
 	UIObject* text_main_menu = nullptr;
 	UIObject* lifes_title = nullptr;
 	UIObject* coins_title = nullptr;
+	UIObject* time_title = nullptr;
 
 
 	/*UIImage* heart1 = nullptr;
