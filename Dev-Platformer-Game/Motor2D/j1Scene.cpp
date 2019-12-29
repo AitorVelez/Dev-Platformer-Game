@@ -307,6 +307,44 @@ bool j1Scene::Update(float dt)
 
 	App->render->camera.x = camPos;
 
+	//LIFES
+
+	switch (App->entities->player->lives)
+	{
+	case 3:
+		App->gui->HUDCleanUp();
+		three_lifes = App->gui->CreateUIImage(50, 40, three_lifes_rect, texture, true);
+	//	points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		break;
+	case 2:
+		App->gui->HUDCleanUp();
+		two_lifes = App->gui->CreateUIImage(50, 40, two_lifes_rect, texture, true);
+		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		break;
+	case 1:
+		App->gui->HUDCleanUp();
+		one_life = App->gui->CreateUIImage(50, 40, one_lifes_rect, texture, true);
+		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		break;
+	case 0:
+		//reset to main menu
+		pause_menu = false;
+		App->scene->active = false;
+		App->startmenu->active = true;
+		App->startmenu->Start();
+		App->scene->CleanUp();
+		App->gui->HUDCleanUp();
+		App->entities->CleanUp();
+		timer.Start();
+		App->entities->player->lives = 3;
+		//points = 0;
+
+		break;
+	}
+
 	return true;
 }
 
