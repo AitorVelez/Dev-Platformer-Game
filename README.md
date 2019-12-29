@@ -41,13 +41,19 @@ This game is a platformer game where you will have to reach the end of the two l
 
 <iframe width="1903" height="768" src="https://www.youtube.com/embed/tLj-odpc2hA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Authors 
+## Authors and pictures
 
 **Marc Tarrés Urbieta:** [MAtaur00](https://github.com/MAtaur00)
 
+![Marc](https://github.com/AitorVelez/Dev-Platformer-Game/blob/master/Other%20Files/Marc%20tarres.jpeg?raw=true)
+
 **Aitor Vélez Tolosa:** [AitorVelez](https://github.com/AitorVelez)
 
+![Aitor](https://github.com/AitorVelez/Dev-Platformer-Game/blob/master/Other%20Files/aitor.png?raw=true)
+
 **Albert Cayuela Naval:** [AlbertCayuela](https://github.com/AlbertCayuela)
+
+![Albert](https://github.com/AitorVelez/Dev-Platformer-Game/blob/master/Other%20Files/cayuela.jpeg?raw=true)
 
 ## License
 
