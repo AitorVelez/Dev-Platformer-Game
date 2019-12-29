@@ -37,6 +37,9 @@ public:
 
 	bool close_game = false;
 
+	unsigned int buttonfx;
+
+
 	iPoint mouse_position, mouse_pos;
 };
 

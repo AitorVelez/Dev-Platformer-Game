@@ -76,7 +76,9 @@ bool j1StartMenu::Start() {
 	//App->startmenu->active = false;
 	//App->scene->active = true;
 	//App->scene->Start();
+	
 	App->audio->PlayMusic("audio/music/MenuTheme.ogg");
+	buttonfx = App->audio->LoadFx("audio/fx/Button.wav");
 
 	return true;
 }
@@ -103,6 +105,7 @@ bool j1StartMenu::Update(float) {
 			App->startmenu->CleanUp();
 			App->scene->Start();
 			App->scene->time_pause = false;
+			App->audio->PlayFx(buttonfx);
 		
 		}
 	}
@@ -118,6 +121,7 @@ bool j1StartMenu::Update(float) {
 			App->gui->CleanUp();
 			App->gui->HUDCleanUp();
 			App->settingsscene->Start();
+			App->audio->PlayFx(buttonfx);
 
 		}
 	}
@@ -132,6 +136,7 @@ bool j1StartMenu::Update(float) {
 			App->gui->HUDCleanUp();
 			App->startmenu->CleanUp();
 			App->creditsscene->Start();
+			App->audio->PlayFx(buttonfx);
 
 		}
 
@@ -148,7 +153,9 @@ bool j1StartMenu::Update(float) {
 			App->startmenu->CleanUp();
 			App->scene->Start();			
 			App->LoadGame("save_game.xml");
-			App->scene->time_pause = false;			
+			App->audio->PlayFx(buttonfx);
+			App->scene->time_pause = false;		
+			App->audio->PlayFx(buttonfx);
 		}
 	}
 
@@ -157,6 +164,7 @@ bool j1StartMenu::Update(float) {
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
+			App->audio->PlayFx(buttonfx);
 			close_game = true;
 		}
 	}
