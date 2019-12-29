@@ -42,6 +42,7 @@ public:
 	UIObject* CreateUIImage(int x, int y, SDL_Rect rect, SDL_Texture* texture, bool is_hud);
 	UIObject* CreateUILabel(int x, int y, p2SString text, bool is_hud);
 	UIObject* CreateUIButton(int x, int y, SDL_Rect mouse_off, SDL_Rect mouse_on, SDL_Rect mouse_click, SDL_Texture* texture);
+	UIObject* CreateUISlider(int x, int y, SDL_Rect thumb_off, SDL_Rect thumb_on, int margin_right, int margin_left, SDL_Texture* tex, UIObject* object);
 
 
 private:

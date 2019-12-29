@@ -105,9 +105,7 @@ bool j1Scene::Start()
 	
 		camPos = App->render->camera.x;
 
-		lifes_title = App->gui->CreateUILabel(App->win->width - 600, 30, "LIFES REMAINING : ", false);
-		coins_title = App->gui->CreateUILabel(App->win->width - 900, 30, "COINS : ", false);
-		time_title  = App->gui->CreateUILabel(-App->render->camera.x + 800, 30, "TIME : ", false);
+	
 	
 	}
 
@@ -356,6 +354,11 @@ bool j1Scene::Update(float dt)
 		time_start = timer.ReadSec();
 
 	}
+
+	lifes_title = App->gui->CreateUILabel(App->win->width - 600, 30, "LIFES REMAINING : ", false);
+	coins_title = App->gui->CreateUILabel(App->win->width - 900, 30, "COINS : ", false);
+	time_title = App->gui->CreateUILabel(-App->render->camera.x + 800, 30, "TIME : ", false);
+
 	App->map->Draw();
 
 
