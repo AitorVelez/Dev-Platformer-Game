@@ -1,5 +1,4 @@
-﻿# Development-Game
-
+﻿# CITY HERO
 
 ## The game
 
@@ -30,13 +29,17 @@ This game is a platformer game where you will have to reach the end of the two l
 * A or D while falling if you have a wall in your left or right to slide down.
 * W key to jump while sliding walls.
 * W/A/S/D to move Up/Left/Down/Right with god mode.
-* P to hit enemies. P while falling makes a flying kick.
+* SPACE to hit enemies. P while falling makes a flying kick.
 
 ## Innovation
 
 * F7  Lower the music volume
 
 * F8  Pump up the music volume
+
+## Gameplay Video
+
+<iframe width="1903" height="768" src="https://www.youtube.com/embed/tLj-odpc2hA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Authors 
 
@@ -50,7 +53,7 @@ This game is a platformer game where you will have to reach the end of the two l
 
 MIT License
 
-Copyright (c) 2018 Marc Tarrés i Urbieta and Aitor Vélez Tolosa
+Copyright (c) 2019 Marc Tarrés i Urbieta and Aitor Vélez Tolosa and Albert Cayuela Naval
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
