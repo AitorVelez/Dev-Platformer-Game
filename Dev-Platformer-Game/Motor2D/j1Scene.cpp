@@ -106,7 +106,11 @@ bool j1Scene::Start()
 	
 		camPos = App->render->camera.x;
 
+		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
 	
+		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+	
+		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
 	
 	}
 
@@ -306,15 +310,21 @@ bool j1Scene::Update(float dt)
 
 	App->render->camera.x = camPos;
 
+	/*if (App->entities->player->lives < 3 && App->entities->player->coinsCount >= 2) {
+		++App->entities->player->lives;
+		--App->entities->player->coinsCount; 
+	}*/
+
+
 	//UI 
 
 	//int to string
-	points_string.create("%i", App->entities->player->score);
+	points_string.create("SCORE : %i", App->entities->player->score);
 
-	coins_string.create("%i", App->entities->player->coinsCount);
+	coins_string.create("COINS : %i", App->entities->player->coinsCount);
 
 	//float to string
-	time_string.create("%.3f", time_start);
+	time_string.create("TIME : %.3f", time_start);
 
 	switch (App->entities->player->lives)
 	{
@@ -322,31 +332,29 @@ bool j1Scene::Update(float dt)
 		App->gui->HUDCleanUp();
 		three_lifes = App->gui->CreateUIImage(40, 20, three_lifes_rect, texture, true);
 		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
+	
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+	
 		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
+		
 		break;
 	case 2:
 		App->gui->HUDCleanUp();
 		two_lifes = App->gui->CreateUIImage(40, 20, two_lifes_rect, texture, true);
 		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
 		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
+
 		break;
 	case 1:
 		App->gui->HUDCleanUp();
 		one_life = App->gui->CreateUIImage(40, 20, one_lifes_rect, texture, true);
 		points_text = App->gui->CreateUILabel(-App->render->camera.x + 250, 30, points_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 140, 30, "SCORE : ", true);
+	
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 830, 30, "TIME : ", true);
+
 		coins_text = App->gui->CreateUILabel(-App->render->camera.x + 590, 30, coins_string, true);
-		App->gui->CreateUILabel(-App->render->camera.x + 500, 30, "COINS : ", true);
+	
 		break;
 	case 0:
 		//reset to main menu
