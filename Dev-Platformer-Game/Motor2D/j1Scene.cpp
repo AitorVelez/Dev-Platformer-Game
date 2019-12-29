@@ -17,6 +17,7 @@
 #include "UILabel.h"
 #include "j1Gui.h"
 #include "j1StartMenu.h"
+#include "Coin.h"
 #include <chrono>
 #include <time.h>
 #include <ctime>
@@ -308,7 +309,7 @@ bool j1Scene::Update(float dt)
 	//UI 
 
 	//int to string
-	//points_string.create("%i", points);
+	points_string.create("%i", App->entities->player->score);
 
 	//float to string
 	time_string.create("%.3f", time_start);
@@ -318,19 +319,19 @@ bool j1Scene::Update(float dt)
 	case 3:
 		App->gui->HUDCleanUp();
 		three_lifes = App->gui->CreateUIImage(40, 20, three_lifes_rect, texture, true);
-		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 2:
 		App->gui->HUDCleanUp();
 		two_lifes = App->gui->CreateUIImage(40, 20, two_lifes_rect, texture, true);
-		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 1:
 		App->gui->HUDCleanUp();
 		one_life = App->gui->CreateUIImage(40, 20, one_lifes_rect, texture, true);
-		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
+		points_text = App->gui->CreateUILabel(-App->render->camera.x + 120, 30, points_string, true);
 		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 0:

@@ -76,11 +76,20 @@ bool j1SettingsScene::Update(float)
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
-			App->settingsscene->active = false;
+			/*App->settingsscene->active = false;
 			App->startmenu->active = true;
 			App->startmenu->Start();
 			App->settingsscene->CleanUp();
-
+			*/
+			App->scene->time_pause = true;
+			App->scene->pause_menu = false;
+			App->scene->active = false;
+			App->startmenu->active = true;
+			App->startmenu->Start();
+			App->scene->CleanUp();
+			App->gui->HUDCleanUp();
+			App->entities->CleanUp();
+			App->scene->cont_pause_timer = 0.0f;
 		}
 	}
 

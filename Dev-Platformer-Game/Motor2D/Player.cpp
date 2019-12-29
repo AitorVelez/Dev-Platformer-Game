@@ -125,6 +125,7 @@ bool Player::Update(float dt)
 					App->entities->CleanUp();
 					App->scene->cont_pause_timer = 0.0f;
 					
+					
 				}
 			/*	else
 				{
