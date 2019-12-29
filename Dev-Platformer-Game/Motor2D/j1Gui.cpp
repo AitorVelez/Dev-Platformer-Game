@@ -10,6 +10,7 @@
 #include "UIImage.h"
 #include "UILabel.h"
 #include "UIButton.h"
+#include "UISlider.h"
 
 
 j1Gui::j1Gui() : j1Module() {
@@ -156,6 +157,14 @@ UIObject * j1Gui::CreateUIButton(int x, int y, SDL_Rect mouse_off, SDL_Rect mous
 
 
 	return button;
+}
+
+UIObject * j1Gui::CreateUISlider(int x, int y, SDL_Rect thumb_off, SDL_Rect thumb_on, int margin_right, int margin_left, SDL_Texture * tex, UIObject* object)
+{
+	UISlider* slider = new UISlider(x, y, thumb_off, thumb_on, margin_right, margin_left, tex, object);
+	UIObjects.add(slider);
+
+	return slider;
 }
 
 

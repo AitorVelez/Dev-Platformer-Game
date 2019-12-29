@@ -6,6 +6,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "UIObject.h"
 #include "j1Render.h"
 #include "j1StartMenu.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -64,7 +65,6 @@ void UISlider::Update()
 	slider_volume = ((object->x + MAX_VOL)*x) / (object->x + object->thumb_rect_off.w);
 	final_volume = slider_volume - object->x;
 	Mix_VolumeMusic(final_volume - VOL_CORRECTION);
-	
 
 }
 
@@ -73,7 +73,7 @@ void UISlider::Draw()
 	BROFILER_CATEGORY("UISliderDraw", Profiler::Color::Beige)
 
 		App->render->Blit(texture, x, y, &current_rect, 0);
-	if (App->startmenu->active)
+	if (App->startmenu->active == true)
 		App->render->DrawQuad({ x,y,rect.w,rect.h }, 255, 0, 0, 255, false, false);
 
 }

@@ -39,6 +39,25 @@ bool j1SettingsScene::Start()
 	//return button label
 	menu_label = App->gui->CreateUILabel(-App->render->camera.x + 65, 575, "MENU", false);
 
+	//volumen bar
+	volume_bar = App->gui->CreateUIImage(20, 150, volumen_rect, texture, false);
+
+	//volumen slider
+	volume_thumb = App->gui->CreateUISlider(215, 150, thumb_rect_off, thumb_rect_on, volume_bar->x + volumen_rect.w, volume_bar->x, texture, volume_bar);
+
+	//volumen bar
+	volume_bar_fx = App->gui->CreateUIImage(20, 350, volumen_rect, texture, false);
+
+	//volumen slider
+	volume_thumb_fx = App->gui->CreateUISlider(215, 350, thumb_rect_off, thumb_rect_on, volume_bar_fx->x + volumen_rect.w, volume_bar_fx->x, texture, volume_bar_fx);
+	
+	//volume music label
+	volume_music_label = App->gui->CreateUILabel(-App->render->camera.x + 20, 120, "MUSIC VOLUME", false);
+
+	//volume music label
+	volume_fx_label = App->gui->CreateUILabel(-App->render->camera.x + 20, 320, "FX VOLUME", false);
+
+
 	return true;
 }
 
