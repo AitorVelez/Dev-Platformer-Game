@@ -107,7 +107,7 @@ bool j1Scene::Start()
 
 		lifes_title = App->gui->CreateUILabel(App->win->width - 600, 30, "LIFES REMAINING : ", false);
 		coins_title = App->gui->CreateUILabel(App->win->width - 900, 30, "COINS : ", false);
-		time_title  = App->gui->CreateUILabel(App->win->width - 150, 30, "TIME : ", false);
+		time_title  = App->gui->CreateUILabel(-App->render->camera.x + 800, 30, "TIME : ", false);
 	
 	}
 
@@ -319,21 +319,21 @@ bool j1Scene::Update(float dt)
 	{
 	case 3:
 		App->gui->HUDCleanUp();
-		three_lifes = App->gui->CreateUIImage(50, 40, three_lifes_rect, texture, true);
+		three_lifes = App->gui->CreateUIImage(40, 20, three_lifes_rect, texture, true);
 		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
-		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 2:
 		App->gui->HUDCleanUp();
-		two_lifes = App->gui->CreateUIImage(50, 40, two_lifes_rect, texture, true);
+		two_lifes = App->gui->CreateUIImage(40, 20, two_lifes_rect, texture, true);
 		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
-		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 1:
 		App->gui->HUDCleanUp();
-		one_life = App->gui->CreateUIImage(50, 40, one_lifes_rect, texture, true);
+		one_life = App->gui->CreateUIImage(40, 20, one_lifes_rect, texture, true);
 		//points_text = App->gui->CreateUILabel(-App->render->camera.x + POINTS_X, POINTS_Y, points_string, true);
-		time_text = App->gui->CreateUILabel(-App->render->camera.x + 180, 100, time_string, true);
+		time_text = App->gui->CreateUILabel(-App->render->camera.x + 900, 30, time_string, true);
 		break;
 	case 0:
 		//reset to main menu
